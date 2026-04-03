@@ -1,0 +1,141 @@
+{
+  "url": "https://10.73.17.95:9443/#/login",
+  "username": "admin",
+  "password": "Admin@123",
+
+  "create_domain": {
+    "zone_name": "apple.com",
+    "zone_ttl": "86400",
+    "zone_contact": "5362.gmail.com",
+    "refresh": "43200",
+    "retry": "3600",
+    "expiry": "1209600",
+    "minimum": "180",
+    "zone_type": "1",
+    "master_servers": "10.73.17.95",
+    "ad_zone": false,
+    "ddns_zone": true,
+    "sec_ns": "data.apple.com",
+    "nameservers": {
+      "nameservers": "data.apple.com",
+      "ns_with_ip": [
+        { "ns": "data.apple.com", "ips": "2.2.2.2" }
+      ]
+    },
+    "option_data": [
+      {
+        "option": 6,
+        "option_name": "check-sibling",
+        "value": "yes",
+        "block": "zone",
+        "cluster": "1"
+      }
+    ],
+    "cluster": "1"
+  },
+
+  "update_domain": {
+    "zone_ttl": "172800",
+    "zone_contact": "updated.admin.gmail.com",
+    "refresh": "86400",
+    "retry": "7200",
+    "expiry": "2419200",
+    "minimum": "300"
+  },
+
+  "fqdn_domain": {
+    "zone_name": "fqdntest.com",
+    "zone_ttl": "86400",
+    "zone_contact": "admin.fqdntest.com",
+    "refresh": "43200",
+    "retry": "3600",
+    "expiry": "1209600",
+    "minimum": "180",
+    "zone_type": "1",
+    "master_servers": "10.73.17.95",
+    "ddns_zone": false,
+    "sec_ns": "ns1.fqdntest.com",
+    "nameservers": {
+      "nameservers": "ns1.fqdntest.com",
+      "ns_with_ip": [
+        { "ns": "ns1.fqdntest.com", "ips": "3.3.3.3" }
+      ]
+    }
+  },
+
+  "subdomain": {
+    "zone_name": "test.apple.com",
+    "zone_ttl": "86400",
+    "zone_contact": "admin.test.apple.com",
+    "refresh": "43200",
+    "retry": "3600",
+    "expiry": "1209600",
+    "minimum": "180",
+    "zone_type": "1",
+    "master_servers": "10.73.17.95",
+    "ddns_zone": false,
+    "sec_ns": "ns1.test.apple.com",
+    "nameservers": {
+      "nameservers": "ns1.test.apple.com",
+      "ns_with_ip": [
+        { "ns": "ns1.test.apple.com", "ips": "4.4.4.4" }
+      ]
+    }
+  },
+
+  "valid_chars_domain": {
+    "zone_name": "valid-domain123.com",
+    "zone_ttl": "86400",
+    "zone_contact": "admin.valid-domain123.com",
+    "refresh": "43200",
+    "retry": "3600",
+    "expiry": "1209600",
+    "minimum": "180",
+    "zone_type": "1",
+    "master_servers": "10.73.17.95",
+    "ddns_zone": false,
+    "sec_ns": "ns1.valid-domain123.com",
+    "nameservers": {
+      "nameservers": "ns1.valid-domain123.com",
+      "ns_with_ip": [
+        { "ns": "ns1.valid-domain123.com", "ips": "5.5.5.5" }
+      ]
+    }
+  },
+
+  "hyphen_domain": {
+    "zone_name": "my-test-domain.com",
+    "zone_ttl": "86400",
+    "zone_contact": "admin.my-test-domain.com",
+    "refresh": "43200",
+    "retry": "3600",
+    "expiry": "1209600",
+    "minimum": "180",
+    "zone_type": "1",
+    "master_servers": "10.73.17.95",
+    "ddns_zone": false,
+    "sec_ns": "ns1.my-test-domain.com",
+    "nameservers": {
+      "nameservers": "ns1.my-test-domain.com",
+      "ns_with_ip": [
+        { "ns": "ns1.my-test-domain.com", "ips": "6.6.6.6" }
+      ]
+    }
+  },
+
+  "negative_invalid_format": {
+    "zone_name": "abc@.com"
+  },
+  "negative_special_chars": {
+    "zone_name": "!@#$%^.com"
+  },
+  "negative_empty_name": {
+    "zone_name": ""
+  },
+  "negative_starting_hyphen": {
+    "zone_name": "-startwithhyphen.com"
+  },
+  "negative_ending_hyphen": {
+    "zone_name": "endwithhyphen-.com"
+  }
+}

@@ -1,0 +1,51 @@
+Date,TC No,Module,Platform,Test Case Description,Expected Result,Type,Test Nature,Status
+21-03-2026,TC_001,Domain,Windows & Linux,Create domain with valid name,Domain should be created successfully,Functional,Positive,Pending
+21-03-2026,TC_002,Domain,Windows & Linux,Create domain with FQDN (example.com),Domain should be accepted,Functional,Positive,Pending
+21-03-2026,TC_003,Domain,Windows & Linux,Update existing domain,Changes should reflect correctly,Functional,Positive,Pending
+21-03-2026,TC_004,Domain,Windows & Linux,Delete domain with confirmation,Domain should be removed,Functional,Positive,Pending
+21-03-2026,TC_005,Domain,Windows & Linux,Bulk import domains (CSV),All valid domains should be imported,Functional,Positive,Pending
+21-03-2026,TC_006,Domain,Windows & Linux,Search domain by keyword,Matching domains should be displayed,Functional,Positive,Pending
+21-03-2026,TC_007,Domain,Windows & Linux,Pagination validation,Domains should load correctly,Functional,Positive,Pending
+21-03-2026,TC_008,Domain,Windows & Linux,Duplicate domain creation,System should restrict duplicates,Functional,Negative,Pending
+21-03-2026,TC_009,Domain,Windows & Linux,Create subdomain (test.example.com),Should be created successfully,Functional,Positive,Pending
+21-03-2026,TC_010,Domain,Windows & Linux,Domain mapping with zones,Should map correctly,Functional,Positive,Pending
+21-03-2026,TC_011,Domain,Windows & Linux,Create domain with valid characters,Success,Functional,Positive,Pending
+21-03-2026,TC_012,Domain,Windows & Linux,Bulk upload valid CSV,All domains imported,Functional,Positive,Pending
+21-03-2026,TC_013,Domain,Windows & Linux,Update domain with valid data,Update success,Functional,Positive,Pending
+21-03-2026,TC_014,Domain,Windows & Linux,Delete existing domain,Deleted successfully,Functional,Positive,Pending
+21-03-2026,TC_015,Domain,Windows & Linux,Search existing domain,Correct result displayed,Functional,Positive,Pending
+21-03-2026,TC_016,Domain,Windows & Linux,Create domain with invalid format (abc@.com),Validation error,Functional,Negative,Pending
+21-03-2026,TC_017,Domain,Windows & Linux,Create domain without name,Error message displayed,Functional,Negative,Pending
+21-03-2026,TC_018,Domain,Windows & Linux,Upload invalid CSV format,Import should fail,Functional,Negative,Pending
+21-03-2026,TC_019,Domain,Windows & Linux,Delete non-existing domain,Proper error message,Functional,Negative,Pending
+21-03-2026,TC_020,Domain,Windows & Linux,Duplicate domain creation,Should not allow,Functional,Negative,Pending
+21-03-2026,TC_021,Domain,Windows & Linux,Special characters in domain (!@#),Validation error,Functional,Negative,Pending
+21-03-2026,TC_022,Domain,Windows & Linux,Domain length >253 characters,Should reject input,Functional,Negative,Pending
+21-03-2026,TC_023,Domain,Windows & Linux,Empty search input,Should handle gracefully,Functional,Negative,Pending
+21-03-2026,TC_024,Domain,Windows & Linux,API failure during create,Proper error response,Functional,Negative,Pending
+21-03-2026,TC_025,Domain,Windows & Linux,Network interruption during import,No data corruption,Functional,Negative,Pending
+21-03-2026,TC_026,Domain,Windows & Linux,UI validation for domain page,UI should be user-friendly,Non-Functional,Usability,Pending
+21-03-2026,TC_027,Domain,Windows & Linux,Error message clarity,Messages should be clear,Non-Functional,Usability,Pending
+21-03-2026,TC_028,Domain,Windows & Linux,Input validation (injection check),Should prevent invalid input,Non-Functional,Security,Pending
+21-03-2026,TC_029,Domain,Windows & Linux,Authentication check,Only authorized users allowed,Non-Functional,Security,Pending
+21-03-2026,TC_030,Domain,Windows & Linux,Role-based access control,Proper access enforced,Non-Functional,Security,Pending
+21-03-2026,TC_031,Domain,Windows & Linux,Browser compatibility,"Works in Chrome, Firefox, Edge",Non-Functional,Compatibility,Pending
+21-03-2026,TC_032,Domain,Windows & Linux,OS compatibility,Works in Windows & Linux,Non-Functional,Compatibility,Pending
+21-03-2026,TC_033,Domain,Windows & Linux,Stability during bulk import,No crash,Non-Functional,Reliability,Pending
+21-03-2026,TC_034,Domain,Windows & Linux,Recovery after failure,System should recover,Non-Functional,Reliability,Pending
+21-03-2026,TC_035,Domain,Windows & Linux,Create 1000 domains,Should complete within acceptable time,Performance,Load,Pending
+21-03-2026,TC_036,Domain,Windows & Linux,Bulk import large CSV (10k domains),Should not crash,Performance,Load,Pending
+21-03-2026,TC_037,Domain,Windows & Linux,Search response time,Results within 2 seconds,Performance,Performance,Pending
+21-03-2026,TC_038,Domain,Windows & Linux,Load page with large data,Page should load smoothly,Performance,Performance,Pending
+21-03-2026,TC_039,Domain,Windows & Linux,Concurrent users (50+),System should handle load,Performance,Stress,Pending
+21-03-2026,TC_040,Domain,Windows & Linux,Verify domain creation after fix,Should work correctly,Regression,Functional,Pending
+21-03-2026,TC_041,Domain,Windows & Linux,Verify update after changes,No issues,Regression,Functional,Pending
+21-03-2026,TC_042,Domain,Windows & Linux,Verify delete functionality,Works properly,Regression,Functional,Pending
+21-03-2026,TC_043,Domain,Windows & Linux,Verify bulk import after fix,Should not fail,Regression,Functional,Pending
+21-03-2026,TC_044,Domain,Windows & Linux,Verify search/filter functionality,Correct results,Regression,Functional,Pending
+21-03-2026,TC_045,Domain,Windows & Linux,Verify API integration,Works as expected,Regression,Integration,Pending
+21-03-2026,TC_046,Domain,Windows & Linux,Verify UI after changes,No impact,Regression,UI,Pending
+21-03-2026,TC_047,Domain,Windows & Linux,Domain max length (253 chars),Should handle correctly,Functional,Edge Case,Pending
+21-03-2026,TC_048,Domain,Windows & Linux,Domain with hyphen (-),Should accept valid format,Functional,Edge Case,Pending
+21-03-2026,TC_049,Domain,Windows & Linux,Domain starting/ending with hyphen,Should validate properly,Functional,Edge Case,Pending
+21-03-2026,TC_050,Domain,Windows & Linux,Case sensitivity check,Should handle correctly,Functional,Edge Case,Pending

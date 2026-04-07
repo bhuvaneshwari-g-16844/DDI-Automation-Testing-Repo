@@ -185,6 +185,18 @@ def txt_record_ids():
 
 
 # ────────────────────────────────────────────────────────────────────── #
+#  SPF (SPF_TXT endpoint with record_type=SPF)
+# ────────────────────────────────────────────────────────────────────── #
+@pytest.fixture(scope="session")
+def spf_api(api_testdata, bearer_token):
+    return _make_dns_api(api_testdata, bearer_token, "SPF_TXT")
+
+@pytest.fixture(scope="session")
+def spf_record_ids():
+    return []
+
+
+# ────────────────────────────────────────────────────────────────────── #
 #  DS
 # ────────────────────────────────────────────────────────────────────── #
 @pytest.fixture(scope="session")

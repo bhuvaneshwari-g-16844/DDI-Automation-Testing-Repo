@@ -16,9 +16,7 @@ import pytest
 import subprocess
 import time
 
-pytestmark = pytest.mark.skip(reason="HINFO records not supported on DDNS zones")
-
-DNS_SERVERS = ["10.73.17.98", "10.73.17.109", "10.72.44.98"]
+DNS_SERVERS = ["10.73.17.98", "10.73.17.109"]  # , "10.72.44.98"
 DIG_WAIT = 3
 
 

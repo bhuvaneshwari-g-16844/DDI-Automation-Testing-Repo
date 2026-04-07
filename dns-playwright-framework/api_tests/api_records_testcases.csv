@@ -1,0 +1,336 @@
+Date,TC No,Module,Platform,Test Case Description,Expected Result,Type,Test Nature,Status
+17/9/24,A-TC-001,A Record,Windows & Linux,POST: Create A record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Pass
+17/9/24,A-TC-002,A Record,Windows & Linux,PUT: Update A record TTL value and verify,TTL value should be updated successfully with 200 status,Functional,Positive,Pass
+17/9/24,A-TC-003,A Record,Windows & Linux,DELETE: Delete A record and verify across all zone types,Record should be deleted successfully with 200 status,Functional,Positive,Pass
+17/9/24,A-TC-004,A Record,Windows & Linux,GET: Retrieve all A records in zone,All A records should be returned with 200 status,Functional,Positive,Pass
+17/9/24,A-TC-005,A Record,Windows & Linux,GET SPECIFIC: Retrieve single A record by ID,Specific record should be returned with 200 status,Functional,Positive,Pass
+17/9/24,A-TC-006,A Record,Windows & Linux,POST: Add A record and verify record values in API response,Record values (IP) should match the submitted payload,Functional,Positive,Pass
+17/9/24,A-TC-007,A Record,Windows & Linux,PUT: Update A record values and verify updated values,Updated record values should be reflected in GET response,Functional,Positive,Pass
+17/9/24,A-TC-008,A Record,Windows & Linux,DELETE: Delete A record and verify record no longer exists,GET should return 400/404 for deleted record,Functional,Positive,Pass
+17/9/24,A-TC-009,A Record,Windows & Linux,POST: Create A record with incorrect zone name,API should return error with 400 status,Functional,Negative,Pass
+17/9/24,A-TC-010,A Record,Windows & Linux,POST: Create A record with incorrect domain name,API should return error with 400 status,Functional,Negative,Pass
+17/9/24,A-TC-011,A Record,Windows & Linux,POST: Create A record with incorrect IPv4 value,API should return error with 400 status,Functional,Negative,Pass
+17/9/24,A-TC-012,A Record,Windows & Linux,POST: Create A record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+17/9/24,A-TC-013,A Record,Windows & Linux,PUT: Update A record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+17/9/24,A-TC-014,A Record,Windows & Linux,GET: Check schedule enable A record get API only,Schedule enabled records should be retrievable via GET,Functional,Positive,Not Automated
+17/9/24,A-TC-015,A Record,Windows & Linux,POST: Create A record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+17/9/24,A-TC-016,A Record,Windows & Linux,PUT: Update A record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+17/9/24,A-TC-017,A Record,Windows & Linux,POST: Create A record with same domain name that already exists,API should return error - domain already exists,Functional,Negative,Pass
+17/9/24,A-TC-018,A Record,Windows & Linux,PUT: Update A record with same domain name as another record,API should return error - domain already exists,Functional,Negative,Skipped
+17/9/24,A-TC-019,A Record,Windows & Linux,POST: Create A record with duplicate record values,API should return error for duplicate values,Functional,Negative,Pass
+17/9/24,A-TC-020,A Record,Windows & Linux,POST: Create A record with * wildcard subdomain,Record should be created successfully or return appropriate error,Functional,Boundary,Pass
+17/9/24,A-TC-021,A Record,Windows & Linux,POST: Create A record with @ root subdomain,Record should be created successfully or return appropriate error,Functional,Boundary,Pass
+17/9/24,A-TC-022,A Record,Windows & Linux,PUT: Update A record with * wildcard subdomain,Record should be updated successfully or return appropriate error,Functional,Boundary,Pass
+17/9/24,A-TC-023,A Record,Windows & Linux,PUT: Update A record with @ root subdomain,Record should be updated successfully or return appropriate error,Functional,Boundary,Pass
+17/9/24,A-TC-024,A Record,Windows,Verify A record data has been pushed to the Windows server machine,Record data should be present on Windows DNS server,Integration,Positive,Not Automated
+17/9/24,A-TC-025,A Record,Linux,Verify A record data has been pushed to the Linux server using dig,Record data should be resolvable via dig command,Integration,Positive,Pass
+17/9/24,A-TC-026,A Record,Windows & Linux,PUT: Update record TTL and remove records then add record and update the records back with PUT method,Record should be updated with new TTL and new records successfully,Functional,Positive,Pass
+17/9/24,A-TC-027,A Record,Windows & Linux,POST: Create A record with lowercase then create same name in uppercase,API should return error - case insensitive duplicate not allowed,Functional,Negative,Skipped
+18/9/24,AAAA-TC-001,AAAA Record,Windows & Linux,POST: Create AAAA record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Pass
+18/9/24,AAAA-TC-002,AAAA Record,Windows & Linux,PUT: Update AAAA record TTL value and verify,TTL value should be updated successfully with 200 status,Functional,Positive,Pass
+18/9/24,AAAA-TC-003,AAAA Record,Windows & Linux,DELETE: Delete AAAA record and verify across all zone types,Record should be deleted successfully with 200 status,Functional,Positive,Pass
+18/9/24,AAAA-TC-004,AAAA Record,Windows & Linux,GET: Retrieve all AAAA records in zone,All AAAA records should be returned with 200 status,Functional,Positive,Pass
+18/9/24,AAAA-TC-005,AAAA Record,Windows & Linux,GET SPECIFIC: Retrieve single AAAA record by ID,Specific record should be returned with 200 status,Functional,Positive,Pass
+18/9/24,AAAA-TC-006,AAAA Record,Windows & Linux,POST: Add AAAA record and verify record values in API response,Record values (IPv6) should match the submitted payload,Functional,Positive,Pass
+18/9/24,AAAA-TC-007,AAAA Record,Windows & Linux,PUT: Update AAAA record values and verify updated values,Updated record values should be reflected in GET response,Functional,Positive,Pass
+18/9/24,AAAA-TC-008,AAAA Record,Windows & Linux,DELETE: Delete AAAA record and verify record no longer exists,GET should return 400/404 for deleted record,Functional,Positive,Pass
+18/9/24,AAAA-TC-009,AAAA Record,Windows & Linux,POST: Create AAAA record with incorrect zone name,API should return error with 400 status,Functional,Negative,Pass
+18/9/24,AAAA-TC-010,AAAA Record,Windows & Linux,POST: Create AAAA record with incorrect domain name,API should return error with 400 status,Functional,Negative,Pass
+18/9/24,AAAA-TC-011,AAAA Record,Windows & Linux,POST: Create AAAA record with incorrect IPv6 value,API should return error with 400 status,Functional,Negative,Pass
+18/9/24,AAAA-TC-012,AAAA Record,Windows & Linux,POST: Create AAAA record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+18/9/24,AAAA-TC-013,AAAA Record,Windows & Linux,PUT: Update AAAA record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+18/9/24,AAAA-TC-014,AAAA Record,Windows & Linux,GET: Check schedule enable AAAA record get API only,Schedule enabled records should be retrievable via GET,Functional,Positive,Not Automated
+18/9/24,AAAA-TC-015,AAAA Record,Windows & Linux,POST: Create AAAA record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+18/9/24,AAAA-TC-016,AAAA Record,Windows & Linux,PUT: Update AAAA record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+18/9/24,AAAA-TC-017,AAAA Record,Windows & Linux,POST: Create AAAA record with same domain name that already exists,API should return error - domain already exists,Functional,Negative,Pass
+18/9/24,AAAA-TC-018,AAAA Record,Windows & Linux,PUT: Update AAAA record with same domain name as another record,API should return error - domain already exists,Functional,Negative,Skipped
+18/9/24,AAAA-TC-019,AAAA Record,Windows & Linux,POST: Create AAAA record with duplicate record values,API should return error for duplicate values,Functional,Negative,Pass
+18/9/24,AAAA-TC-020,AAAA Record,Windows & Linux,POST: Create AAAA record with * wildcard subdomain,Record should be created successfully or return appropriate error,Functional,Boundary,Pass
+18/9/24,AAAA-TC-021,AAAA Record,Windows & Linux,POST: Create AAAA record with @ root subdomain,Record should be created successfully or return appropriate error,Functional,Boundary,Pass
+18/9/24,AAAA-TC-022,AAAA Record,Windows & Linux,PUT: Update AAAA record with * wildcard subdomain,Record should be updated successfully or return appropriate error,Functional,Boundary,Pass
+18/9/24,AAAA-TC-023,AAAA Record,Windows & Linux,PUT: Update AAAA record with @ root subdomain,Record should be updated successfully or return appropriate error,Functional,Boundary,Pass
+18/9/24,AAAA-TC-024,AAAA Record,Windows,Verify AAAA record data has been pushed to the Windows server machine,Record data should be present on Windows DNS server,Integration,Positive,Not Automated
+18/9/24,AAAA-TC-025,AAAA Record,Linux,Verify AAAA record data has been pushed to the Linux server using dig,Record data should be resolvable via dig command,Integration,Positive,Pass
+18/9/24,AAAA-TC-026,AAAA Record,Windows & Linux,PUT: Update record TTL and remove records then add record back with PUT method,Record should be updated with new TTL and new records successfully,Functional,Positive,Pass
+18/9/24,AAAA-TC-027,AAAA Record,Windows & Linux,POST: Create AAAA record with lowercase then create same name in uppercase,API should return error - case insensitive duplicate not allowed,Functional,Negative,Skipped
+18/9/24,CAA-TC-001,CAA Record,Windows & Linux,POST: Create CAA record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Pass
+18/9/24,CAA-TC-002,CAA Record,Windows & Linux,PUT: Update CAA record TTL value and verify,TTL value should be updated successfully with 200 status,Functional,Positive,Pass
+18/9/24,CAA-TC-003,CAA Record,Windows & Linux,DELETE: Delete CAA record and verify across all zone types,Record should be deleted successfully with 200 status,Functional,Positive,Pass
+18/9/24,CAA-TC-004,CAA Record,Windows & Linux,GET: Retrieve all CAA records in zone,All CAA records should be returned with 200 status,Functional,Positive,Pass
+18/9/24,CAA-TC-005,CAA Record,Windows & Linux,GET SPECIFIC: Retrieve single CAA record by ID,Specific record should be returned with 200 status,Functional,Positive,Pass
+18/9/24,CAA-TC-006,CAA Record,Windows & Linux,POST: Add CAA record and verify record values in API response,Record values should match the submitted payload,Functional,Positive,Pass
+18/9/24,CAA-TC-007,CAA Record,Windows & Linux,PUT: Update CAA record values and verify updated values,Updated record values should be reflected in GET response,Functional,Positive,Pass
+18/9/24,CAA-TC-008,CAA Record,Windows & Linux,DELETE: Delete CAA record and verify record no longer exists,GET should return 400/404 for deleted record,Functional,Positive,Pass
+18/9/24,CAA-TC-009,CAA Record,Windows & Linux,POST: Create CAA record with incorrect zone name,API should return error with 400 status,Functional,Negative,Pass
+18/9/24,CAA-TC-010,CAA Record,Windows & Linux,POST: Create CAA record with incorrect domain name,API should return error with 400 status,Functional,Negative,Pass
+18/9/24,CAA-TC-011,CAA Record,Windows & Linux,POST: Create CAA record with incorrect host name value,API should return error with 400 status,Functional,Negative,Pass
+18/9/24,CAA-TC-012,CAA Record,Windows & Linux,POST: Create CAA record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+18/9/24,CAA-TC-013,CAA Record,Windows & Linux,PUT: Update CAA record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+18/9/24,CAA-TC-014,CAA Record,Windows & Linux,GET: Check schedule enable CAA record get API only,Schedule enabled records should be retrievable via GET,Functional,Positive,Not Automated
+18/9/24,CAA-TC-015,CAA Record,Windows & Linux,POST: Create CAA record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+18/9/24,CAA-TC-016,CAA Record,Windows & Linux,PUT: Update CAA record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+18/9/24,CAA-TC-017,CAA Record,Windows & Linux,POST: Create CAA record with same domain name that already exists,API should return error - domain already exists,Functional,Negative,Pass
+18/9/24,CAA-TC-018,CAA Record,Windows & Linux,PUT: Update CAA record with same domain name as another record,API should return error - domain already exists,Functional,Negative,Pass
+18/9/24,CAA-TC-019,CAA Record,Windows & Linux,POST: Create CAA record with duplicate record values,API should return error for duplicate values,Functional,Negative,Pass
+18/9/24,CAA-TC-020,CAA Record,Windows & Linux,POST: Create CAA record with flag value 0 (valid minimum),Record should be created successfully,Functional,Boundary,Pass
+18/9/24,CAA-TC-021,CAA Record,Windows & Linux,POST: Create CAA record with flag value 255 (valid maximum),Record should be created successfully,Functional,Boundary,Pass
+18/9/24,CAA-TC-022,CAA Record,Windows & Linux,POST: Create CAA record with flag value 256 (invalid exceeds max),API should return error with 400 status,Functional,Negative,Pass
+18/9/24,CAA-TC-023,CAA Record,Windows & Linux,POST: Create CAA record with invalid tag name,API should return error with 400 status,Functional,Negative,Pass
+18/9/24,CAA-TC-024,CAA Record,Windows & Linux,POST: Create CAA record with @ root subdomain,Record should be created successfully or return appropriate error,Functional,Boundary,Pass
+18/9/24,CAA-TC-025,CAA Record,Windows & Linux,POST: Create CAA record with * wildcard subdomain - not allowed for CAA,API should return error - wildcard not allowed for CAA,Functional,Negative,Pass
+18/9/24,CAA-TC-026,CAA Record,Windows,Verify CAA record data has been pushed to the Windows server machine,Record data should be present on Windows DNS server,Integration,Positive,Not Automated
+18/9/24,CAA-TC-027,CAA Record,Linux,Verify CAA record data has been pushed to the Linux server using dig,Record data should be resolvable via dig command,Integration,Positive,Pass
+18/9/24,CAA-TC-028,CAA Record,Windows & Linux,PUT: Update record TTL and remove records then add record back with PUT method,Record should be updated with new TTL and new records successfully,Functional,Positive,Pass
+18/9/24,CAA-TC-029,CAA Record,Windows & Linux,POST: Create CAA record with lowercase then create same name in uppercase,API should return error - case insensitive duplicate not allowed,Functional,Negative,Skipped
+19/9/24,CNAME-TC-001,CNAME Record,Windows & Linux,POST: Create CNAME record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Pass
+19/9/24,CNAME-TC-002,CNAME Record,Windows & Linux,PUT: Update CNAME record TTL value and verify,TTL value should be updated successfully with 200 status,Functional,Positive,Pass
+19/9/24,CNAME-TC-003,CNAME Record,Windows & Linux,DELETE: Delete CNAME record and verify,Record should be deleted successfully with 200 status,Functional,Positive,Pass
+19/9/24,CNAME-TC-004,CNAME Record,Windows & Linux,GET: Retrieve all CNAME records in zone,All CNAME records should be returned with 200 status,Functional,Positive,Pass
+19/9/24,CNAME-TC-005,CNAME Record,Windows & Linux,GET SPECIFIC: Retrieve single CNAME record by ID,Specific record should be returned with 200 status,Functional,Positive,Pass
+19/9/24,CNAME-TC-006,CNAME Record,Windows & Linux,POST: Add CNAME record and verify record values in API response,Record values should match the submitted payload,Functional,Positive,Pass
+19/9/24,CNAME-TC-007,CNAME Record,Windows & Linux,PUT: Update CNAME record values and verify updated values,Updated record values should be reflected in GET response,Functional,Positive,Pass
+19/9/24,CNAME-TC-008,CNAME Record,Windows & Linux,DELETE: Delete CNAME record and verify record no longer exists,GET should return 400/404 for deleted record,Functional,Positive,Pass
+19/9/24,CNAME-TC-009,CNAME Record,Windows & Linux,POST: Create CNAME record with incorrect zone name,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,CNAME-TC-010,CNAME Record,Windows & Linux,POST: Create CNAME record with incorrect domain name,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,CNAME-TC-011,CNAME Record,Windows & Linux,POST: Create CNAME record with incorrect host name value,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,CNAME-TC-012,CNAME Record,Windows & Linux,POST: Create CNAME record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+19/9/24,CNAME-TC-013,CNAME Record,Windows & Linux,PUT: Update CNAME record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+19/9/24,CNAME-TC-014,CNAME Record,Windows & Linux,GET: Check schedule enable CNAME record get API only,Schedule enabled records should be retrievable via GET,Functional,Positive,Not Automated
+19/9/24,CNAME-TC-015,CNAME Record,Windows & Linux,POST: Create CNAME record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,CNAME-TC-016,CNAME Record,Windows & Linux,PUT: Update CNAME record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,CNAME-TC-017,CNAME Record,Windows & Linux,POST: Create CNAME record with same domain name that already exists,API should return error - domain already exists,Functional,Negative,Pass
+19/9/24,CNAME-TC-018,CNAME Record,Windows & Linux,PUT: Update CNAME record with same domain name as another record,API should return error - domain already exists,Functional,Negative,Pass
+19/9/24,CNAME-TC-019,CNAME Record,Windows & Linux,POST: Create CNAME record with duplicate record values,API should return error for duplicate values,Functional,Negative,Pass
+19/9/24,CNAME-TC-020,CNAME Record,Windows & Linux,POST: Create CNAME record with * wildcard subdomain,Record should be created successfully,Functional,Boundary,Pass
+19/9/24,CNAME-TC-021,CNAME Record,Windows & Linux,POST: Create CNAME record with @ root subdomain - not allowed for CNAME,API should return error - @ root record not allowed for CNAME,Functional,Negative,Pass
+19/9/24,CNAME-TC-022,CNAME Record,Windows & Linux,POST: Create CNAME record with multiple hosts - only one allowed,API should return error - CNAME allows only one host,Functional,Negative,Pass
+19/9/24,CNAME-TC-023,CNAME Record,Windows,Verify CNAME record data has been pushed to the Windows server machine,Record data should be present on Windows DNS server,Integration,Positive,Not Automated
+19/9/24,CNAME-TC-024,CNAME Record,Linux,Verify CNAME record data has been pushed to the Linux server using dig,Record data should be resolvable via dig command,Integration,Positive,Pass
+19/9/24,CNAME-TC-025,CNAME Record,Windows & Linux,PUT: Update record TTL and remove records then add record back with PUT method,Record should be updated with new TTL and new records successfully,Functional,Positive,Pass
+19/9/24,CNAME-TC-026,CNAME Record,Windows & Linux,POST: Create CNAME record with lowercase then create same name in uppercase,API should return error - case insensitive duplicate not allowed,Functional,Negative,Skipped
+19/9/24,DS-TC-001,DS Record,Windows & Linux,POST: Create DS record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Skipped
+19/9/24,DS-TC-002,DS Record,Windows & Linux,PUT: Update DS record TTL value and verify,TTL value should be updated successfully with 200 status,Functional,Positive,Skipped
+19/9/24,DS-TC-003,DS Record,Windows & Linux,DELETE: Delete DS record and verify,Record should be deleted successfully with 200 status,Functional,Positive,Skipped
+19/9/24,DS-TC-004,DS Record,Windows & Linux,GET: Retrieve all DS records in zone,All DS records should be returned with 200 status,Functional,Positive,Skipped
+19/9/24,DS-TC-005,DS Record,Windows & Linux,GET SPECIFIC: Retrieve single DS record by ID,Specific record should be returned with 200 status,Functional,Positive,Skipped
+19/9/24,DS-TC-006,DS Record,Windows & Linux,POST: Add DS record and verify record values in API response,Record values should match the submitted payload,Functional,Positive,Skipped
+19/9/24,DS-TC-007,DS Record,Windows & Linux,PUT: Update DS record values and verify updated values,Updated record values should be reflected in GET response,Functional,Positive,Skipped
+19/9/24,DS-TC-008,DS Record,Windows & Linux,DELETE: Delete DS record and verify record no longer exists,GET should return 400/404 for deleted record,Functional,Positive,Skipped
+19/9/24,DS-TC-009,DS Record,Windows & Linux,POST: Create DS record with incorrect zone name,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,DS-TC-010,DS Record,Windows & Linux,POST: Create DS record with incorrect domain name,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,DS-TC-011,DS Record,Windows & Linux,POST: Create DS record with incorrect key tag value,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,DS-TC-012,DS Record,Windows & Linux,POST: Create DS record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+19/9/24,DS-TC-013,DS Record,Windows & Linux,PUT: Update DS record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+19/9/24,DS-TC-014,DS Record,Windows & Linux,GET: Check schedule enable DS record get API only,Schedule enabled records should be retrievable via GET,Functional,Positive,Not Automated
+19/9/24,DS-TC-015,DS Record,Windows & Linux,POST: Create DS record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,DS-TC-016,DS Record,Windows & Linux,PUT: Update DS record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,DS-TC-017,DS Record,Windows & Linux,POST: Create DS record with same domain name that already exists,API should return error - domain already exists,Functional,Negative,Pass
+19/9/24,DS-TC-018,DS Record,Windows & Linux,PUT: Update DS record with same domain name as another record,API should return error - domain already exists,Functional,Negative,Pass
+19/9/24,DS-TC-019,DS Record,Windows & Linux,POST: Create DS record with duplicate record values,API should return error for duplicate values,Functional,Negative,Pass
+19/9/24,DS-TC-020,DS Record,Windows & Linux,POST: Create DS record with * wildcard subdomain - not allowed for DS,API should return error - wildcard not allowed for DS,Functional,Negative,Pass
+19/9/24,DS-TC-021,DS Record,Windows & Linux,POST: Create DS record with @ root subdomain,Record should be created successfully or return appropriate error,Functional,Boundary,Pass
+19/9/24,DS-TC-022,DS Record,Windows & Linux,POST: Create DS record with incorrect digest value,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,DS-TC-023,DS Record,Windows & Linux,POST: Create DS record with incorrect digest type value,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,DS-TC-024,DS Record,Windows & Linux,POST: Add multiple DS records to same subdomain,Multiple records should be added successfully,Functional,Positive,Pass
+19/9/24,DS-TC-025,DS Record,Windows & Linux,POST: Create DS record with same digest type - not allowed,API should return error - same digest type not allowed,Functional,Negative,Pass
+19/9/24,DS-TC-026,DS Record,Windows,Verify DS record data has been pushed to the Windows server machine,Record data should be present on Windows DNS server,Integration,Positive,Not Automated
+19/9/24,DS-TC-027,DS Record,Linux,Verify DS record data has been pushed to the Linux server using dig,Record data should be resolvable via dig command,Integration,Positive,Skipped
+19/9/24,DS-TC-028,DS Record,Windows & Linux,PUT: Update record TTL and remove records then add record back with PUT method,Record should be updated with new TTL and new records successfully,Functional,Positive,Skipped
+19/9/24,DS-TC-029,DS Record,Windows & Linux,POST: Create DS record with lowercase then create same name in uppercase,API should return error - case insensitive duplicate not allowed,Functional,Negative,Skipped
+19/9/24,MX-TC-001,MX Record,Windows & Linux,POST: Create MX record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Pass
+19/9/24,MX-TC-002,MX Record,Windows & Linux,PUT: Update MX record TTL value and verify,TTL value should be updated successfully with 200 status,Functional,Positive,Pass
+19/9/24,MX-TC-003,MX Record,Windows & Linux,DELETE: Delete MX record and verify across all zone types,Record should be deleted successfully with 200 status,Functional,Positive,Pass
+19/9/24,MX-TC-004,MX Record,Windows & Linux,GET: Retrieve all MX records in zone,All MX records should be returned with 200 status,Functional,Positive,Pass
+19/9/24,MX-TC-005,MX Record,Windows & Linux,GET SPECIFIC: Retrieve single MX record by ID,Specific record should be returned with 200 status,Functional,Positive,Pass
+19/9/24,MX-TC-006,MX Record,Windows & Linux,POST: Add MX record and verify record values in API response,Record values should match the submitted payload,Functional,Positive,Pass
+19/9/24,MX-TC-007,MX Record,Windows & Linux,PUT: Update MX record values and verify updated values,Updated record values should be reflected in GET response,Functional,Positive,Pass
+19/9/24,MX-TC-008,MX Record,Windows & Linux,DELETE: Delete MX record and verify record no longer exists,GET should return 400/404 for deleted record,Functional,Positive,Pass
+19/9/24,MX-TC-009,MX Record,Windows & Linux,POST: Create MX record with incorrect zone name,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,MX-TC-010,MX Record,Windows & Linux,POST: Create MX record with incorrect domain name,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,MX-TC-011,MX Record,Windows & Linux,POST: Create MX record with incorrect host name and preference value,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,MX-TC-012,MX Record,Windows & Linux,POST: Create MX record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+19/9/24,MX-TC-013,MX Record,Windows & Linux,PUT: Update MX record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+19/9/24,MX-TC-014,MX Record,Windows & Linux,GET: Check schedule enable MX record get API only,Schedule enabled records should be retrievable via GET,Functional,Positive,Not Automated
+19/9/24,MX-TC-015,MX Record,Windows & Linux,POST: Create MX record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,MX-TC-016,MX Record,Windows & Linux,PUT: Update MX record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+19/9/24,MX-TC-017,MX Record,Windows & Linux,POST: Create MX record with same domain name that already exists,API should return error - domain already exists,Functional,Negative,Pass
+19/9/24,MX-TC-018,MX Record,Windows & Linux,PUT: Update MX record with same domain name as another record,API should return error - domain already exists,Functional,Negative,Pass
+19/9/24,MX-TC-019,MX Record,Windows & Linux,POST: Create MX record with duplicate record values,API should return error for duplicate values,Functional,Negative,Pass
+19/9/24,MX-TC-020,MX Record,Windows & Linux,POST: Create MX record with * wildcard subdomain,Record should be created successfully,Functional,Boundary,Pass
+19/9/24,MX-TC-021,MX Record,Windows & Linux,POST: Create MX record with @ root subdomain,Record should be created successfully,Functional,Boundary,Pass
+19/9/24,MX-TC-022,MX Record,Windows & Linux,Verify MX record data pushed to named configuration file,Record should be present in named config,Integration,Positive,Not Automated
+19/9/24,MX-TC-023,MX Record,Windows,Verify MX record data has been pushed to the Windows server machine,Record data should be present on Windows DNS server,Integration,Positive,Not Automated
+19/9/24,MX-TC-024,MX Record,Linux,Verify MX record data has been pushed to the Linux server using dig,Record data should be resolvable via dig command,Integration,Positive,Pass
+19/9/24,MX-TC-025,MX Record,Windows & Linux,PUT: Update record TTL and remove records then add record back with PUT method,Record should be updated with new TTL and new records successfully,Functional,Positive,Pass
+19/9/24,MX-TC-026,MX Record,Windows & Linux,POST: Create MX record with lowercase then create same name in uppercase,API should return error - case insensitive duplicate not allowed,Functional,Negative,Skipped
+20/9/24,SRV-TC-001,SRV Record,Windows & Linux,POST: Create SRV record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Pass
+20/9/24,SRV-TC-002,SRV Record,Windows & Linux,PUT: Update SRV record TTL value and verify,TTL value should be updated successfully with 200 status,Functional,Positive,Pass
+20/9/24,SRV-TC-003,SRV Record,Windows & Linux,DELETE: Delete SRV record and verify,Record should be deleted successfully with 200 status,Functional,Positive,Pass
+20/9/24,SRV-TC-004,SRV Record,Windows & Linux,GET: Retrieve all SRV records in zone,All SRV records should be returned with 200 status,Functional,Positive,Pass
+20/9/24,SRV-TC-005,SRV Record,Windows & Linux,GET SPECIFIC: Retrieve single SRV record by ID,Specific record should be returned with 200 status,Functional,Positive,Pass
+20/9/24,SRV-TC-006,SRV Record,Windows & Linux,POST: Add SRV record and verify record values in API response,Record values should match the submitted payload,Functional,Positive,Pass
+20/9/24,SRV-TC-007,SRV Record,Windows & Linux,PUT: Update SRV record values and verify updated values,Updated record values should be reflected in GET response,Functional,Positive,Pass
+20/9/24,SRV-TC-008,SRV Record,Windows & Linux,DELETE: Delete SRV record and verify record no longer exists,GET should return 400/404 for deleted record,Functional,Positive,Pass
+20/9/24,SRV-TC-009,SRV Record,Windows & Linux,POST: Create SRV record with incorrect zone name,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,SRV-TC-010,SRV Record,Windows & Linux,POST: Create SRV record with incorrect domain name,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,SRV-TC-011,SRV Record,Windows & Linux,POST: Create SRV record with incorrect target and preference value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,SRV-TC-012,SRV Record,Windows & Linux,POST: Create SRV record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+20/9/24,SRV-TC-013,SRV Record,Windows & Linux,PUT: Update SRV record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+20/9/24,SRV-TC-014,SRV Record,Windows & Linux,GET: Check schedule enable SRV record get API only,Schedule enabled records should be retrievable via GET,Functional,Positive,Not Automated
+20/9/24,SRV-TC-015,SRV Record,Windows & Linux,POST: Create SRV record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,SRV-TC-016,SRV Record,Windows & Linux,PUT: Update SRV record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,SRV-TC-017,SRV Record,Windows & Linux,POST: Create SRV record with same domain name that already exists,API should return error - domain already exists,Functional,Negative,Pass
+20/9/24,SRV-TC-018,SRV Record,Windows & Linux,PUT: Update SRV record with same domain name as another record,API should return error - domain already exists,Functional,Negative,Pass
+20/9/24,SRV-TC-019,SRV Record,Windows & Linux,POST: Create SRV record with duplicate record values,API should return error for duplicate values,Functional,Negative,Pass
+20/9/24,SRV-TC-020,SRV Record,Windows & Linux,POST: Create SRV record with * and @ subdomain - not allowed for SRV,API should return error - special chars not allowed for SRV,Functional,Negative,Pass
+20/9/24,SRV-TC-021,SRV Record,Windows & Linux,Verify SRV record data pushed to named configuration file,Record should be present in named config,Integration,Positive,Not Automated
+20/9/24,SRV-TC-022,SRV Record,Windows & Linux,POST: Create SRV record with weight and preference value 0 (valid minimum),Record should be created successfully,Functional,Boundary,Pass
+20/9/24,SRV-TC-023,SRV Record,Windows & Linux,POST: Create SRV record with weight and preference value 255 (valid maximum),Record should be created successfully,Functional,Boundary,Pass
+20/9/24,SRV-TC-024,SRV Record,Windows & Linux,POST: Create SRV record with weight and preference value 256 (invalid exceeds max),API should return error - value out of range 0-255,Functional,Negative,Pass
+20/9/24,SRV-TC-025,SRV Record,Windows,Verify SRV record data has been pushed to the Windows server machine,Record data should be present on Windows DNS server,Integration,Positive,Not Automated
+20/9/24,SRV-TC-026,SRV Record,Linux,Verify SRV record data has been pushed to the Linux server using dig,Record data should be resolvable via dig command,Integration,Positive,Pass
+20/9/24,SRV-TC-027,SRV Record,Windows & Linux,PUT: Update record TTL and remove records then add record back with PUT method,Record should be updated with new TTL and new records successfully,Functional,Positive,Pass
+20/9/24,SRV-TC-028,SRV Record,Windows & Linux,POST: Create SRV record with lowercase then create same name in uppercase,API should return error - case insensitive duplicate not allowed,Functional,Negative,Skipped
+20/9/24,NS-TC-001,NS Record,Windows & Linux,POST: Create NS record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Pass
+20/9/24,NS-TC-002,NS Record,Windows & Linux,PUT: Update NS record TTL value and verify,TTL value should be updated successfully with 200 status,Functional,Positive,Pass
+20/9/24,NS-TC-003,NS Record,Windows & Linux,DELETE: Delete NS record and verify,Record should be deleted successfully with 200 status,Functional,Positive,Pass
+20/9/24,NS-TC-004,NS Record,Windows & Linux,GET: Retrieve all NS records in zone,All NS records should be returned with 200 status,Functional,Positive,Pass
+20/9/24,NS-TC-005,NS Record,Windows & Linux,GET SPECIFIC: Retrieve single NS record by ID,Specific record should be returned with 200 status,Functional,Positive,Pass
+20/9/24,NS-TC-006,NS Record,Windows & Linux,POST: Add NS record with single record value and verify,Single record value should be created successfully,Functional,Positive,Pass
+20/9/24,NS-TC-007,NS Record,Windows & Linux,POST: Add NS record with multiple record values and verify,Multiple record values should be created successfully,Functional,Positive,Pass
+20/9/24,NS-TC-008,NS Record,Windows & Linux,PUT: Update NS record with single value and verify,Single value should be updated successfully,Functional,Positive,Pass
+20/9/24,NS-TC-009,NS Record,Windows & Linux,PUT: Update NS record with multiple values and verify,Multiple values should be updated successfully,Functional,Positive,Pass
+20/9/24,NS-TC-010,NS Record,Windows & Linux,DELETE: Delete NS record and verify record no longer exists,GET should return 400/404 for deleted record,Functional,Positive,Pass
+20/9/24,NS-TC-011,NS Record,Windows & Linux,POST: Create NS record with incorrect zone name,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,NS-TC-012,NS Record,Windows & Linux,POST: Create NS record with incorrect domain name,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,NS-TC-013,NS Record,Windows & Linux,POST: Create NS record with incorrect host name value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,NS-TC-014,NS Record,Windows & Linux,POST: Create NS record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+20/9/24,NS-TC-015,NS Record,Windows & Linux,PUT: Update NS record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+20/9/24,NS-TC-016,NS Record,Windows & Linux,GET: Check schedule enable NS record get API only,Schedule enabled records should be retrievable via GET,Functional,Positive,Not Automated
+20/9/24,NS-TC-017,NS Record,Windows & Linux,POST: Create NS record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,NS-TC-018,NS Record,Windows & Linux,PUT: Update NS record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,NS-TC-019,NS Record,Windows & Linux,POST: Create NS record with same domain name that already exists,API should return error - domain already exists,Functional,Negative,Pass
+20/9/24,NS-TC-020,NS Record,Windows & Linux,POST: Create NS record with duplicate record values,API should return error for duplicate values,Functional,Negative,Pass
+20/9/24,NS-TC-021,NS Record,Windows & Linux,POST: Create NS record with * wildcard subdomain - not allowed for NS,API should return error - wildcard not allowed for NS,Functional,Negative,Pass
+20/9/24,NS-TC-022,NS Record,Windows & Linux,Verify NS record data pushed to named configuration file,Record should be present in named config,Integration,Positive,Not Automated
+20/9/24,NS-TC-023,NS Record,Windows,Verify NS record data has been pushed to the Windows server machine,Record data should be present on Windows DNS server,Integration,Positive,Not Automated
+20/9/24,NS-TC-024,NS Record,Linux,Verify NS record data has been pushed to the Linux server using dig,Record data should be resolvable via dig command,Integration,Positive,Pass
+20/9/24,NS-TC-025,NS Record,Windows & Linux,PUT: Update record TTL and remove records then add record back with PUT method,Record should be updated with new TTL and new records successfully,Functional,Positive,Pass
+20/9/24,NS-TC-026,NS Record,Windows & Linux,POST: Create NS record with lowercase then create same name in uppercase,API should return error - case insensitive duplicate not allowed,Functional,Negative,Pass
+20/9/24,PTR-TC-001,PTR Record,Windows & Linux,POST: Create PTR record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Pass
+20/9/24,PTR-TC-002,PTR Record,Windows & Linux,PUT: Update PTR record TTL value and verify,TTL value should be updated successfully with 200 status,Functional,Positive,Pass
+20/9/24,PTR-TC-003,PTR Record,Windows & Linux,DELETE: Delete PTR record and verify,Record should be deleted successfully with 200 status,Functional,Positive,Pass
+20/9/24,PTR-TC-004,PTR Record,Windows & Linux,GET: Retrieve all PTR records in zone,All PTR records should be returned with 200 status,Functional,Positive,Pass
+20/9/24,PTR-TC-005,PTR Record,Windows & Linux,GET SPECIFIC: Retrieve single PTR record by ID,Specific record should be returned with 200 status,Functional,Positive,Pass
+20/9/24,PTR-TC-006,PTR Record,Windows & Linux,POST: Add PTR record with single record value and verify,Single record value should be created successfully,Functional,Positive,Pass
+20/9/24,PTR-TC-007,PTR Record,Windows & Linux,POST: Add PTR record with multiple record values and verify,Multiple record values should be created successfully,Functional,Positive,Pass
+20/9/24,PTR-TC-008,PTR Record,Windows & Linux,PUT: Update PTR record with single value and verify,Single value should be updated successfully,Functional,Positive,Pass
+20/9/24,PTR-TC-009,PTR Record,Windows & Linux,PUT: Update PTR record with multiple values and verify,Multiple values should be updated successfully,Functional,Positive,Pass
+20/9/24,PTR-TC-010,PTR Record,Windows & Linux,DELETE: Delete PTR record and verify record no longer exists,GET should return 400/404 for deleted record,Functional,Positive,Pass
+20/9/24,PTR-TC-011,PTR Record,Windows & Linux,POST: Create PTR record with incorrect zone name,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,PTR-TC-012,PTR Record,Windows & Linux,POST: Create PTR record with incorrect domain name,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,PTR-TC-013,PTR Record,Windows & Linux,POST: Create PTR record with incorrect system name value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,PTR-TC-014,PTR Record,Windows & Linux,POST: Create PTR record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+20/9/24,PTR-TC-015,PTR Record,Windows & Linux,PUT: Update PTR record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+20/9/24,PTR-TC-016,PTR Record,Windows & Linux,GET: Check schedule enable PTR record get API only,Schedule enabled records should be retrievable via GET,Functional,Positive,Not Automated
+20/9/24,PTR-TC-017,PTR Record,Windows & Linux,POST: Create PTR record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,PTR-TC-018,PTR Record,Windows & Linux,PUT: Update PTR record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,PTR-TC-019,PTR Record,Windows & Linux,POST: Create PTR record with same domain name that already exists,API should return error - domain already exists,Functional,Negative,Pass
+20/9/24,PTR-TC-020,PTR Record,Windows & Linux,POST: Create PTR record with duplicate record values,API should return error for duplicate values,Functional,Negative,Pass
+20/9/24,PTR-TC-021,PTR Record,Windows & Linux,POST: Create PTR record with * and @ subdomain - not allowed for PTR,API should return error - special chars not allowed for PTR,Functional,Negative,Pass
+20/9/24,PTR-TC-022,PTR Record,Windows & Linux,Verify PTR record data pushed to named configuration file,Record should be present in named config,Integration,Positive,Not Automated
+20/9/24,PTR-TC-023,PTR Record,Windows,Verify PTR record data has been pushed to the Windows server machine,Record data should be present on Windows DNS server,Integration,Positive,Not Automated
+20/9/24,PTR-TC-024,PTR Record,Linux,Verify PTR record data has been pushed to the Linux server using dig,Record data should be resolvable via dig command,Integration,Positive,Pass
+20/9/24,PTR-TC-025,PTR Record,Windows & Linux,PUT: Update record TTL and remove records then add record back with PUT method,Record should be updated with new TTL and new records successfully,Functional,Positive,Pass
+20/9/24,PTR-TC-026,PTR Record,Windows & Linux,POST: Create PTR record with lowercase then create same name in uppercase,API should return error - case insensitive duplicate not allowed,Functional,Negative,Skipped
+24/9/24,SPF-TC-001,SPF/TXT Record,Windows & Linux,POST: Create SPF record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Pass
+24/9/24,SPF-TC-002,SPF/TXT Record,Windows & Linux,POST: Create TXT record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Pass
+24/9/24,SPF-TC-003,SPF/TXT Record,Windows & Linux,PUT: Update SPF/TXT record TTL value and verify,TTL value should be updated successfully with 200 status,Functional,Positive,Pass
+24/9/24,SPF-TC-004,SPF/TXT Record,Windows & Linux,DELETE: Delete SPF/TXT record and verify,Record should be deleted successfully with 200 status,Functional,Positive,Pass
+24/9/24,SPF-TC-005,SPF/TXT Record,Windows & Linux,GET: Retrieve all SPF/TXT records in zone,All records should be returned with 200 status,Functional,Positive,Pass
+24/9/24,SPF-TC-006,SPF/TXT Record,Windows & Linux,GET SPECIFIC: Retrieve single SPF/TXT record by ID,Specific record should be returned with 200 status,Functional,Positive,Pass
+24/9/24,SPF-TC-007,SPF/TXT Record,Windows & Linux,POST: Add SPF/TXT record with single record value and verify,Single record value should be created successfully,Functional,Positive,Pass
+24/9/24,SPF-TC-008,SPF/TXT Record,Windows & Linux,POST: Add TXT record with multiple record values and verify,Multiple record values should be created successfully for TXT type,Functional,Positive,Pass
+24/9/24,SPF-TC-009,SPF/TXT Record,Windows & Linux,PUT: Update SPF/TXT record values and verify,Updated record values should be reflected in GET response,Functional,Positive,Pass
+24/9/24,SPF-TC-010,SPF/TXT Record,Windows & Linux,DELETE: Delete SPF/TXT record and verify record no longer exists,GET should return 400/404 for deleted record,Functional,Positive,Pass
+24/9/24,SPF-TC-011,SPF/TXT Record,Windows & Linux,POST: Create SPF/TXT record with incorrect zone name,API should return error with 400 status,Functional,Negative,Pass
+24/9/24,SPF-TC-012,SPF/TXT Record,Windows & Linux,POST: Create SPF/TXT record with incorrect domain name,API should return error with 400 status,Functional,Negative,Pass
+24/9/24,SPF-TC-013,SPF/TXT Record,Windows & Linux,POST: Create SPF/TXT record with incorrect record value,API should return error with 400 status,Functional,Negative,Pass
+24/9/24,SPF-TC-014,SPF/TXT Record,Windows & Linux,POST: Create SPF/TXT record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+24/9/24,SPF-TC-015,SPF/TXT Record,Windows & Linux,PUT: Update SPF/TXT record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+24/9/24,SPF-TC-016,SPF/TXT Record,Windows & Linux,GET: Check schedule enable SPF/TXT record get API only,Schedule enabled records should be retrievable via GET,Functional,Positive,Not Automated
+24/9/24,SPF-TC-017,SPF/TXT Record,Windows & Linux,POST: Create SPF/TXT record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+24/9/24,SPF-TC-018,SPF/TXT Record,Windows & Linux,PUT: Update SPF/TXT record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+24/9/24,SPF-TC-019,SPF/TXT Record,Windows & Linux,POST: Create SPF/TXT record with same domain name that already exists,API should return error - domain already exists,Functional,Negative,Pass
+24/9/24,SPF-TC-020,SPF/TXT Record,Windows & Linux,POST: Create SPF/TXT record with duplicate record values,API should return error for duplicate values,Functional,Negative,Pass
+24/9/24,SPF-TC-021,SPF/TXT Record,Windows & Linux,POST: Create SPF/TXT record with * wildcard subdomain,Record should be created successfully,Functional,Boundary,Pass
+24/9/24,SPF-TC-022,SPF/TXT Record,Windows & Linux,POST: Create SPF/TXT record with @ root subdomain,Record should be created successfully,Functional,Boundary,Pass
+24/9/24,SPF-TC-023,SPF/TXT Record,Windows & Linux,Verify SPF/TXT record data pushed to named configuration file,Record should be present in named config,Integration,Positive,Not Automated
+24/9/24,SPF-TC-024,SPF/TXT Record,Windows,Verify SPF/TXT record data has been pushed to the Windows server machine,Record data should be present on Windows DNS server,Integration,Positive,Not Automated
+24/9/24,SPF-TC-025,SPF/TXT Record,Linux,Verify SPF/TXT record data has been pushed to the Linux server using dig,Record data should be resolvable via dig command,Integration,Positive,Pass
+24/9/24,SPF-TC-026,SPF/TXT Record,Windows & Linux,POST: Create record with 255 characters in record value,Record should be created successfully with max length value,Functional,Boundary,Pass
+24/9/24,SPF-TC-027,SPF/TXT Record,Windows & Linux,POST: Create SPF record with multiple values - SPF allows only single value,API should return 400 - SPF cannot have more than 1 record,Functional,Negative,Pass
+24/9/24,SPF-TC-028,SPF/TXT Record,Windows & Linux,POST: Create TXT record with multiple record values - should be allowed,TXT record should accept multiple values successfully,Functional,Positive,Pass
+24/9/24,SPF-TC-029,SPF/TXT Record,Windows & Linux,POST: Create @ root record for both SPF and TXT - only one type allowed,Second creation should return error - @ root already has record,Functional,Negative,Pass
+24/9/24,SPF-TC-030,SPF/TXT Record,Windows & Linux,PUT: Update record TTL and remove records then add record back with PUT method,Record should be updated with new TTL and new records successfully,Functional,Positive,Pass
+24/9/24,SPF-TC-031,SPF/TXT Record,Windows & Linux,POST: Create SPF/TXT record with lowercase then create same name in uppercase,API should return error - case insensitive duplicate not allowed,Functional,Negative,Skipped
+20/9/24,NAPTR-TC-001,NAPTR Record,Windows & Linux,POST: Create NAPTR record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Pass
+20/9/24,NAPTR-TC-002,NAPTR Record,Windows & Linux,PUT: Update NAPTR record TTL value and verify,TTL value should be updated successfully with 200 status,Functional,Positive,Pass
+20/9/24,NAPTR-TC-003,NAPTR Record,Windows & Linux,DELETE: Delete NAPTR record and verify,Record should be deleted successfully with 200 status,Functional,Positive,Pass
+20/9/24,NAPTR-TC-004,NAPTR Record,Windows & Linux,GET: Retrieve all NAPTR records in zone,All NAPTR records should be returned with 200 status,Functional,Positive,Pass
+20/9/24,NAPTR-TC-005,NAPTR Record,Windows & Linux,GET SPECIFIC: Retrieve single NAPTR record by ID,Specific record should be returned with 200 status,Functional,Positive,Pass
+20/9/24,NAPTR-TC-006,NAPTR Record,Windows & Linux,POST: Add NAPTR record and verify record values in API response,Record values should match the submitted payload,Functional,Positive,Pass
+20/9/24,NAPTR-TC-007,NAPTR Record,Windows & Linux,PUT: Update NAPTR record values and verify updated values,Updated record values should be reflected in GET response,Functional,Positive,Pass
+20/9/24,NAPTR-TC-008,NAPTR Record,Windows & Linux,DELETE: Delete NAPTR record and verify record no longer exists,GET should return 400/404 for deleted record,Functional,Positive,Pass
+20/9/24,NAPTR-TC-009,NAPTR Record,Windows & Linux,POST: Create NAPTR record with incorrect zone name,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,NAPTR-TC-010,NAPTR Record,Windows & Linux,POST: Create NAPTR record with incorrect domain name,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,NAPTR-TC-011,NAPTR Record,Windows & Linux,POST: Create NAPTR record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+20/9/24,NAPTR-TC-012,NAPTR Record,Windows & Linux,PUT: Update NAPTR record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+20/9/24,NAPTR-TC-013,NAPTR Record,Windows & Linux,POST: Create NAPTR record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,NAPTR-TC-014,NAPTR Record,Windows & Linux,PUT: Update NAPTR record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,NAPTR-TC-015,NAPTR Record,Windows & Linux,POST: Create NAPTR record with same domain name that already exists,API should return error - domain already exists,Functional,Negative,Pass
+20/9/24,NAPTR-TC-016,NAPTR Record,Windows & Linux,POST: Create NAPTR record with duplicate record values,API should return error for duplicate values,Functional,Negative,Pass
+20/9/24,NAPTR-TC-017,NAPTR Record,Windows,Verify NAPTR record data has been pushed to the Windows server machine,Record data should be present on Windows DNS server,Integration,Positive,Not Automated
+20/9/24,NAPTR-TC-018,NAPTR Record,Linux,Verify NAPTR record data has been pushed to the Linux server using dig,Record data should be resolvable via dig command,Integration,Positive,Pass
+20/9/24,NAPTR-TC-019,NAPTR Record,Windows & Linux,PUT: Update record TTL and remove records then add record back with PUT method,Record should be updated with new TTL and new records successfully,Functional,Positive,Pass
+20/9/24,NAPTR-TC-020,NAPTR Record,Windows & Linux,POST: Create NAPTR record with lowercase then create same name in uppercase,API should return error - case insensitive duplicate not allowed,Functional,Negative,Pass
+20/9/24,HINFO-TC-001,HINFO Record,Windows & Linux,POST: Create HINFO record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Pass
+20/9/24,HINFO-TC-002,HINFO Record,Windows & Linux,PUT: Update HINFO record TTL value and verify,TTL value should be updated successfully with 200 status,Functional,Positive,Pass
+20/9/24,HINFO-TC-003,HINFO Record,Windows & Linux,DELETE: Delete HINFO record and verify,Record should be deleted successfully with 200 status,Functional,Positive,Pass
+20/9/24,HINFO-TC-004,HINFO Record,Windows & Linux,GET: Retrieve all HINFO records in zone,All HINFO records should be returned with 200 status,Functional,Positive,Pass
+20/9/24,HINFO-TC-005,HINFO Record,Windows & Linux,GET SPECIFIC: Retrieve single HINFO record by ID,Specific record should be returned with 200 status,Functional,Positive,Pass
+20/9/24,HINFO-TC-006,HINFO Record,Windows & Linux,POST: Add HINFO record and verify record values in API response,Record values (cpu/os) should match the submitted payload,Functional,Positive,Pass
+20/9/24,HINFO-TC-007,HINFO Record,Windows & Linux,PUT: Update HINFO record values and verify updated values,Updated record values should be reflected in GET response,Functional,Positive,Pass
+20/9/24,HINFO-TC-008,HINFO Record,Windows & Linux,DELETE: Delete HINFO record and verify record no longer exists,GET should return 400/404 for deleted record,Functional,Positive,Pass
+20/9/24,HINFO-TC-009,HINFO Record,Windows & Linux,POST: Create HINFO record with incorrect zone name,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,HINFO-TC-010,HINFO Record,Windows & Linux,POST: Create HINFO record with incorrect domain name,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,HINFO-TC-011,HINFO Record,Windows & Linux,POST: Create HINFO record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+20/9/24,HINFO-TC-012,HINFO Record,Windows & Linux,PUT: Update HINFO record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+20/9/24,HINFO-TC-013,HINFO Record,Windows & Linux,POST: Create HINFO record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,HINFO-TC-014,HINFO Record,Windows & Linux,PUT: Update HINFO record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,HINFO-TC-015,HINFO Record,Windows & Linux,POST: Create HINFO record with same domain name that already exists,API should return error - domain already exists,Functional,Negative,Pass
+20/9/24,HINFO-TC-016,HINFO Record,Windows & Linux,POST: Create HINFO record with duplicate record values,API should return error for duplicate values,Functional,Negative,Pass
+20/9/24,HINFO-TC-017,HINFO Record,Windows,Verify HINFO record data has been pushed to the Windows server machine,Record data should be present on Windows DNS server,Integration,Positive,Not Automated
+20/9/24,HINFO-TC-018,HINFO Record,Linux,Verify HINFO record data has been pushed to the Linux server using dig,Record data should be resolvable via dig command,Integration,Positive,Pass
+20/9/24,HINFO-TC-019,HINFO Record,Windows & Linux,PUT: Update record TTL and remove records then add record back with PUT method,Record should be updated with new TTL and new records successfully,Functional,Positive,Pass
+20/9/24,HINFO-TC-020,HINFO Record,Windows & Linux,POST: Create HINFO record with lowercase then create same name in uppercase,API should return error - case insensitive duplicate not allowed,Functional,Negative,Pass
+20/9/24,HTTPS-TC-001,HTTPS Record,Windows & Linux,POST: Create HTTPS record and verify via API,Record should be created successfully with 200/201 status,Functional,Positive,Pass
+20/9/24,HTTPS-TC-002,HTTPS Record,Windows & Linux,PUT: Update HTTPS record TTL value and verify,TTL value should be updated successfully with 200 status,Functional,Positive,Pass
+20/9/24,HTTPS-TC-003,HTTPS Record,Windows & Linux,DELETE: Delete HTTPS record and verify,Record should be deleted successfully with 200 status,Functional,Positive,Pass
+20/9/24,HTTPS-TC-004,HTTPS Record,Windows & Linux,GET: Retrieve all HTTPS records in zone,All HTTPS records should be returned with 200 status,Functional,Positive,Pass
+20/9/24,HTTPS-TC-005,HTTPS Record,Windows & Linux,GET SPECIFIC: Retrieve single HTTPS record by ID,Specific record should be returned with 200 status,Functional,Positive,Pass
+20/9/24,HTTPS-TC-006,HTTPS Record,Windows & Linux,POST: Add HTTPS record and verify record values in API response,Record values should match the submitted payload,Functional,Positive,Pass
+20/9/24,HTTPS-TC-007,HTTPS Record,Windows & Linux,PUT: Update HTTPS record values and verify updated values,Updated record values should be reflected in GET response,Functional,Positive,Pass
+20/9/24,HTTPS-TC-008,HTTPS Record,Windows & Linux,DELETE: Delete HTTPS record and verify record no longer exists,GET should return 400/404 for deleted record,Functional,Positive,Pass
+20/9/24,HTTPS-TC-009,HTTPS Record,Windows & Linux,POST: Create HTTPS record with incorrect zone name,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,HTTPS-TC-010,HTTPS Record,Windows & Linux,POST: Create HTTPS record with incorrect domain name,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,HTTPS-TC-011,HTTPS Record,Windows & Linux,POST: Create HTTPS record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+20/9/24,HTTPS-TC-012,HTTPS Record,Windows & Linux,PUT: Update HTTPS record with incorrect cluster name,API should return 400 - Incorrect cluster name,Functional,Negative,Pass
+20/9/24,HTTPS-TC-013,HTTPS Record,Windows & Linux,POST: Create HTTPS record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,HTTPS-TC-014,HTTPS Record,Windows & Linux,PUT: Update HTTPS record with empty records value,API should return error with 400 status,Functional,Negative,Pass
+20/9/24,HTTPS-TC-015,HTTPS Record,Windows & Linux,POST: Create HTTPS record with same domain name that already exists,API should return error - domain already exists,Functional,Negative,Pass
+20/9/24,HTTPS-TC-016,HTTPS Record,Windows & Linux,POST: Create HTTPS record with duplicate record values,API should return error for duplicate values,Functional,Negative,Pass
+20/9/24,HTTPS-TC-017,HTTPS Record,Windows,Verify HTTPS record data has been pushed to the Windows server machine,Record data should be present on Windows DNS server,Integration,Positive,Not Automated
+20/9/24,HTTPS-TC-018,HTTPS Record,Linux,Verify HTTPS record data has been pushed to the Linux server using dig,Record data should be resolvable via dig command,Integration,Positive,Pass
+20/9/24,HTTPS-TC-019,HTTPS Record,Windows & Linux,PUT: Update record TTL and remove records then add record back with PUT method,Record should be updated with new TTL and new records successfully,Functional,Positive,Pass
+20/9/24,HTTPS-TC-020,HTTPS Record,Windows & Linux,POST: Create HTTPS record with lowercase then create same name in uppercase,API should return error - case insensitive duplicate not allowed,Functional,Negative,Pass

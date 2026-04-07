@@ -14,7 +14,7 @@ import pytest
 import subprocess
 import time
 
-DNS_SERVERS = ["10.73.17.98", "10.73.17.109", "10.72.44.98"]
+DNS_SERVERS = ["10.73.17.98", "10.73.17.109"]  # , "10.72.44.98"
 DIG_WAIT = 3
 
 

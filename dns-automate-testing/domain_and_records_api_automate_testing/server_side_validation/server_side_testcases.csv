@@ -1,0 +1,58 @@
+Date,TC No,Module,Platform,Test Case Description,Expected Result,Type,Test Nature,Status
+07/04/26,SSV-TC-001,SQL Injection,Linux,POST: SQL injection in domain_name field (OR 1=1) across all 13 record types via Internal UI API,Server should not return 500 or expose SQL error details,Security,Negative,Not Automated
+07/04/26,SSV-TC-002,SQL Injection,Linux,POST: SQL injection in domain_name field (DROP TABLE) across all 13 record types,Server should not return 500 or expose SQL error details,Security,Negative,Not Automated
+07/04/26,SSV-TC-003,SQL Injection,Linux,POST: SQL injection in domain_name field (UNION SELECT) across all 13 record types,Server should not return 500 or expose SQL error details,Security,Negative,Not Automated
+07/04/26,SSV-TC-004,SQL Injection,Linux,POST: SQL injection in domain_name field (single quote / stacked query) across all 13 record types,Server should not return 500 or expose SQL error details,Security,Negative,Not Automated
+07/04/26,SSV-TC-005,SQL Injection,Linux,POST: SQL injection in zone_name field via A record Internal API,Server should not return 500 or expose SQL error in response,Security,Negative,Not Automated
+07/04/26,SSV-TC-006,SQL Injection,Linux,POST: SQL injection in cluster_name field via A record Internal API,Server should not return 500 or expose SQL error in response,Security,Negative,Not Automated
+07/04/26,SSV-TC-007,SQL Injection,Linux,GET: SQL injection in URL pk path parameter across all 13 record types,Server should return 400/404 not 500 with SQL error,Security,Negative,Not Automated
+07/04/26,SSV-TC-008,SQL Injection,Linux,DELETE: SQL injection in URL pk path parameter across all 13 record types,Server should return 400/404 not 500 with SQL error,Security,Negative,Not Automated
+07/04/26,SSV-TC-009,SQL Injection,Linux,POST: SQL injection in root_hint cluster parameter,Server should not return 500 or expose SQL error,Security,Negative,Not Automated
+07/04/26,SSV-TC-010,SQL Injection,Linux,POST: SQL injection in root_hint named_root_ns_data parameter,Server should not return 500 or expose SQL error,Security,Negative,Not Automated
+07/04/26,SSV-TC-011,SQL Injection,Linux,POST: SQL injection via OAuth2 Domain API create record across all record types,Server should not return 500 or expose SQL error details,Security,Negative,Not Automated
+07/04/26,SSV-TC-012,SQL Injection,Linux,GET: SQL injection in OAuth2 zone_pk URL parameter,Server should return 400/404 not 500 with SQL error,Security,Negative,Not Automated
+07/04/26,SSV-TC-013,SQL Injection,Linux,POST: Time-based blind SQL injection (pg_sleep) in cluster_name - verify response < 3 seconds,Response time should be < 3s proving sleep was not executed,Security,Negative,Not Automated
+07/04/26,SSV-TC-014,SQL Injection,Linux,POST: Time-based blind SQL injection (pg_sleep) in root_hint cluster - verify response < 3 seconds,Response time should be < 3s proving sleep was not executed,Security,Negative,Not Automated
+07/04/26,SSV-TC-015,SQL Injection,Linux,POST: SQL injection in zone create endpoint (zone_name field),Server should not return 500 or expose SQL error,Security,Negative,Not Automated
+07/04/26,SSV-TC-016,SQL Injection,Linux,GET: SQL injection in zone GET by pk URL parameter,Server should return 400/404 not 500 with SQL error,Security,Negative,Not Automated
+07/04/26,SSV-TC-017,XSS,Linux,POST: XSS payload (<script>alert(1)</script>) in domain_name across all 13 record types via Internal API,Server should not return 500 or reflect unescaped XSS in response,Security,Negative,Not Automated
+07/04/26,SSV-TC-018,XSS,Linux,POST: XSS payload (img onerror) in domain_name across all 13 record types,Server should not return 500 or reflect unescaped XSS,Security,Negative,Not Automated
+07/04/26,SSV-TC-019,XSS,Linux,POST: XSS payload (svg onload / iframe / event handler) in domain_name across all 13 record types,Server should not return 500 or reflect unescaped XSS,Security,Negative,Not Automated
+07/04/26,SSV-TC-020,XSS,Linux,POST: XSS payload in zone_name and cluster_name fields,Server should not return 500 or reflect unescaped XSS in response body,Security,Negative,Not Automated
+07/04/26,SSV-TC-021,XSS,Linux,POST: XSS payload in root_hint named_root_ns_data field,Server should not return 500 or reflect unescaped XSS,Security,Negative,Not Automated
+07/04/26,SSV-TC-022,XSS,Linux,POST: XSS payload in TXT/SPF record value field,Server should not return 500 or reflect unescaped XSS,Security,Negative,Not Automated
+07/04/26,SSV-TC-023,XSS,Linux,POST: XSS payload in HINFO cpu and os fields,Server should not return 500 or reflect unescaped XSS,Security,Negative,Not Automated
+07/04/26,SSV-TC-024,XSS,Linux,POST: XSS payload via OAuth2 Domain API (A record and zone create),Server should not return 500 or reflect unescaped XSS,Security,Negative,Not Automated
+07/04/26,SSV-TC-025,Input Validation,Linux,POST: Invalid IPv4 addresses (0.0.0.0 / 127.0.0.1 / 255.255.255.255 / 999.999.999.999) in A record,Server should return 400/422 for invalid IPv4 not 500,Functional,Negative,Not Automated
+07/04/26,SSV-TC-026,Input Validation,Linux,POST: Invalid IPv6 addresses (::1 / :: / malformed / too many groups) in AAAA record,Server should not return 500 for invalid IPv6,Functional,Negative,Not Automated
+07/04/26,SSV-TC-027,Input Validation,Linux,POST: Special characters (!@#$%^&*(){}[]|;:' etc.) in domain_name across A/AAAA/CNAME/MX,Server should not return 500 for special character hostnames,Functional,Negative,Not Automated
+07/04/26,SSV-TC-028,Input Validation,Linux,POST: Domain name with 255 characters (max DNS label length),Server should not return 500 - should accept or reject with 400,Functional,Boundary,Not Automated
+07/04/26,SSV-TC-029,Input Validation,Linux,POST: Domain name with 1000 characters (exceeds max),Server should return 400/422 for oversized hostname not 500,Functional,Boundary,Not Automated
+07/04/26,SSV-TC-030,Input Validation,Linux,POST: Negative TTL value (-1) in A record,Server should not return 500 for negative TTL,Functional,Negative,Not Automated
+07/04/26,SSV-TC-031,Input Validation,Linux,POST: Extremely large TTL value (99999999999999) in A record,Server should not return 500 for oversized TTL,Functional,Boundary,Not Automated
+07/04/26,SSV-TC-032,Input Validation,Linux,POST: Non-numeric TTL value (abc) in A record,Server should not return 500 for non-numeric TTL,Functional,Negative,Not Automated
+07/04/26,SSV-TC-033,Input Validation,Linux,POST: MX priority negative (-1) and over 65535 (99999),Server should not return 500 for invalid MX priority values,Functional,Boundary,Not Automated
+07/04/26,SSV-TC-034,Input Validation,Linux,POST: SRV port over 65535 (99999),Server should not return 500 for oversized SRV port,Functional,Boundary,Not Automated
+07/04/26,SSV-TC-035,Input Validation,Linux,POST: CAA flag over 255 (999),Server should not return 500 for oversized CAA flag,Functional,Boundary,Not Automated
+07/04/26,SSV-TC-036,Input Validation,Linux,POST: Empty body ({}) to all 13 record type endpoints,Server should return 400/422 for empty body not 500,Functional,Negative,Not Automated
+07/04/26,SSV-TC-037,Input Validation,Linux,POST: Missing domain_name field to all 13 record type endpoints,Server should not return 500 for missing required field,Functional,Negative,Not Automated
+07/04/26,SSV-TC-038,Input Validation,Linux,POST: Missing records field to all 13 record type endpoints,Server should not return 500 for missing records,Functional,Negative,Not Automated
+07/04/26,SSV-TC-039,Input Validation,Linux,POST: All null field values (domain_name/zone_name/cluster/ttl/records = null),Server should not return 500 for null values,Functional,Negative,Not Automated
+07/04/26,SSV-TC-040,Input Validation,Linux,POST: Invalid JSON body (malformed syntax) to A record endpoint,Server should return 400 for invalid JSON not 500,Functional,Negative,Not Automated
+07/04/26,SSV-TC-041,Input Validation,Linux,POST: XML payload instead of JSON to A record endpoint,Server should return 400/415 for wrong content type not 500,Functional,Negative,Not Automated
+07/04/26,SSV-TC-042,Input Validation,Linux,POST: Very large payload (10000 records array) to A record endpoint,Server should handle gracefully without 500,Functional,Boundary,Not Automated
+07/04/26,SSV-TC-043,Input Validation,Linux,PATCH: Wrong HTTP method (PATCH) to all 13 record type endpoints,Server should return 400/404/405 for unsupported method,Functional,Negative,Not Automated
+07/04/26,SSV-TC-044,Auth Validation,Linux,POST: Access all 13 record type create endpoints without Bearer token,Server should return 401/403 Unauthorized,Security,Negative,Not Automated
+07/04/26,SSV-TC-045,Auth Validation,Linux,GET: Access all 13 record type list endpoints without Bearer token,Server should return 401/403 Unauthorized,Security,Negative,Not Automated
+07/04/26,SSV-TC-046,Auth Validation,Linux,GET: Access zone list endpoint without token,Server should return 401/403 Unauthorized,Security,Negative,Not Automated
+07/04/26,SSV-TC-047,Auth Validation,Linux,POST: Access root_hint configure endpoint without token,Server should return 401/403 Unauthorized,Security,Negative,Not Automated
+07/04/26,SSV-TC-048,Auth Validation,Linux,GET: Access OAuth2 domain list endpoint without token,Server should return 401/403 Unauthorized,Security,Negative,Not Automated
+07/04/26,SSV-TC-049,Auth Validation,Linux,GET: Access OAuth2 records endpoint without token,Server should return 401/403 Unauthorized,Security,Negative,Not Automated
+07/04/26,SSV-TC-050,Auth Validation,Linux,GET: Access zone list with invalid/garbage Bearer token,Server should return 401/403 for invalid token,Security,Negative,Not Automated
+07/04/26,SSV-TC-051,Auth Validation,Linux,POST: Create A record with invalid/expired Bearer token,Server should return 401/403 for invalid token,Security,Negative,Not Automated
+07/04/26,SSV-TC-052,Auth Validation,Linux,GET: Access OAuth2 domain API with invalid Bearer token,Server should return 401/403 for invalid token,Security,Negative,Not Automated
+07/04/26,SSV-TC-053,Auth Validation,Linux,GET: Access zone list with SQL injection in Bearer token value,Server should return 401/403 not 500,Security,Negative,Not Automated
+07/04/26,SSV-TC-054,Auth Validation,Linux,GET: Access zone list with XSS in Bearer token value,Server should return 401/403 not 500,Security,Negative,Not Automated
+07/04/26,SSV-TC-055,Auth Validation,Linux,GET: Access without Authorization header entirely,Server should return 401/403 for missing auth header,Security,Negative,Not Automated
+07/04/26,SSV-TC-056,Auth Validation,Linux,GET: Access with Basic auth instead of Bearer auth,Server should return 401/403 for wrong auth scheme,Security,Negative,Not Automated
+07/04/26,SSV-TC-057,Auth Validation,Linux,POST: Bulk delete all 13 record types without authentication,Server should return 401/403 for bulk delete without auth,Security,Negative,Not Automated

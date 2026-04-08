@@ -1,0 +1,109 @@
+{
+  "ddi_console": {
+    "url": "https://10.72.51.96:9443",
+    "lease_page": "https://10.72.51.96:9443/#/dhcp/lease"
+  },
+  "dhcp_server": {
+    "host": "10.72.44.97",
+    "port": 22,
+    "username": "test",
+    "password": "Admin@123",
+    "key_file": null
+  },
+  "lease_files": {
+    "v4": "/usr/local/dhcpd/var/lib/dhcpd/dhcpd.leases",
+    "v6": "/usr/local/dhcpd/var/lib/dhcpd/dhcpd6.leases"
+  },
+  "dhcpd_service": {
+    "restart_cmd": "systemctl restart dhcpd",
+    "status_cmd": "systemctl status dhcpd",
+    "restart_v6_cmd": "systemctl restart dhcpd6",
+    "status_v6_cmd": "systemctl status dhcpd6"
+  },
+  "v4_test_data": {
+    "scope_id": "2.2.228.0/24",
+    "scope_range_start": "2.2.228.100",
+    "scope_range_end": "2.2.228.200",
+    "test_lease": {
+      "ip": "2.2.228.150",
+      "mac": "00:00:23:df:5e:f1",
+      "hostname": "test-client-v4",
+      "starts": "2026/04/07 10:00:00",
+      "ends": "2027/04/07 10:00:00",
+      "binding_state": "active"
+    },
+    "update_lease": {
+      "ip": "2.2.228.150",
+      "mac": "00:00:23:df:5e:f1",
+      "hostname": "updated-client-v4",
+      "starts": "2026/04/07 10:00:00",
+      "ends": "2027/06/07 10:00:00",
+      "binding_state": "active"
+    },
+    "batch_leases": [
+      {"ip": "2.2.228.101", "mac": "00:11:22:33:44:01"},
+      {"ip": "2.2.228.102", "mac": "00:11:22:33:44:02"},
+      {"ip": "2.2.228.103", "mac": "00:11:22:33:44:03"},
+      {"ip": "2.2.228.104", "mac": "00:11:22:33:44:04"},
+      {"ip": "2.2.228.105", "mac": "00:11:22:33:44:05"}
+    ],
+    "invalid_ips": [
+      "999.999.999.999",
+      "abc.def.ghi.jkl",
+      "256.1.1.1",
+      "-1.0.0.0",
+      "1.2.3.4.5"
+    ],
+    "out_of_scope_ip": "10.10.10.10",
+    "invalid_macs": [
+      "ZZ:ZZ:ZZ:ZZ:ZZ:ZZ",
+      "00:11:22",
+      "not-a-mac",
+      "",
+      "00:11:22:33:44:55:66:77"
+    ]
+  },
+  "v6_test_data": {
+    "prefix": "1000::/64",
+    "test_lease": {
+      "ip": "1000::9465:cf2d:ef86:df42",
+      "duid": "\\001\\000\\000\\000\\000\\003\\000\\0018\\370\\366j\\313@",
+      "iaid": "\\001\\000\\000\\000",
+      "hostname": "test-client-v6",
+      "preferred_life": 3600,
+      "max_life": 7200,
+      "ends": "2027/04/07 10:00:00",
+      "binding_state": "active"
+    },
+    "update_lease": {
+      "ip": "1000::9465:cf2d:ef86:df42",
+      "duid": "\\001\\000\\000\\000\\000\\003\\000\\0018\\370\\366j\\313@",
+      "iaid": "\\001\\000\\000\\000",
+      "hostname": "updated-client-v6",
+      "preferred_life": 7200,
+      "max_life": 14400,
+      "ends": "2027/06/07 10:00:00",
+      "binding_state": "active"
+    },
+    "batch_leases": [
+      {"ip": "1000::1001", "duid": "\\001\\000\\000\\001"},
+      {"ip": "1000::1002", "duid": "\\001\\000\\000\\002"},
+      {"ip": "1000::1003", "duid": "\\001\\000\\000\\003"},
+      {"ip": "1000::1004", "duid": "\\001\\000\\000\\004"},
+      {"ip": "1000::1005", "duid": "\\001\\000\\000\\005"}
+    ],
+    "invalid_ipv6": [
+      "gggg::1",
+      "1000::::::1",
+      "not-an-ipv6",
+      "",
+      "12345::1"
+    ],
+    "out_of_prefix_ip": "2001:db8::1",
+    "invalid_duids": [
+      "",
+      "not-a-duid",
+      "ZZ:ZZ:ZZ"
+    ]
+  }
+}

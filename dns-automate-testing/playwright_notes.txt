@@ -1,0 +1,492 @@
+================================================================================
+  PLAYWRIGHT PYTHON - ESSENTIAL NOTES & QUICK REFERENCE
+================================================================================
+
+Author : Bhuvaneshwari
+Purpose: Learn and improve Playwright for automation testing
+Updated: April 2026
+
+================================================================================
+  1. INSTALLATION & SETUP
+================================================================================
+
+# Install Playwright
+    pip install playwright
+    playwright install                  # Downloads browser binaries (Chromium, Firefox, WebKit)
+    playwright install chromium         # Install only Chromium
+
+# Install pytest plugin
+    pip install pytest-playwright
+
+================================================================================
+  2. BROWSER LAUNCH MODES
+================================================================================
+
+# Headed (visible browser) - useful for debugging
+    browser = playwright.chromium.launch(headless=False)
+
+# Headless (no UI) - faster, used in CI/CD
+    browser = playwright.chromium.launch(headless=True)
+
+# Slow motion - slows down actions for visual debugging
+    browser = playwright.chromium.launch(headless=False, slow_mo=500)  # 500ms delay
+
+# Browser types
+    playwright.chromium.launch()   # Chrome/Edge
+    playwright.firefox.launch()    # Firefox
+    playwright.webkit.launch()     # Safari
+
+================================================================================
+  3. PAGE & CONTEXT
+================================================================================
+
+# Browser Context = isolated session (cookies, storage, etc.)
+    context = browser.new_context()
+    page = context.new_page()
+
+# Multiple pages in same context (share cookies/session)
+    page1 = context.new_page()
+    page2 = context.new_page()
+
+# Set viewport size
+    context = browser.new_context(viewport={"width": 1920, "height": 1080})
+
+# Set user agent
+    context = browser.new_context(user_agent="Custom Agent String")
+
+# Ignore HTTPS errors (self-signed certificates)
+    context = browser.new_context(ignore_https_errors=True)
+
+================================================================================
+  4. NAVIGATION
+================================================================================
+
+    page.goto("https://example.com")
+    page.go_back()                      # Browser back
+    page.go_forward()                   # Browser forward
+    page.reload()                       # Refresh page
+
+# Wait for page load states
+    page.goto("https://example.com", wait_until="domcontentloaded")
+    page.goto("https://example.com", wait_until="networkidle")
+    page.goto("https://example.com", wait_until="load")
+
+================================================================================
+  5. LOCATORS (RECOMMENDED WAY)
+================================================================================
+
+# ---- By Role (BEST practice) ----
+    page.get_by_role("button", name="Submit")
+    page.get_by_role("link", name="Login")
+    page.get_by_role("textbox", name="Email")
+    page.get_by_role("checkbox", name="Remember me")
+    page.get_by_role("heading", name="Welcome")
+    page.get_by_role("row")                              # Table rows
+
+# ---- By Text ----
+    page.get_by_text("Welcome")                          # Exact substring match
+    page.get_by_text("Welcome", exact=True)              # Exact full match
+
+# ---- By Label (for form fields) ----
+    page.get_by_label("Username")
+    page.get_by_label("Password")
+
+# ---- By Placeholder ----
+    page.get_by_placeholder("Enter email")
+
+# ---- By Test ID (data-testid attribute) ----
+    page.get_by_test_id("submit-button")
+
+# ---- By CSS Selector ----
+    page.locator("css=#login-btn")
+    page.locator("css=.submit-class")
+    page.locator("css=input[type='email']")
+    page.locator("css=div.container > button")
+
+# ---- By XPath ----
+    page.locator("xpath=//button[@id='submit']")
+    page.locator("xpath=//input[@name='username']")
+    page.locator("xpath=//div[contains(@class, 'header')]")
+    page.locator("xpath=//span[text()='Login']")
+
+# ---- Chaining Locators (narrow down) ----
+    page.locator("div.form").locator("button.submit")
+    page.locator("table").locator("tr").nth(2)
+
+# ---- Filter Locators ----
+    page.get_by_role("listitem").filter(has_text="Product 1")
+    page.locator("div").filter(has=page.get_by_role("button", name="Delete"))
+
+================================================================================
+  6. ACTIONS (CLICK, TYPE, SELECT, etc.)
+================================================================================
+
+# Click
+    page.locator("#btn").click()
+    page.locator("#btn").dblclick()                  # Double click
+    page.locator("#btn").click(button="right")       # Right click
+    page.locator("#btn").click(force=True)           # Force click (skip checks)
+
+# Type / Fill
+    page.locator("#email").fill("user@example.com")  # Clears and types
+    page.locator("#email").type("user@example.com")  # Types character by character
+    page.locator("#email").clear()                   # Clear input field
+    page.locator("#email").press("Enter")            # Press keyboard key
+
+# Keyboard shortcuts
+    page.keyboard.press("Control+a")
+    page.keyboard.press("Control+c")
+    page.keyboard.press("Escape")
+    page.keyboard.press("Tab")
+
+# Select dropdown
+    page.locator("select#country").select_option("India")           # By visible text
+    page.locator("select#country").select_option(value="IN")        # By value
+    page.locator("select#country").select_option(index=2)           # By index
+
+# Checkbox / Radio
+    page.locator("#agree").check()
+    page.locator("#agree").uncheck()
+    page.locator("#agree").is_checked()              # Returns True/False
+
+# Hover
+    page.locator("#menu").hover()
+
+# Drag and Drop
+    page.locator("#source").drag_to(page.locator("#target"))
+
+# File Upload
+    page.locator("input[type='file']").set_input_files("path/to/file.pdf")
+    page.locator("input[type='file']").set_input_files([])           # Clear
+
+# Scroll
+    page.locator("#element").scroll_into_view_if_needed()
+    page.mouse.wheel(0, 500)                         # Scroll down 500px
+
+================================================================================
+  7. ASSERTIONS (expect)
+================================================================================
+
+from playwright.sync_api import expect
+
+# ---- Visibility ----
+    expect(page.locator("#msg")).to_be_visible()
+    expect(page.locator("#msg")).to_be_hidden()
+    expect(page.locator("#msg")).not_to_be_visible()
+
+# ---- Text ----
+    expect(page.locator("#msg")).to_have_text("Success")
+    expect(page.locator("#msg")).to_contain_text("Succ")
+
+# ---- Value (input fields) ----
+    expect(page.locator("#email")).to_have_value("user@example.com")
+
+# ---- Attribute ----
+    expect(page.locator("#btn")).to_have_attribute("disabled", "")
+    expect(page.locator("#link")).to_have_attribute("href", "/home")
+
+# ---- CSS Class ----
+    expect(page.locator("#btn")).to_have_class("active primary")
+
+# ---- Count ----
+    expect(page.locator("table tr")).to_have_count(5)
+
+# ---- Enabled / Disabled ----
+    expect(page.locator("#btn")).to_be_enabled()
+    expect(page.locator("#btn")).to_be_disabled()
+
+# ---- Page Title / URL ----
+    expect(page).to_have_title("Dashboard")
+    expect(page).to_have_url("https://example.com/dashboard")
+    expect(page).to_have_url(re.compile(r".*dashboard.*"))          # Regex
+
+================================================================================
+  8. WAITS
+================================================================================
+
+# Auto-waiting (Playwright auto-waits for elements before actions)
+#   - click(), fill(), etc. automatically wait for element to be visible & stable
+
+# Explicit waits
+    page.wait_for_selector("#loading", state="hidden")       # Wait until hidden
+    page.wait_for_selector("#data", state="visible")         # Wait until visible
+    page.wait_for_selector("#row", state="attached")         # Wait until in DOM
+
+# Wait for URL/navigation
+    page.wait_for_url("**/dashboard")
+    page.wait_for_load_state("networkidle")
+    page.wait_for_load_state("domcontentloaded")
+
+# Wait for response (API call)
+    with page.expect_response("**/api/users") as response_info:
+        page.locator("#load-users").click()
+    response = response_info.value
+
+# Wait for timeout (avoid using — only for debugging)
+    page.wait_for_timeout(3000)   # 3 seconds — NOT recommended in production tests
+
+# Locator-level timeout
+    page.locator("#slow-element").click(timeout=10000)   # 10s timeout
+
+================================================================================
+  9. FRAMES & IFRAMES
+================================================================================
+
+# Access iframe by name or URL
+    frame = page.frame(name="my-frame")
+    frame = page.frame(url="**/iframe-content")
+
+# Using frame_locator (recommended)
+    page.frame_locator("#my-iframe").locator("#btn-inside").click()
+
+# Nested iframes
+    page.frame_locator("#outer").frame_locator("#inner").locator("#btn").click()
+
+================================================================================
+  10. DIALOGS (Alert, Confirm, Prompt)
+================================================================================
+
+# Handle alert/confirm/prompt BEFORE triggering it
+    page.on("dialog", lambda dialog: dialog.accept())           # Accept
+    page.on("dialog", lambda dialog: dialog.dismiss())          # Dismiss
+    page.on("dialog", lambda dialog: dialog.accept("my text"))  # Prompt input
+
+# One-time handler
+    page.once("dialog", lambda dialog: dialog.accept())
+    page.locator("#trigger-alert").click()
+
+================================================================================
+  11. MULTIPLE PAGES / TABS
+================================================================================
+
+# Handle new tab/popup
+    with context.expect_page() as new_page_info:
+        page.locator("#open-tab").click()
+    new_page = new_page_info.value
+    new_page.wait_for_load_state()
+    print(new_page.title())
+
+# Switch between pages
+    pages = context.pages          # List of all pages
+    pages[0].bring_to_front()      # Switch to first tab
+
+================================================================================
+  12. SCREENSHOTS & VIDEOS
+================================================================================
+
+# Screenshot
+    page.screenshot(path="screenshot.png")
+    page.screenshot(path="full.png", full_page=True)           # Full page
+    page.locator("#element").screenshot(path="element.png")    # Element only
+
+# Video recording (set at context level)
+    context = browser.new_context(record_video_dir="videos/")
+    page = context.new_page()
+    # ... do actions ...
+    context.close()    # Video saved after context close
+
+# Trace (detailed debugging)
+    context.tracing.start(screenshots=True, snapshots=True, sources=True)
+    # ... do actions ...
+    context.tracing.stop(path="trace.zip")
+    # View: playwright show-trace trace.zip
+
+================================================================================
+  13. NETWORK INTERCEPTION (Mock API)
+================================================================================
+
+# Block images (speed up tests)
+    page.route("**/*.{png,jpg,jpeg}", lambda route: route.abort())
+
+# Mock API response
+    def mock_handler(route):
+        route.fulfill(
+            status=200,
+            content_type="application/json",
+            body='{"data": "mocked"}'
+        )
+    page.route("**/api/users", mock_handler)
+
+# Modify request
+    def modify_handler(route, request):
+        headers = {**request.headers, "Authorization": "Bearer fake-token"}
+        route.continue_(headers=headers)
+    page.route("**/api/**", modify_handler)
+
+================================================================================
+  14. PYTEST-PLAYWRIGHT FIXTURES
+================================================================================
+
+# Built-in fixtures (auto-available in conftest.py):
+#   page       -> A new page for each test
+#   context    -> Browser context
+#   browser    -> Browser instance
+#   browser_name -> "chromium", "firefox", or "webkit"
+
+# Example test:
+    def test_login(page):
+        page.goto("https://example.com/login")
+        page.get_by_label("Email").fill("user@test.com")
+        page.get_by_label("Password").fill("pass123")
+        page.get_by_role("button", name="Login").click()
+        expect(page).to_have_url("**/dashboard")
+
+# Run with:
+    # pytest test_file.py --headed                  # Visible browser
+    # pytest test_file.py --browser chromium        # Specific browser
+    # pytest test_file.py --browser-channel chrome  # Use installed Chrome
+    # pytest test_file.py --slowmo 500              # Slow motion
+    # pytest test_file.py -v -s                     # Verbose with prints
+
+================================================================================
+  15. PAGE OBJECT MODEL (POM) PATTERN
+================================================================================
+
+# pages/login_page.py
+class LoginPage:
+    def __init__(self, page):
+        self.page = page
+        self.email_input = page.get_by_label("Email")
+        self.password_input = page.get_by_label("Password")
+        self.login_button = page.get_by_role("button", name="Login")
+
+    def goto(self):
+        self.page.goto("https://example.com/login")
+
+    def login(self, email, password):
+        self.email_input.fill(email)
+        self.password_input.fill(password)
+        self.login_button.click()
+
+# tests/test_login.py
+    def test_valid_login(page):
+        login = LoginPage(page)
+        login.goto()
+        login.login("user@test.com", "pass123")
+        expect(page).to_have_url("**/dashboard")
+
+================================================================================
+  16. DEBUGGING TIPS
+================================================================================
+
+# 1. Playwright Inspector (step-by-step debugging)
+    PWDEBUG=1 pytest test_file.py -s
+
+# 2. Codegen (auto-generate test code by recording actions)
+    playwright codegen https://example.com
+
+# 3. Trace Viewer
+    playwright show-trace trace.zip
+
+# 4. Pause in test (opens inspector)
+    page.pause()
+
+# 5. Console logs from browser
+    page.on("console", lambda msg: print(f"BROWSER: {msg.text}"))
+
+# 6. Evaluate JavaScript in page
+    title = page.evaluate("document.title")
+    page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+
+================================================================================
+  17. COMMON PYTEST COMMANDS FOR PLAYWRIGHT
+================================================================================
+
+# Run all tests
+    pytest tests/ -v
+
+# Run specific test file
+    pytest tests/test_login.py -v -s
+
+# Run specific test function
+    pytest tests/test_login.py::test_valid_login -v -s
+
+# Run with HTML report
+    pip install pytest-html
+    pytest tests/ --html=report.html --self-contained-html
+
+# Run in parallel
+    pip install pytest-xdist
+    pytest tests/ -n 4              # 4 workers
+
+# Run with markers
+    pytest tests/ -m "smoke"        # Only @pytest.mark.smoke tests
+    pytest tests/ -m "not slow"     # Skip @pytest.mark.slow tests
+
+# Stop on first failure
+    pytest tests/ -x
+
+# Retry failed tests
+    pip install pytest-rerunfailures
+    pytest tests/ --reruns 2        # Retry failed tests 2 times
+
+================================================================================
+  18. BEST PRACTICES
+================================================================================
+
+# 1. Use Locators over page.query_selector()
+#       GOOD: page.get_by_role("button", name="Submit")
+#       BAD:  page.query_selector("#submit-btn")
+
+# 2. Prefer user-facing locators (role, text, label, placeholder)
+#       GOOD: page.get_by_role("button", name="Login")
+#       OK:   page.locator("css=#login-btn")
+#       BAD:  page.locator("xpath=//div[3]/div[2]/button")
+
+# 3. Don't use hard-coded waits (wait_for_timeout)
+#       GOOD: page.wait_for_selector("#data", state="visible")
+#       BAD:  page.wait_for_timeout(5000)
+
+# 4. Use Page Object Model for maintainability
+
+# 5. Use fixtures in conftest.py for shared setup
+
+# 6. Always close context/browser in teardown
+
+# 7. Use expect() for assertions (auto-retry built in)
+
+# 8. Use test data from JSON/CSV files, not hardcoded
+
+# 9. Run in headless mode for CI/CD, headed for debugging
+
+# 10. Use traces for debugging flaky tests
+
+================================================================================
+  19. SYNC vs ASYNC API
+================================================================================
+
+# SYNC (simpler, recommended for pytest)
+from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    browser = p.chromium.launch()
+    page = browser.new_page()
+    page.goto("https://example.com")
+    print(page.title())
+    browser.close()
+
+# ASYNC (for asyncio-based frameworks)
+import asyncio
+from playwright.async_api import async_playwright
+
+async def main():
+    async with async_playwright() as p:
+        browser = await p.chromium.launch()
+        page = await browser.new_page()
+        await page.goto("https://example.com")
+        print(await page.title())
+        await browser.close()
+
+asyncio.run(main())
+
+================================================================================
+  20. USEFUL LINKS
+================================================================================
+
+# Official Docs:      https://playwright.dev/python/
+# API Reference:      https://playwright.dev/python/docs/api/class-page
+# Locators Guide:     https://playwright.dev/python/docs/locators
+# Best Practices:     https://playwright.dev/python/docs/best-practices
+# Trace Viewer:       https://playwright.dev/python/docs/trace-viewer
+
+================================================================================

@@ -34,6 +34,9 @@ class DHCPLeaseManager(object):
         self.restart_cmd = restart_cmd
         self.restart_v6_cmd = restart_v6_cmd
         self._client = None
+        # Set by conftest autouse fixture before each test so every
+        # lease written to the file is stamped with the TC number.
+        self._current_tc_tag = None
 
     def _sudo_prefix(self):
         """Return a sudo command prefix that provides the password via stdin."""
@@ -80,9 +83,20 @@ class DHCPLeaseManager(object):
             raise IOError("Failed to read {}: {}".format(filepath, err))
         return out
 
+    @staticmethod
+    def _normalize_content(content):
+        """Collapse 3+ consecutive blank lines into 1 and strip edges."""
+        # Collapse runs of blank lines (3+ newlines → 2 newlines = 1 blank line)
+        content = re.sub(r"\n{3,}", "\n\n", content)
+        return content.strip() + "\n"
+
     def _write_file(self, filepath, content):
-        """Write content to a remote file via SSH (uses sudo)."""
-        # Write to a temp file first, then sudo mv to target
+        """Write content to a remote file via SSH (uses sudo).
+
+        Uses ``cat tmp > dest`` instead of ``cp`` so the file inode is
+        preserved and services that have the file open continue to see
+        changes.
+        """
         tmp = "/tmp/_dhcp_lease_tmp_{}".format(id(content) % 100000)
         sftp = self._client.open_sftp()
         try:
@@ -91,7 +105,9 @@ class DHCPLeaseManager(object):
         finally:
             sftp.close()
         sudo_prefix = self._sudo_prefix()
-        self._exec("{} bash -c 'cp {} {}' && rm {}".format(sudo_prefix, tmp, filepath, tmp))
+        self._exec(
+            "{sudo} bash -c 'cat {tmp} > {dst} && chmod 666 {dst}' && rm -f {tmp}".format(
+                sudo=sudo_prefix, tmp=tmp, dst=filepath))
 
     def _append_file(self, filepath, content):
         """Append content to a remote file via SSH (uses sudo)."""
@@ -109,18 +125,17 @@ class DHCPLeaseManager(object):
     # ── DHCPv4 Lease Operations ──────────────────────────────────────── #
     @staticmethod
     def build_v4_lease(ip, mac, starts=None, ends=None, hostname=None,
-                       binding_state="active", tstp=None, cltt=None):
+                       binding_state="active", tstp=None, cltt=None,
+                       tc_tag=None):
         """
         Build a DHCPv4 lease block string.
 
-        Example output:
-            lease 2.2.228.102 {
-              starts 1 2026/02/23 06:33:10;
-              ends 1 2027/01/04 00:00:00;
-              tstp 1 2027/01/04 00:00:00;
-              cltt 1 2026/02/23 06:33:10;
-              binding state active;
-              hardware ethernet 00:00:23:df:5e:f1;
+        When *tc_tag* is supplied (e.g. "TC001") a comment line is
+        prepended so the lease is easily identifiable in the file:
+
+            # [AUTOTEST] TC001 | 2026/04/08 14:30:00
+            lease 3.3.228.102 {
+              ...
             }
         """
         now_str = datetime.utcnow().strftime("%Y/%m/%d %H:%M:%S")
@@ -139,6 +154,8 @@ class DHCPLeaseManager(object):
 
         # weekday number: 0=Sun ... 6=Sat
         lines = []
+        if tc_tag:
+            lines.append("# [AUTOTEST] {} | {}".format(tc_tag, now_str))
         lines.append("lease {} {{".format(ip))
         lines.append("  starts 1 {};".format(starts))
         lines.append("  ends 1 {};".format(ends))
@@ -152,11 +169,19 @@ class DHCPLeaseManager(object):
         return "\n".join(lines)
 
     def create_v4_lease(self, ip, mac, starts=None, ends=None,
-                        hostname=None, binding_state="active"):
-        """Create a DHCPv4 lease by appending to the lease file."""
+                        hostname=None, binding_state="active", tc_tag=None):
+        """Create a DHCPv4 lease by appending to the lease file.
+
+        Pass *tc_tag* (e.g. ``"TC001"``) to stamp the lease with an
+        ``# [AUTOTEST]`` comment so you can tell at a glance which
+        test case wrote it.  Falls back to ``_current_tc_tag`` when
+        not supplied (set automatically by conftest autouse fixture).
+        """
+        tag = tc_tag or self._current_tc_tag
         lease_block = self.build_v4_lease(
             ip=ip, mac=mac, starts=starts, ends=ends,
-            hostname=hostname, binding_state=binding_state
+            hostname=hostname, binding_state=binding_state,
+            tc_tag=tag,
         )
         self._append_file(self.v4_lease_file, "\n" + lease_block + "\n")
         return lease_block
@@ -178,34 +203,53 @@ class DHCPLeaseManager(object):
         return self.get_v4_lease(ip) is not None
 
     def delete_v4_lease(self, ip):
-        """Delete a v4 lease by removing it from the lease file."""
+        """Delete **all** v4 lease entries for *ip* from the lease file.
+
+        Removes every ``lease <ip> { ... }`` block (there may be
+        duplicates from repeated test runs) together with any preceding
+        ``# [AUTOTEST]`` comment line, then normalizes blank lines so
+        the file stays clean.
+        """
         content = self._read_file(self.v4_lease_file)
-        pattern = r"\n?lease\s+{}\s*\{{[^}}]+\}}\n?".format(re.escape(ip))
+        # Match optional AUTOTEST comment + lease block
+        pattern = r"\n?(?:#\s*\[AUTOTEST\][^\n]*\n)?lease\s+{}\s*\{{[^}}]+\}}\n?".format(
+            re.escape(ip))
         new_content = re.sub(pattern, "\n", content, flags=re.DOTALL)
+        if new_content == content:
+            return False
+        new_content = self._normalize_content(new_content)
         self._write_file(self.v4_lease_file, new_content)
-        return content != new_content  # True if something was removed
+        return True
 
     def update_v4_lease(self, ip, mac=None, starts=None, ends=None,
-                        hostname=None, binding_state=None):
-        """Update a v4 lease: delete old, write new."""
+                        hostname=None, binding_state=None, tc_tag=None):
+        """Update a v4 lease: delete old, write new.
+
+        Any field that is *None* is carried forward from the existing
+        lease so callers only need to specify the fields they want to
+        change.
+        """
+        tag = tc_tag or self._current_tc_tag
         existing = self.get_v4_lease(ip)
         if not existing:
             raise ValueError("Lease for {} not found".format(ip))
 
         # Parse existing values as defaults
-        old_mac = mac
         if not mac:
             m = re.search(r"hardware ethernet ([^;]+);", existing)
-            old_mac = m.group(1) if m else "00:00:00:00:00:00"
-        old_state = binding_state
+            mac = m.group(1) if m else "00:00:00:00:00:00"
         if not binding_state:
             m = re.search(r"binding state (\w+);", existing)
-            old_state = m.group(1) if m else "active"
+            binding_state = m.group(1) if m else "active"
+        if hostname is None:
+            m = re.search(r'client-hostname "([^"]*)";', existing)
+            hostname = m.group(1) if m else None
 
         self.delete_v4_lease(ip)
         return self.create_v4_lease(
-            ip=ip, mac=old_mac, starts=starts, ends=ends,
-            hostname=hostname, binding_state=old_state
+            ip=ip, mac=mac, starts=starts, ends=ends,
+            hostname=hostname, binding_state=binding_state,
+            tc_tag=tag,
         )
 
     def count_v4_leases(self):
@@ -216,19 +260,15 @@ class DHCPLeaseManager(object):
     @staticmethod
     def build_v6_lease(ip, duid, iaid=None, preferred_life=3600,
                        max_life=7200, ends=None, binding_state="active",
-                       cltt=None):
+                       cltt=None, tc_tag=None):
         """
         Build a DHCPv6 lease block string.
 
-        Example output:
-            ia-na "\\001\\000..." {
-              cltt 2 2025/12/09 07:33:25;
-              iaaddr 1000::9465:cf2d:ef86:df42 {
-                binding state active;
-                preferred-life 3600;
-                max-life 7200;
-                ends 1 2027/03/09 13:06:16;
-              }
+        When *tc_tag* is supplied a comment line is prepended:
+
+            # [AUTOTEST] TC011 | 2026/04/08 14:30:00
+            ia-na "..." {
+              ...
             }
         """
         now_str = datetime.utcnow().strftime("%Y/%m/%d %H:%M:%S")
@@ -246,6 +286,8 @@ class DHCPLeaseManager(object):
         duid_str = "{}{}".format(iaid, duid)
 
         lines = []
+        if tc_tag:
+            lines.append("# [AUTOTEST] {} | {}".format(tc_tag, now_str))
         lines.append('ia-na "{}" {{'.format(duid_str))
         lines.append("  cltt 2 {};".format(cltt))
         lines.append("  iaaddr {} {{".format(ip))
@@ -258,11 +300,17 @@ class DHCPLeaseManager(object):
         return "\n".join(lines)
 
     def create_v6_lease(self, ip, duid, iaid=None, preferred_life=3600,
-                        max_life=7200, ends=None, binding_state="active"):
-        """Create a DHCPv6 lease by appending to the v6 lease file."""
+                        max_life=7200, ends=None, binding_state="active",
+                        tc_tag=None):
+        """Create a DHCPv6 lease by appending to the v6 lease file.
+
+        Falls back to ``_current_tc_tag`` when *tc_tag* is not supplied.
+        """
+        tag = tc_tag or self._current_tc_tag
         lease_block = self.build_v6_lease(
             ip=ip, duid=duid, iaid=iaid, preferred_life=preferred_life,
-            max_life=max_life, ends=ends, binding_state=binding_state
+            max_life=max_life, ends=ends, binding_state=binding_state,
+            tc_tag=tag,
         )
         self._append_file(self.v6_lease_file, "\n" + lease_block + "\n")
         return lease_block
@@ -289,18 +337,28 @@ class DHCPLeaseManager(object):
         return self.get_v6_lease(ip) is not None
 
     def delete_v6_lease(self, ip):
-        """Delete a v6 lease by removing it from the lease file."""
+        """Delete **all** v6 lease entries for *ip* from the lease file.
+
+        Removes every ``ia-na ... { iaaddr <ip> { ... } }`` block
+        together with any preceding ``# [AUTOTEST]`` comment, then
+        normalizes blank lines.
+        """
         content = self._read_file(self.v6_lease_file)
-        pattern = r"\n?ia-na\s+\"[^\"]*\"\s*\{{[^}}]*iaaddr\s+{}\s*\{{[^}}]+\}}[^}}]*\}}\n?".format(
+        pattern = r"\n?(?:#\s*\[AUTOTEST\][^\n]*\n)?ia-na\s+\"[^\"]*\"\s*\{{[^}}]*iaaddr\s+{}\s*\{{[^}}]+\}}[^}}]*\}}\n?".format(
             re.escape(ip)
         )
         new_content = re.sub(pattern, "\n", content, flags=re.DOTALL)
+        if new_content == content:
+            return False
+        new_content = self._normalize_content(new_content)
         self._write_file(self.v6_lease_file, new_content)
-        return content != new_content
+        return True
 
     def update_v6_lease(self, ip, duid=None, iaid=None, preferred_life=None,
-                        max_life=None, ends=None, binding_state=None):
+                        max_life=None, ends=None, binding_state=None,
+                        tc_tag=None):
         """Update a v6 lease: delete old, write new."""
+        tag = tc_tag or self._current_tc_tag
         existing = self.get_v6_lease(ip)
         if not existing:
             raise ValueError("v6 Lease for {} not found".format(ip))
@@ -321,12 +379,179 @@ class DHCPLeaseManager(object):
         self.delete_v6_lease(ip)
         return self.create_v6_lease(
             ip=ip, duid=duid, iaid=iaid, preferred_life=preferred_life,
-            max_life=max_life, ends=ends, binding_state=binding_state
+            max_life=max_life, ends=ends, binding_state=binding_state,
+            tc_tag=tag,
         )
 
     def count_v6_leases(self):
         """Count total v6 leases."""
         return len(self.get_all_v6_leases())
+
+    # ── DUID Type Helpers ────────────────────────────────────────────── #
+    @staticmethod
+    def build_duid_llt(mac, timestamp_hex="5f3c6a00"):
+        """Build DUID-LLT (Type 1) bytes from MAC and timestamp hex.
+
+        Structure: type(2) + hw_type(2) + time(4) + MAC(6) = 14 bytes
+        Returns list of ints (byte values).
+        """
+        ts = [int(timestamp_hex[i:i+2], 16) for i in range(0, 8, 2)]
+        mac_bytes = [int(b, 16) for b in mac.split(":")]
+        return [0, 1, 0, 1] + ts + mac_bytes
+
+    @staticmethod
+    def build_duid_ll(mac):
+        """Build DUID-LL (Type 3) bytes from MAC.
+
+        Structure: type(2) + hw_type(2) + MAC(6) = 10 bytes
+        Returns list of ints (byte values).
+        """
+        mac_bytes = [int(b, 16) for b in mac.split(":")]
+        return [0, 3, 0, 1] + mac_bytes
+
+    @staticmethod
+    def duid_bytes_to_escaped(duid_bytes, iaid_bytes=None):
+        """Convert DUID byte list to ISC DHCP escaped string.
+
+        If *iaid_bytes* is provided it is prepended (default IAID
+        ``[1, 0, 0, 0]``).
+        """
+        if iaid_bytes is None:
+            iaid_bytes = [1, 0, 0, 0]
+        octets = list(iaid_bytes) + list(duid_bytes)
+        parts = []
+        for b in octets:
+            ch = chr(b)
+            if 0x21 <= b <= 0x7E and ch not in '"\\;{}':
+                parts.append(ch)
+            else:
+                parts.append("\\{:03o}".format(b))
+        return "".join(parts)
+
+    @staticmethod
+    def duid_bytes_to_hex(duid_bytes):
+        """Convert DUID byte list to colon-separated hex string."""
+        return ":".join("{:02x}".format(b) for b in duid_bytes)
+
+    @staticmethod
+    def duid_type_from_bytes(duid_bytes):
+        """Return DUID type number from a byte list (first 2 bytes)."""
+        if len(duid_bytes) < 2:
+            return None
+        return (duid_bytes[0] << 8) | duid_bytes[1]
+
+    @staticmethod
+    def duid_extract_mac(duid_bytes):
+        """Extract MAC address from DUID-LLT (type 1) or DUID-LL (type 3).
+
+        Returns MAC string or None if not a MAC-bearing DUID type.
+        """
+        if len(duid_bytes) < 4:
+            return None
+        dtype = (duid_bytes[0] << 8) | duid_bytes[1]
+        if dtype == 1 and len(duid_bytes) >= 14:
+            # LLT: skip type(2)+hw(2)+time(4), last 6 bytes are MAC
+            mac_bytes = duid_bytes[8:14]
+        elif dtype == 3 and len(duid_bytes) >= 10:
+            # LL: skip type(2)+hw(2), last 6 bytes are MAC
+            mac_bytes = duid_bytes[4:10]
+        else:
+            return None
+        return ":".join("{:02x}".format(b) for b in mac_bytes)
+
+    def build_v6_lease_duid(self, ip, mac, duid_type="LLT",
+                            iaid_bytes=None, preferred_life=3600,
+                            max_life=7200, ends=None,
+                            binding_state="active", cltt=None,
+                            tc_tag=None):
+        """Build a DHCPv6 lease block using a real DUID from a MAC.
+
+        *duid_type* must be ``"LLT"`` (Type 1) or ``"LL"`` (Type 3).
+        Returns the lease block string.
+        """
+        now_str = datetime.utcnow().strftime("%Y/%m/%d %H:%M:%S")
+        if not ip:
+            raise ValueError("ip is required")
+        if not mac:
+            raise ValueError("mac is required")
+        if duid_type.upper() == "LLT":
+            duid_bytes = self.build_duid_llt(mac)
+        elif duid_type.upper() == "LL":
+            duid_bytes = self.build_duid_ll(mac)
+        else:
+            raise ValueError("duid_type must be 'LLT' or 'LL', got {}".format(duid_type))
+
+        if not ends:
+            ends = "2027/04/07 00:00:00"
+        if not cltt:
+            cltt = now_str
+
+        duid_str = self.duid_bytes_to_escaped(duid_bytes, iaid_bytes)
+        tag = tc_tag or self._current_tc_tag
+
+        lines = []
+        if tag:
+            lines.append("# [AUTOTEST] {} | {}".format(tag, now_str))
+        lines.append('ia-na "{}" {{'.format(duid_str))
+        lines.append("  cltt 2 {};".format(cltt))
+        lines.append("  iaaddr {} {{".format(ip))
+        lines.append("    binding state {};".format(binding_state))
+        lines.append("    preferred-life {};".format(preferred_life))
+        lines.append("    max-life {};".format(max_life))
+        lines.append("    ends 1 {};".format(ends))
+        lines.append("  }")
+        lines.append("}")
+        return "\n".join(lines)
+
+    def create_v6_lease_duid(self, ip, mac, duid_type="LLT",
+                             iaid_bytes=None, preferred_life=3600,
+                             max_life=7200, ends=None,
+                             binding_state="active", tc_tag=None):
+        """Create a DHCPv6 lease using a real DUID built from MAC.
+
+        Convenience wrapper around build_v6_lease_duid + _append_file.
+        """
+        tag = tc_tag or self._current_tc_tag
+        block = self.build_v6_lease_duid(
+            ip=ip, mac=mac, duid_type=duid_type, iaid_bytes=iaid_bytes,
+            preferred_life=preferred_life, max_life=max_life,
+            ends=ends, binding_state=binding_state, tc_tag=tag,
+        )
+        self._append_file(self.v6_lease_file, "\n" + block + "\n")
+        return block
+
+    def get_v6_lease_duid_type(self, ip):
+        """Read a v6 lease and return its DUID type number (1, 2, 3, 4).
+
+        Parses the ia-na escaped DUID string, skips 4-byte IAID,
+        reads the DUID type from the first 2 bytes of the DUID portion.
+        Returns None when the lease is not found.
+        """
+        block = self.get_v6_lease(ip)
+        if not block:
+            return None
+        m = re.search(r'ia-na "([^"]*)"', block)
+        if not m:
+            return None
+        raw = m.group(1)
+        # Decode the escaped string to bytes
+        octets = []
+        i = 0
+        while i < len(raw):
+            if raw[i] == '\\' and i + 3 < len(raw) and raw[i+1:i+4].isdigit():
+                octets.append(int(raw[i+1:i+4], 8))
+                i += 4
+            elif raw[i] == '\\' and i + 1 < len(raw):
+                octets.append(ord(raw[i+1]))
+                i += 2
+            else:
+                octets.append(ord(raw[i]))
+                i += 1
+        # Skip 4-byte IAID, DUID starts at byte 4
+        if len(octets) < 6:
+            return None
+        duid_bytes = octets[4:]
+        return self.duid_type_from_bytes(duid_bytes)
 
     # ── Service Management ───────────────────────────────────────────── #
     def restart_dhcpd(self):
@@ -439,3 +664,108 @@ class DHCPLeaseManager(object):
         if m:
             info["cltt"] = m.group(1)
         return info
+
+    # ── Hardware Type helpers ────────────────────────────────────────── #
+    @staticmethod
+    def build_v4_lease_with_hw_type(ip, mac, hw_type="ethernet", starts=None,
+                                     ends=None, hostname=None,
+                                     binding_state="active", tc_tag=None):
+        """Build a v4 lease block with a custom hardware type."""
+        now_str = datetime.utcnow().strftime("%Y/%m/%d %H:%M:%S")
+        if not ip:
+            raise ValueError("ip is required")
+        if not mac:
+            raise ValueError("mac is required")
+        if not starts:
+            starts = now_str
+        if not ends:
+            ends = "2027/04/07 00:00:00"
+        lines = []
+        if tc_tag:
+            lines.append("# [AUTOTEST] {} | {}".format(tc_tag, now_str))
+        lines.append("lease {} {{".format(ip))
+        lines.append("  starts 1 {};".format(starts))
+        lines.append("  ends 1 {};".format(ends))
+        lines.append("  tstp 1 {};".format(ends))
+        lines.append("  cltt 1 {};".format(starts))
+        lines.append("  binding state {};".format(binding_state))
+        if hostname:
+            lines.append('  client-hostname "{}";'.format(hostname))
+        lines.append("  hardware {} {};".format(hw_type, mac))
+        lines.append("}")
+        return "\n".join(lines)
+
+    def create_v4_lease_with_hw_type(self, ip, mac, hw_type="ethernet",
+                                      starts=None, ends=None, hostname=None,
+                                      binding_state="active", tc_tag=None):
+        """Create a v4 lease with a custom hardware type."""
+        tag = tc_tag or self._current_tc_tag
+        block = self.build_v4_lease_with_hw_type(
+            ip=ip, mac=mac, hw_type=hw_type, starts=starts, ends=ends,
+            hostname=hostname, binding_state=binding_state, tc_tag=tag,
+        )
+        self._append_file(self.v4_lease_file, "\n" + block + "\n")
+        return block
+
+    @staticmethod
+    def parse_v4_hardware(lease_block):
+        """Parse hardware type and address from a v4 lease block."""
+        m = re.search(r"hardware\s+(\S+)\s+([^;]+);", lease_block)
+        if m:
+            return {"hw_type": m.group(1), "hw_address": m.group(2)}
+        return {"hw_type": None, "hw_address": None}
+
+    # ── DNS Lookup helpers (via dig on the remote server) ────────────── #
+    @staticmethod
+    def _filter_dig(lines):
+        """Remove dig error/comment lines, return only record data."""
+        return [
+            l for l in lines
+            if l and not l.startswith(";") and "timed out" not in l
+            and "connection refused" not in l.lower()
+        ]
+
+    def dns_lookup_a(self, hostname, server=None):
+        """Lookup A record for hostname. Returns list of IPs."""
+        cmd = "dig +short A {}".format(hostname)
+        if server:
+            cmd = "dig +short @{} A {}".format(server, hostname)
+        out, err, code = self._exec(cmd)
+        raw = [line.strip() for line in out.strip().split("\n") if line.strip()]
+        return self._filter_dig(raw)
+
+    def dns_lookup_aaaa(self, hostname, server=None):
+        """Lookup AAAA record for hostname. Returns list of IPv6 addresses."""
+        cmd = "dig +short AAAA {}".format(hostname)
+        if server:
+            cmd = "dig +short @{} AAAA {}".format(server, hostname)
+        out, err, code = self._exec(cmd)
+        raw = [line.strip() for line in out.strip().split("\n") if line.strip()]
+        return self._filter_dig(raw)
+
+    def dns_lookup_ptr(self, ip, server=None):
+        """Lookup PTR record for IP. Returns list of hostnames."""
+        cmd = "dig +short -x {}".format(ip)
+        if server:
+            cmd = "dig +short @{} -x {}".format(server, ip)
+        out, err, code = self._exec(cmd)
+        raw = [line.strip() for line in out.strip().split("\n") if line.strip()]
+        return self._filter_dig(raw)
+
+    def get_ddns_config(self):
+        """Check if DDNS is enabled in dhcpd.conf."""
+        out, err, code = self._exec(
+            "grep -i 'ddns-update-style' /etc/dhcp/dhcpd.conf 2>/dev/null "
+            "|| grep -i 'ddns-update-style' /usr/local/dhcpd/etc/dhcpd.conf 2>/dev/null "
+            "|| echo 'not-found'"
+        )
+        return out.strip()
+
+    # ── Lease file raw content (for sync verification) ───────────────── #
+    def get_v4_lease_file_raw(self):
+        """Return the raw content of the v4 lease file."""
+        return self._read_file(self.v4_lease_file)
+
+    def get_v6_lease_file_raw(self):
+        """Return the raw content of the v6 lease file."""
+        return self._read_file(self.v6_lease_file)

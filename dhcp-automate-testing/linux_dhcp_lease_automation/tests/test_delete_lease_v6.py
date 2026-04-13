@@ -15,7 +15,7 @@ class TestDeleteLeaseV6:
     # TC049: Delete a single DHCPv6 lease
     def test_tc049_delete_v6_single(self, lease_mgr, v6_data):
         """TC049: Delete a single DHCPv6 lease from the prefix."""
-        ip = "1000::e001"
+        ip = "2000::e001"
         duid = "\\001\\000\\000\\049"
 
         if not lease_mgr.v6_lease_exists(ip):
@@ -32,9 +32,9 @@ class TestDeleteLeaseV6:
     def test_tc050_delete_v6_batch(self, lease_mgr):
         """TC050: Delete multiple v6 leases in batch."""
         batch = [
-            {"ip": "1000::e010", "duid": "\\001\\000\\050\\001"},
-            {"ip": "1000::e011", "duid": "\\001\\000\\050\\002"},
-            {"ip": "1000::e012", "duid": "\\001\\000\\050\\003"},
+            {"ip": "2000::e010", "duid": "\\001\\000\\050\\001"},
+            {"ip": "2000::e011", "duid": "\\001\\000\\050\\002"},
+            {"ip": "2000::e012", "duid": "\\001\\000\\050\\003"},
         ]
 
         for l in batch:
@@ -51,7 +51,7 @@ class TestDeleteLeaseV6:
     # TC051: Delete all DHCPv6 leases from prefix
     def test_tc051_delete_v6_all_in_prefix(self, lease_mgr):
         """TC051: Delete all test v6 leases."""
-        test_ips = ["1000::e020", "1000::e021", "1000::e022"]
+        test_ips = ["2000::e020", "2000::e021", "2000::e022"]
         for i, ip in enumerate(test_ips):
             if not lease_mgr.v6_lease_exists(ip):
                 lease_mgr.create_v6_lease(
@@ -66,7 +66,7 @@ class TestDeleteLeaseV6:
     # TC052: Delete v6 lease and verify IPv6 released
     def test_tc052_delete_v6_ip_released(self, lease_mgr):
         """TC052: Delete lease and verify IPv6 can be reused."""
-        ip = "1000::e030"
+        ip = "2000::e030"
         duid1 = "\\001\\000\\052\\001"
         duid2 = "\\001\\000\\052\\002"
 
@@ -81,12 +81,11 @@ class TestDeleteLeaseV6:
         lease_mgr.create_v6_lease(ip=ip, duid=duid2)
         assert lease_mgr.v6_lease_exists(ip), "IPv6 should be reusable"
 
-        lease_mgr.delete_v6_lease(ip)
 
     # TC053: Verify deletion happens
     def test_tc053_delete_v6_confirm(self, lease_mgr):
         """TC053: Verify v6 lease is actually removed from file."""
-        ip = "1000::e040"
+        ip = "2000::e040"
         duid = "\\001\\000\\053"
 
         if not lease_mgr.v6_lease_exists(ip):
@@ -103,7 +102,7 @@ class TestDeleteLeaseV6:
     # TC054: Cancel deletion (no-op)
     def test_tc054_cancel_delete_v6(self, lease_mgr):
         """TC054: Verify v6 lease still exists when NOT deleted."""
-        ip = "1000::e050"
+        ip = "2000::e050"
         duid = "\\001\\000\\054"
 
         if not lease_mgr.v6_lease_exists(ip):
@@ -112,12 +111,11 @@ class TestDeleteLeaseV6:
         # Do NOT delete
         assert lease_mgr.v6_lease_exists(ip), "v6 lease should still exist"
 
-        lease_mgr.delete_v6_lease(ip)
 
     # TC055: Delete v6 lease and verify removed from list
     def test_tc055_delete_v6_verify_removed(self, lease_mgr):
         """TC055: Delete v6 lease and verify removed from lease list."""
-        ip = "1000::e060"
+        ip = "2000::e060"
         duid = "\\001\\000\\055"
 
         if not lease_mgr.v6_lease_exists(ip):

@@ -15,7 +15,7 @@ class TestDeleteLeaseV4:
     # TC041: Delete a single DHCPv4 lease
     def test_tc041_delete_v4_single(self, lease_mgr, v4_data):
         """TC041: Delete a single DHCPv4 lease from the scope."""
-        ip = "2.2.228.180"
+        ip = "3.3.228.220"
         mac = "00:00:41:00:00:01"
 
         # Setup: create a lease to delete
@@ -35,7 +35,7 @@ class TestDeleteLeaseV4:
     # TC042: Delete multiple DHCPv4 leases in batch
     def test_tc042_delete_v4_batch(self, lease_mgr):
         """TC042: Delete multiple leases in batch."""
-        batch_ips = ["2.2.228.181", "2.2.228.182", "2.2.228.183"]
+        batch_ips = ["3.3.228.221", "3.3.228.222", "3.3.228.223"]
 
         # Setup: create leases
         for i, ip in enumerate(batch_ips):
@@ -54,9 +54,9 @@ class TestDeleteLeaseV4:
 
     # TC043: Delete all DHCPv4 leases from a scope
     def test_tc043_delete_v4_all_in_scope(self, lease_mgr):
-        """TC043: Delete all leases from scope (2.2.228.x)."""
+        """TC043: Delete all leases from scope (3.3.228.x)."""
         # Create a few test leases
-        test_ips = ["2.2.228.190", "2.2.228.191", "2.2.228.192"]
+        test_ips = ["3.3.228.224", "3.3.228.225", "3.3.228.226"]
         for i, ip in enumerate(test_ips):
             if not lease_mgr.v4_lease_exists(ip):
                 lease_mgr.create_v4_lease(
@@ -74,7 +74,7 @@ class TestDeleteLeaseV4:
     # TC044: Delete lease and verify IP is released
     def test_tc044_delete_v4_ip_released(self, lease_mgr):
         """TC044: Delete lease and verify IP can be reused."""
-        ip = "2.2.228.193"
+        ip = "3.3.228.227"
         mac1 = "00:00:44:00:00:01"
         mac2 = "00:00:44:00:00:02"
 
@@ -94,12 +94,11 @@ class TestDeleteLeaseV4:
         parsed = DHCPLeaseManager.parse_v4_lease(lease_block)
         assert parsed["mac"] == mac2, "New MAC not assigned after reuse"
 
-        lease_mgr.delete_v4_lease(ip)
 
     # TC045: Verify deletion happens (no UI confirmation in file mode)
     def test_tc045_delete_v4_confirm(self, lease_mgr):
         """TC045: Verify lease is actually removed from file."""
-        ip = "2.2.228.194"
+        ip = "3.3.228.228"
         mac = "00:00:45:00:00:01"
 
         if not lease_mgr.v4_lease_exists(ip):
@@ -116,7 +115,7 @@ class TestDeleteLeaseV4:
     # TC046: Cancel deletion (skip – file-based, no cancel dialog)
     def test_tc046_cancel_delete_v4(self, lease_mgr):
         """TC046: Verify lease still exists when NOT deleted (no-op test)."""
-        ip = "2.2.228.195"
+        ip = "3.3.228.229"
         mac = "00:00:46:00:00:01"
 
         if not lease_mgr.v4_lease_exists(ip):
@@ -125,12 +124,11 @@ class TestDeleteLeaseV4:
         # Do NOT delete – just verify it still exists
         assert lease_mgr.v4_lease_exists(ip), "Lease should still exist"
 
-        lease_mgr.delete_v4_lease(ip)
 
     # TC047: Delete lease and verify count decreased
     def test_tc047_delete_v4_verify_removed(self, lease_mgr):
         """TC047: Delete lease and verify it is removed from list."""
-        ip = "2.2.228.196"
+        ip = "3.3.228.196"
         mac = "00:00:47:00:00:01"
 
         if not lease_mgr.v4_lease_exists(ip):

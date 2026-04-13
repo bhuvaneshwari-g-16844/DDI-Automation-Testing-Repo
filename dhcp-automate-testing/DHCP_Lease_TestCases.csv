@@ -1,187 +1,207 @@
-Date,TC No,Module,Platform,Test Case Description,Expected Result,Type,Test Nature,Status,Tested By
-04/08/2026,TC001,Create Lease v4,Linux,Create a new DHCPv4 lease with valid IP address and scope ID and MAC address,DHCPv4 lease should be created successfully and appear in the lease list with correct IP and scope details,Functional,Positive,Pass,Automation
-04/08/2026,TC002,Create Lease v4,Linux,Create DHCPv4 lease with valid hostname and lease expiry time,Lease should be created with the specified hostname and expiry time reflected correctly,Functional,Positive,Pass,Automation
-04/08/2026,TC003,Create Lease v4,Linux,Create DHCPv4 lease with duplicate IP address in the same scope,System should reject the duplicate lease and display an appropriate error message indicating IP conflict,Functional,Negative,Pass,Automation
-04/08/2026,TC004,Create Lease v4,Linux,Create DHCPv4 lease with invalid IP address format (e.g. 999.999.999.999),System should show validation error and prevent lease creation with invalid IP format,Functional,Negative,Pass,Automation
-04/08/2026,TC005,Create Lease v4,Linux,Create DHCPv4 lease with IP address outside the scope range,System should reject the lease and display error indicating IP is outside the defined scope range,Functional,Negative,Pass,Automation
-04/08/2026,TC006,Create Lease v4,Linux,Create DHCPv4 lease without mandatory fields (IP or scope ID or MAC),System should show validation error for missing mandatory fields and prevent lease creation,Functional,Negative,Pass,Automation
-04/08/2026,TC007,Create Lease v4,Linux,Create DHCPv4 lease with invalid MAC address format,System should reject the lease and show error indicating invalid MAC address format,Functional,Negative,Pass,Automation
-04/08/2026,TC008,Create Lease v4,Linux,Create multiple DHCPv4 leases in batch within the same scope,All leases should be created successfully and each lease should have unique IP and MAC address,Functional,Positive,Pass,Automation
-04/08/2026,TC009,Create Lease v4,Linux,Create DHCPv4 lease with past expiry date,System should either reject the lease or handle gracefully with appropriate warning about past expiry,Functional,Boundary,Pass,Automation
-04/08/2026,TC010,Create Lease v4,Linux,Create DHCPv4 lease and verify it appears in console UI immediately,Newly created lease should be visible in the console lease list without requiring manual refresh,Functional,Positive,Pass,Automation
-04/08/2026,TC011,Create Lease v6,Linux,Create a new DHCPv6 lease with valid IPv6 address and DUID and IAID,DHCPv6 lease should be created successfully and appear in the lease list with correct IPv6 address and DUID,Functional,Positive,Pass,Automation
-04/08/2026,TC012,Create Lease v6,Linux,Create DHCPv6 lease with valid hostname and lease expiry time,Lease should be created with the specified hostname and expiry time reflected correctly for v6,Functional,Positive,Pass,Automation
-04/08/2026,TC013,Create Lease v6,Linux,Create DHCPv6 lease with duplicate IPv6 address in the same prefix,System should reject the duplicate lease and display an appropriate error message indicating IPv6 conflict,Functional,Negative,Pass,Automation
-04/08/2026,TC014,Create Lease v6,Linux,Create DHCPv6 lease with invalid IPv6 address format,System should show validation error and prevent lease creation with invalid IPv6 format,Functional,Negative,Pass,Automation
-04/08/2026,TC015,Create Lease v6,Linux,Create DHCPv6 lease with IPv6 address outside the prefix range,System should reject the lease and display error indicating IPv6 is outside the defined prefix range,Functional,Negative,Pass,Automation
-04/08/2026,TC016,Create Lease v6,Linux,Create DHCPv6 lease without mandatory fields (IPv6 or DUID or IAID),System should show validation error for missing mandatory fields and prevent lease creation,Functional,Negative,Pass,Automation
-04/08/2026,TC017,Create Lease v6,Linux,Create DHCPv6 lease with invalid DUID format,System should reject the lease and show error indicating invalid DUID format,Functional,Negative,Pass,Automation
-04/08/2026,TC018,Create Lease v6,Linux,Create multiple DHCPv6 leases in batch within the same prefix,All v6 leases should be created successfully with unique IPv6 addresses and DUIDs,Functional,Positive,Pass,Automation
-04/08/2026,TC019,Create Lease v6,Linux,Create DHCPv6 lease with various DUID types (DUID-LLT and DUID-EN and DUID-LL),Lease should be created successfully regardless of DUID type used,Functional,Positive,Pass,Automation
-04/08/2026,TC020,Create Lease v6,Linux,Create DHCPv6 lease and verify it appears in console UI immediately,Newly created v6 lease should be visible in the console lease list without requiring manual refresh,Functional,Positive,Pass,Automation
-04/08/2026,TC021,Update Lease v4,Linux,Update an existing DHCPv4 lease hostname,Lease hostname should be updated successfully and reflected in the lease list,Functional,Positive,Pass,Automation
-04/08/2026,TC022,Update Lease v4,Linux,Update an existing DHCPv4 lease expiry time to a future date,Lease expiry time should be updated successfully with the new future date,Functional,Positive,Pass,Automation
-04/08/2026,TC023,Update Lease v4,Linux,Update DHCPv4 lease IP address to a new valid IP within the scope,Lease IP should be updated and old IP should be released from the scope,Functional,Positive,Pass,Automation
-04/08/2026,TC024,Update Lease v4,Linux,Update DHCPv4 lease IP address to an IP outside scope range,System should reject the update and show error indicating IP is outside the scope range,Functional,Negative,Pass,Automation
-04/08/2026,TC025,Update Lease v4,Linux,Update DHCPv4 lease with an IP already assigned to another lease,System should reject the update with error indicating IP address conflict,Functional,Negative,Pass,Automation
-04/08/2026,TC026,Update Lease v4,Linux,Update DHCPv4 lease scope ID,Lease scope should be updated and the lease should appear under the new scope,Functional,Positive,Pass,Automation
-04/08/2026,TC027,Update Lease v4,Linux,Update DHCPv4 lease with empty mandatory fields,System should prevent update and show validation errors for empty mandatory fields,Functional,Negative,Pass,Automation
-04/08/2026,TC028,Update Lease v4,Linux,Update DHCPv4 lease and verify changes reflect in console UI,Updated lease details should be immediately visible in the console without manual refresh,Functional,Positive,Pass,Automation
-04/08/2026,TC029,Update Lease v4,Linux,Update multiple DHCPv4 lease fields simultaneously (hostname and expiry and description),All updated fields should be saved correctly and reflected in the lease details,Functional,Positive,Pass,Automation
-04/08/2026,TC030,Update Lease v4,Linux,Update DHCPv4 lease expiry to a past date,System should reject the update or show appropriate warning about setting past expiry date,Functional,Negative,Pass,Automation
-04/08/2026,TC031,Update Lease v6,Linux,Update an existing DHCPv6 lease hostname,Lease hostname should be updated successfully and reflected in the v6 lease list,Functional,Positive,Pass,Automation
-04/08/2026,TC032,Update Lease v6,Linux,Update an existing DHCPv6 lease expiry time to a future date,Lease expiry time should be updated successfully with the new future date for v6,Functional,Positive,Pass,Automation
-04/08/2026,TC033,Update Lease v6,Linux,Update DHCPv6 lease IPv6 address to a new valid address within the prefix,Lease IPv6 address should be updated and old address should be released,Functional,Positive,Pass,Automation
-04/08/2026,TC034,Update Lease v6,Linux,Update DHCPv6 lease IPv6 address to an address outside prefix range,System should reject the update and show error indicating address is outside the prefix range,Functional,Negative,Pass,Automation
-04/08/2026,TC035,Update Lease v6,Linux,Update DHCPv6 lease DUID to a new valid DUID,Lease DUID should be updated successfully with the new value,Functional,Positive,Pass,Automation
-04/08/2026,TC036,Update Lease v6,Linux,Update DHCPv6 lease IAID value,Lease IAID should be updated successfully and reflected in the lease details,Functional,Positive,Pass,Automation
-04/08/2026,TC037,Update Lease v6,Linux,Update DHCPv6 lease with empty mandatory fields,System should prevent update and show validation errors for empty mandatory fields,Functional,Negative,Pass,Automation
-04/08/2026,TC038,Update Lease v6,Linux,Update DHCPv6 lease and verify changes reflect in console UI,Updated v6 lease details should be immediately visible in the console without manual refresh,Functional,Positive,Pass,Automation
-04/08/2026,TC039,Update Lease v6,Linux,Update multiple DHCPv6 lease fields simultaneously,All updated fields should be saved correctly and reflected in the v6 lease details,Functional,Positive,Pass,Automation
-04/08/2026,TC040,Update Lease v6,Linux,Update DHCPv6 lease with invalid IPv6 format,System should reject the update and show validation error for invalid IPv6 format,Functional,Negative,Pass,Automation
-04/08/2026,TC041,Delete Lease v4,Linux,Delete a single DHCPv4 lease from the scope,Lease should be deleted successfully and removed from the lease list,Functional,Positive,Pass,Automation
-04/08/2026,TC042,Delete Lease v4,Linux,Delete multiple DHCPv4 leases in batch from the same scope,All selected leases should be deleted successfully and removed from the lease list,Functional,Positive,Pass,Automation
-04/08/2026,TC043,Delete Lease v4,Linux,Delete all DHCPv4 leases from a scope,All leases in the scope should be deleted and the lease list should be empty for that scope,Functional,Positive,Pass,Automation
-04/08/2026,TC044,Delete Lease v4,Linux,Delete DHCPv4 lease and verify IP is released back to the scope pool,Deleted lease IP address should be available again for new lease assignment in the scope,Functional,Positive,Pass,Automation
-04/08/2026,TC045,Delete Lease v4,Linux,Verify confirmation prompt appears before deleting DHCPv4 lease,System should display a confirmation dialog before proceeding with lease deletion,Functional,Positive,Pass,Automation
-04/08/2026,TC046,Delete Lease v4,Linux,Cancel DHCPv4 lease deletion from confirmation prompt,Lease should not be deleted when user cancels from the confirmation dialog,Functional,Positive,Pass,Automation
-04/08/2026,TC047,Delete Lease v4,Linux,Delete DHCPv4 lease and verify it is removed from console UI immediately,Deleted lease should disappear from the console list without requiring manual refresh,Functional,Positive,Pass,Automation
-04/08/2026,TC048,Delete Lease v4,Linux,Attempt to delete a non-existent DHCPv4 lease,System should handle gracefully and show appropriate message indicating lease not found,Functional,Negative,Pass,Automation
-04/08/2026,TC049,Delete Lease v6,Linux,Delete a single DHCPv6 lease from the prefix,DHCPv6 lease should be deleted successfully and removed from the v6 lease list,Functional,Positive,Pass,Automation
-04/08/2026,TC050,Delete Lease v6,Linux,Delete multiple DHCPv6 leases in batch from the same prefix,All selected v6 leases should be deleted successfully and removed from the lease list,Functional,Positive,Pass,Automation
-04/08/2026,TC051,Delete Lease v6,Linux,Delete all DHCPv6 leases from a prefix,All leases in the prefix should be deleted and the lease list should be empty for that prefix,Functional,Positive,Pass,Automation
-04/08/2026,TC052,Delete Lease v6,Linux,Delete DHCPv6 lease and verify IPv6 address is released back to the prefix pool,Deleted lease IPv6 address should be available again for new lease assignment,Functional,Positive,Pass,Automation
-04/08/2026,TC053,Delete Lease v6,Linux,Verify confirmation prompt appears before deleting DHCPv6 lease,System should display a confirmation dialog before proceeding with v6 lease deletion,Functional,Positive,Pass,Automation
-04/08/2026,TC054,Delete Lease v6,Linux,Cancel DHCPv6 lease deletion from confirmation prompt,V6 lease should not be deleted when user cancels from the confirmation dialog,Functional,Positive,Pass,Automation
-04/08/2026,TC055,Delete Lease v6,Linux,Delete DHCPv6 lease and verify it is removed from console UI immediately,Deleted v6 lease should disappear from the console list without requiring manual refresh,Functional,Positive,Pass,Automation
-04/08/2026,TC056,Delete Lease v6,Linux,Attempt to delete a non-existent DHCPv6 lease,System should handle gracefully and show appropriate message indicating v6 lease not found,Functional,Negative,Pass,Automation
-04/07/2026,TC057,Lease History v4,Linux,Update DHCPv4 lease and verify update entry in lease history,Lease history should show an update record with old and new values after v4 lease modification,Functional,Positive,Not Executed,
-04/07/2026,TC058,Lease History v4,Linux,Create DHCPv4 lease and verify creation entry in lease history,Lease history should show a create/add record when a new v4 lease is created,Functional,Positive,Not Executed,
-04/07/2026,TC059,Lease History v4,Linux,Delete DHCPv4 lease and verify deletion entry in lease history,Lease history should show a delete record when a v4 lease is removed,Functional,Positive,Not Executed,
-04/07/2026,TC060,Lease History v4,Linux,Verify lease history shows correct timestamp for each v4 lease operation,Each lease history entry should have accurate date and time matching when the operation was performed,Functional,Positive,Not Executed,
-04/07/2026,TC061,Lease History v4,Linux,Verify lease history shows the user or source who performed the v4 lease operation,Lease history entry should display the username or source (console/agent) that performed the action,Functional,Positive,Not Executed,
-04/07/2026,TC062,Lease History v4,Linux,Update DHCPv4 lease multiple times and verify all changes are recorded in history,Each update should create a separate history entry and all entries should be visible in chronological order,Functional,Positive,Not Executed,
-04/07/2026,TC063,Lease History v4,Linux,Filter lease history by date range for v4 leases,Lease history should show only entries within the specified date range,Functional,Positive,Not Executed,
-04/07/2026,TC064,Lease History v4,Linux,Filter lease history by operation type (create/update/delete) for v4,Lease history should show only entries matching the selected operation type filter,Functional,Positive,Not Executed,
-04/07/2026,TC065,Lease History v4,Linux,Verify lease history pagination works correctly for large number of v4 entries,Pagination should work correctly showing correct number of entries per page with proper navigation,Functional,Positive,Not Executed,
-04/07/2026,TC066,Lease History v6,Linux,Update DHCPv6 lease and verify update entry in lease history,Lease history should show an update record with old and new values after v6 lease modification,Functional,Positive,Not Executed,
-04/07/2026,TC067,Lease History v6,Linux,Create DHCPv6 lease and verify creation entry in lease history,Lease history should show a create/add record when a new v6 lease is created,Functional,Positive,Not Executed,
-04/07/2026,TC068,Lease History v6,Linux,Delete DHCPv6 lease and verify deletion entry in lease history,Lease history should show a delete record when a v6 lease is removed,Functional,Positive,Not Executed,
-04/07/2026,TC069,Lease History v6,Linux,Verify lease history shows correct timestamp for each v6 lease operation,Each v6 lease history entry should have accurate date and time matching when the operation was performed,Functional,Positive,Not Executed,
-04/07/2026,TC070,Lease History v6,Linux,Verify lease history shows the user or source who performed the v6 lease operation,V6 lease history entry should display the username or source that performed the action,Functional,Positive,Not Executed,
-04/07/2026,TC071,Lease History v6,Linux,Update DHCPv6 lease multiple times and verify all changes are recorded in history,Each v6 update should create a separate history entry in chronological order,Functional,Positive,Not Executed,
-04/07/2026,TC072,Lease History v6,Linux,Filter lease history by date range for v6 leases,V6 lease history should show only entries within the specified date range,Functional,Positive,Not Executed,
-04/07/2026,TC073,Lease History v6,Linux,Filter lease history by operation type (create/update/delete) for v6,V6 lease history should show only entries matching the selected operation type filter,Functional,Positive,Not Executed,
-04/07/2026,TC074,MAC Address,Linux,Verify MAC address is displayed correctly for DHCPv4 lease in lease details,MAC address should be displayed in correct format (XX-XX-XX-XX-XX-XX) in the lease details page,Functional,Positive,Not Executed,
-04/07/2026,TC075,MAC Address,Linux,Update MAC address of an existing DHCPv4 lease to a new valid MAC,MAC address should be updated successfully and reflected in the lease details,Functional,Positive,Not Executed,
-04/07/2026,TC076,MAC Address,Linux,Update MAC address with invalid format (wrong separators or length),System should reject the update and show validation error for invalid MAC address format,Functional,Negative,Not Executed,
-04/07/2026,TC077,MAC Address,Linux,Update MAC address with duplicate MAC already used by another lease in the same scope,System should reject or warn about duplicate MAC address within the same scope,Functional,Negative,Not Executed,
-04/07/2026,TC078,MAC Address,Linux,Verify MAC address change is recorded in lease history,Lease history should show the old and new MAC address values after MAC update,Functional,Positive,Not Executed,
-04/07/2026,TC079,MAC Address,Linux,Update MAC address with empty value,System should reject the update and show validation error for empty MAC address field,Functional,Negative,Not Executed,
-04/07/2026,TC080,MAC Address,Linux,Verify MAC address with different vendor prefixes is accepted,MAC addresses with various vendor prefixes should all be accepted as valid,Functional,Positive,Not Executed,
-04/07/2026,TC081,MAC Address,Linux,Verify MAC address is displayed correctly for DHCPv6 lease (DUID contains MAC),DUID-based MAC information should be parsed and displayed correctly for v6 leases,Functional,Positive,Not Executed,
-04/07/2026,TC082,Start End Time,Linux,Verify lease start time is displayed correctly for DHCPv4 lease,Lease start time should match the time when the lease was created or last renewed,Functional,Positive,Not Executed,
-04/07/2026,TC083,Start End Time,Linux,Verify lease end time (expiry) is displayed correctly for DHCPv4 lease,Lease end time should match the configured expiry time for the v4 lease,Functional,Positive,Not Executed,
-04/07/2026,TC084,Start End Time,Linux,Update DHCPv4 lease start time to a valid date,Lease start time should be updated successfully and reflected in the lease details,Functional,Positive,Not Executed,
-04/07/2026,TC085,Start End Time,Linux,Update DHCPv4 lease end time (expiry) to a valid future date,Lease end time should be updated successfully with the new future expiry date,Functional,Positive,Not Executed,
-04/07/2026,TC086,Start End Time,Linux,Update DHCPv4 lease end time to a date before start time,System should reject the update and show error that end time cannot be before start time,Functional,Negative,Not Executed,
-04/07/2026,TC087,Start End Time,Linux,Verify lease start time is displayed correctly for DHCPv6 lease,V6 lease start time should match the time when the lease was created or last renewed,Functional,Positive,Not Executed,
-04/07/2026,TC088,Start End Time,Linux,Verify lease end time (expiry) is displayed correctly for DHCPv6 lease,V6 lease end time should match the configured expiry time,Functional,Positive,Not Executed,
-04/07/2026,TC089,Start End Time,Linux,Update DHCPv6 lease start time to a valid date,V6 lease start time should be updated successfully and reflected in the lease details,Functional,Positive,Not Executed,
-04/07/2026,TC090,Start End Time,Linux,Update DHCPv6 lease end time (expiry) to a valid future date,V6 lease end time should be updated successfully with the new future expiry date,Functional,Positive,Not Executed,
-04/07/2026,TC091,Start End Time,Linux,Update DHCPv6 lease end time to a date before start time,System should reject the update and show error that end time cannot be before start time for v6,Functional,Negative,Not Executed,
-04/07/2026,TC092,Start End Time,Linux,Verify start and end time formats are consistent across v4 and v6 leases,Date time format should be consistent (e.g. YYYY-MM-DD HH:MM:SS) for both v4 and v6 lease displays,Functional,Positive,Not Executed,
-04/07/2026,TC093,Start End Time,Linux,Update start and end time and verify changes recorded in lease history,Lease history should capture old and new start/end time values for the update operation,Functional,Positive,Not Executed,
-04/07/2026,TC094,Hardware Update,Linux,Verify hardware type is displayed correctly for DHCPv4 lease,Hardware type field should display the correct hardware type (e.g. Ethernet) for v4 lease,Functional,Positive,Not Executed,
-04/07/2026,TC095,Hardware Update,Linux,Update hardware type for an existing DHCPv4 lease,Hardware type should be updated successfully and reflected in the lease details,Functional,Positive,Not Executed,
-04/07/2026,TC096,Hardware Update,Linux,Update hardware information with invalid hardware type,System should reject the update and show validation error for unsupported hardware type,Functional,Negative,Not Executed,
-04/07/2026,TC097,Hardware Update,Linux,Verify hardware address matches MAC address for DHCPv4 lease,Hardware address field should correspond to the client MAC address in the lease,Functional,Positive,Not Executed,
-04/07/2026,TC098,Hardware Update,Linux,Update hardware address and verify MAC address is also updated consistently,Updating hardware address should reflect consistently in both hardware and MAC address fields,Functional,Positive,Not Executed,
-04/07/2026,TC099,Hardware Update,Linux,Verify hardware update is recorded in lease history,Lease history should show old and new hardware values after hardware update,Functional,Positive,Not Executed,
-04/07/2026,TC100,Hardware Update,Linux,Verify hardware type for DHCPv6 lease,Hardware type information should be displayed correctly for v6 leases,Functional,Positive,Not Executed,
-04/07/2026,TC101,Hardware Update,Linux,Update hardware information for DHCPv6 lease,Hardware details should be updated successfully for v6 lease and reflected in lease details,Functional,Positive,Not Executed,
-04/07/2026,TC102,Hardware Update,Linux,Verify hardware update for v6 lease is recorded in lease history,V6 lease history should capture hardware update with old and new values,Functional,Positive,Not Executed,
-04/07/2026,TC103,DDNS Relation v4,Linux,Verify DDNS forward lookup (A record) is created when DHCPv4 lease is created,A record should be created in DNS for the lease hostname pointing to the assigned IPv4 address,Functional,Positive,Not Executed,
-04/07/2026,TC104,DDNS Relation v4,Linux,Verify DDNS reverse lookup (PTR record) is created when DHCPv4 lease is created,PTR record should be created in reverse DNS zone for the assigned IPv4 address,Functional,Positive,Not Executed,
-04/07/2026,TC105,DDNS Relation v4,Linux,Update DHCPv4 lease hostname and verify DDNS A record is updated,DNS A record should be updated to reflect the new hostname for the v4 lease,Functional,Positive,Not Executed,
-04/07/2026,TC106,DDNS Relation v4,Linux,Update DHCPv4 lease IP address and verify DDNS records (A and PTR) are updated,Both A and PTR records should be updated to reflect the new IP address,Functional,Positive,Not Executed,
-04/07/2026,TC107,DDNS Relation v4,Linux,Delete DHCPv4 lease and verify DDNS records (A and PTR) are cleaned up,DNS records associated with the deleted lease should be removed from DNS zones,Functional,Positive,Not Executed,
-04/07/2026,TC108,DDNS Relation v4,Linux,Verify DDNS relation is displayed in the DHCPv4 lease details page,Lease details should show associated DNS records (A and PTR) with their current status,Functional,Positive,Not Executed,
-04/07/2026,TC109,DDNS Relation v4,Linux,Verify DDNS update on DHCPv4 lease renewal,DDNS records should be refreshed/updated when a v4 lease is renewed,Functional,Positive,Not Executed,
-04/07/2026,TC110,DDNS Relation v4,Linux,Create DHCPv4 lease with DDNS disabled and verify no DNS records are created,No DNS records should be created when DDNS is disabled for the scope/lease,Functional,Negative,Not Executed,
-04/07/2026,TC111,DDNS Relation v4,Linux,Verify DDNS conflict handling when A record already exists for different lease,System should handle the DNS conflict appropriately (overwrite or reject based on DDNS policy),Functional,Negative,Not Executed,
-04/07/2026,TC112,DDNS Relation v6,Linux,Verify DDNS forward lookup (AAAA record) is created when DHCPv6 lease is created,AAAA record should be created in DNS for the lease hostname pointing to the assigned IPv6 address,Functional,Positive,Not Executed,
-04/07/2026,TC113,DDNS Relation v6,Linux,Verify DDNS reverse lookup (PTR record) is created when DHCPv6 lease is created,PTR record should be created in reverse DNS zone (ip6.arpa) for the assigned IPv6 address,Functional,Positive,Not Executed,
-04/07/2026,TC114,DDNS Relation v6,Linux,Update DHCPv6 lease hostname and verify DDNS AAAA record is updated,DNS AAAA record should be updated to reflect the new hostname for the v6 lease,Functional,Positive,Not Executed,
-04/07/2026,TC115,DDNS Relation v6,Linux,Update DHCPv6 lease IPv6 address and verify DDNS records (AAAA and PTR) are updated,Both AAAA and PTR records should be updated to reflect the new IPv6 address,Functional,Positive,Not Executed,
-04/07/2026,TC116,DDNS Relation v6,Linux,Delete DHCPv6 lease and verify DDNS records (AAAA and PTR) are cleaned up,DNS records associated with the deleted v6 lease should be removed from DNS zones,Functional,Positive,Not Executed,
-04/07/2026,TC117,DDNS Relation v6,Linux,Verify DDNS relation is displayed in the DHCPv6 lease details page,V6 lease details should show associated DNS records (AAAA and PTR) with their current status,Functional,Positive,Not Executed,
-04/07/2026,TC118,DDNS Relation v6,Linux,Verify DDNS update on DHCPv6 lease renewal,DDNS records should be refreshed/updated when a v6 lease is renewed,Functional,Positive,Not Executed,
-04/07/2026,TC119,DDNS Relation v6,Linux,Create DHCPv6 lease with DDNS disabled and verify no DNS records are created,No DNS records should be created when DDNS is disabled for the prefix/lease,Functional,Negative,Not Executed,
-04/07/2026,TC120,DDNS Relation v6,Linux,Verify DDNS conflict handling when AAAA record already exists for different v6 lease,System should handle the DNS conflict appropriately based on DDNS policy for v6,Functional,Negative,Not Executed,
-04/07/2026,TC121,Lease History DNS,Linux,Verify DNS query records are displayed in the lease history page for v4 lease,Lease history page should show associated DNS queries (A and PTR lookups) related to the lease,Functional,Positive,Not Executed,
-04/07/2026,TC122,Lease History DNS,Linux,Verify DNS query records are displayed in the lease history page for v6 lease,Lease history page should show associated DNS queries (AAAA and PTR lookups) related to the v6 lease,Functional,Positive,Not Executed,
-04/07/2026,TC123,Lease History DNS,Linux,Verify DNS query timestamp matches the lease operation time,DNS query timestamp in lease history should align with when the DDNS update was triggered,Functional,Positive,Not Executed,
-04/07/2026,TC124,Lease History DNS,Linux,Verify DNS query type (A/AAAA/PTR) is displayed correctly in lease history,DNS query type column should accurately show the record type that was queried,Functional,Positive,Not Executed,
-04/07/2026,TC125,Lease History DNS,Linux,Verify DNS query result (success/failure) is shown in lease history,DNS query status should indicate whether the DDNS update succeeded or failed,Functional,Positive,Not Executed,
-04/07/2026,TC126,Lease History DNS,Linux,Verify DNS query source server is displayed in lease history,The DNS server that handled the query should be identified in the lease history entry,Functional,Positive,Not Executed,
-04/07/2026,TC127,Lease History DNS,Linux,Filter lease history to show only DNS query entries,Filtering by DNS queries should display only DNS-related entries and hide lease CRUD operations,Functional,Positive,Not Executed,
-04/07/2026,TC128,Lease History DNS,Linux,Verify DNS queries are logged for failed DDNS updates in lease history,Failed DDNS update attempts should also appear in lease history with error details,Functional,Negative,Not Executed,
-04/07/2026,TC129,Lease Data Console v4,Linux,Verify DHCPv4 lease data is displayed correctly in the console,All v4 lease fields (IP/MAC/hostname/expiry/scope) should be displayed correctly in console UI,Functional,Positive,Not Executed,
-04/07/2026,TC130,Lease Data Console v4,Linux,Verify DHCPv4 lease count matches between console and DHCP server,Total number of v4 leases shown in console should match the actual count on the DHCP agent server,Functional,Positive,Not Executed,
-04/07/2026,TC131,Lease Data Console v4,Linux,Verify DHCPv4 lease data sync between console and agent server,Lease data in console should be consistent with data on the agent server with no missing or extra entries,Functional,Positive,Not Executed,
-04/07/2026,TC132,Lease Data Console v4,Linux,Create DHCPv4 lease on agent server and verify it appears in console,New lease created directly on agent should sync to console and be visible in the lease list,Functional,Positive,Not Executed,
-04/07/2026,TC133,Lease Data Console v4,Linux,Delete DHCPv4 lease on agent server and verify it is removed from console,Lease deleted on agent should be removed from console after sync,Functional,Positive,Not Executed,
-04/07/2026,TC134,Lease Data Console v4,Linux,Verify DHCPv4 lease search and filter works correctly in console,Searching by IP or MAC or hostname should return correct matching v4 leases,Functional,Positive,Not Executed,
-04/07/2026,TC135,Lease Data Console v4,Linux,Verify DHCPv4 lease sorting works correctly in console (by IP/MAC/expiry),Sorting by different columns should order leases correctly in ascending and descending order,Functional,Positive,Not Executed,
-04/07/2026,TC136,Lease Data Console v4,Linux,Verify DHCPv4 lease pagination works correctly in console for large datasets,Pagination should work correctly with proper page counts and navigation for many v4 leases,Functional,Positive,Not Executed,
-04/07/2026,TC137,Lease Data Console v6,Linux,Verify DHCPv6 lease data is displayed correctly in the console,All v6 lease fields (IPv6/DUID/IAID/hostname/expiry/prefix) should be displayed correctly in console,Functional,Positive,Not Executed,
-04/07/2026,TC138,Lease Data Console v6,Linux,Verify DHCPv6 lease count matches between console and DHCP server,Total number of v6 leases shown in console should match the actual count on the DHCP agent server,Functional,Positive,Not Executed,
-04/07/2026,TC139,Lease Data Console v6,Linux,Verify DHCPv6 lease data sync between console and agent server,V6 lease data in console should be consistent with data on the agent server,Functional,Positive,Not Executed,
-04/07/2026,TC140,Lease Data Console v6,Linux,Create DHCPv6 lease on agent server and verify it appears in console,New v6 lease created directly on agent should sync to console and be visible,Functional,Positive,Not Executed,
-04/07/2026,TC141,Lease Data Console v6,Linux,Delete DHCPv6 lease on agent server and verify it is removed from console,V6 lease deleted on agent should be removed from console after sync,Functional,Positive,Not Executed,
-04/07/2026,TC142,Lease Data Console v6,Linux,Verify DHCPv6 lease search and filter works correctly in console,Searching by IPv6 or DUID or hostname should return correct matching v6 leases,Functional,Positive,Not Executed,
-04/07/2026,TC143,Lease Data Console v6,Linux,Verify DHCPv6 lease sorting works correctly in console,Sorting by different columns should order v6 leases correctly,Functional,Positive,Not Executed,
-04/07/2026,TC144,Lease Data Console v6,Linux,Verify DHCPv6 lease pagination works correctly in console for large datasets,Pagination should work correctly for many v6 leases,Functional,Positive,Not Executed,
-04/07/2026,TC145,Lease Data Agent v4,Linux,Verify DHCPv4 lease data is accessible on the agent server via CLI or API,V4 lease data should be retrievable directly from the agent server,Functional,Positive,Not Executed,
-04/07/2026,TC146,Lease Data Agent v4,Linux,Verify DHCPv4 lease fields on agent match console display,All lease field values on agent server should match what is shown in the console,Functional,Positive,Not Executed,
-04/07/2026,TC147,Lease Data Agent v6,Linux,Verify DHCPv6 lease data is accessible on the agent server via CLI or API,V6 lease data should be retrievable directly from the agent server,Functional,Positive,Not Executed,
-04/07/2026,TC148,Lease Data Agent v6,Linux,Verify DHCPv6 lease fields on agent match console display,All v6 lease field values on agent server should match what is shown in the console,Functional,Positive,Not Executed,
-04/07/2026,TC149,Lease Data Sync,Linux,Verify lease data sync latency between agent and console is within acceptable time,Lease changes on agent should reflect in console within the expected sync interval,Functional,Positive,Not Executed,
-04/07/2026,TC150,Lease Data Sync,Linux,Verify lease data integrity after agent server restart,All lease data should remain intact and sync correctly after agent server restart,Functional,Positive,Not Executed,
-04/07/2026,TC151,Lease Data Sync,Linux,Verify lease data integrity after console server restart,Console should reload all lease data correctly from agent after console restart,Functional,Positive,Not Executed,
-04/07/2026,TC152,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for MAC address spoofing — same MAC requesting multiple IPs rapidly,System should detect and flag MAC spoofing anomaly when a single MAC requests many v4 leases in short time,Functional,Positive,Not Executed,
-04/07/2026,TC153,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for IP address conflict — duplicate IP assignment,System should detect and flag IP conflict anomaly when same IPv4 is assigned to multiple clients,Functional,Positive,Not Executed,
-04/07/2026,TC154,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for rogue DHCP server on the network,System should identify and alert about unauthorized DHCP server responses on the network,Functional,Positive,Not Executed,
-04/07/2026,TC155,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for DHCP starvation attack — excessive DISCOVER requests,System should detect abnormal volume of DHCP DISCOVER packets indicating a starvation attack,Functional,Positive,Not Executed,
-04/07/2026,TC156,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for lease exhaustion — scope utilization at 100%,System should flag anomaly when a v4 scope reaches full utilization with no available addresses,Functional,Positive,Not Executed,
-04/07/2026,TC157,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for rapid lease churn — frequent create and delete cycles,System should detect unusual lease churn rate where leases are rapidly created and deleted,Functional,Positive,Not Executed,
-04/07/2026,TC158,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for unauthorized client — unknown MAC requesting lease,System should flag unknown/unauthorized MAC addresses requesting DHCP leases,Functional,Positive,Not Executed,
-04/07/2026,TC159,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for abnormal lease duration — extremely short or long expiry,System should flag leases with abnormally short or long durations compared to scope policy,Functional,Positive,Not Executed,
-04/07/2026,TC160,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for DHCP relay agent anomaly — invalid relay information,System should detect and flag anomalies in DHCP relay agent information option,Functional,Positive,Not Executed,
-04/07/2026,TC161,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for scope mismatch — client getting address from wrong scope,System should flag when a client receives an address from an unexpected scope,Functional,Positive,Not Executed,
-04/07/2026,TC162,DHCP Anomaly v4,Linux,Verify DHCPv4 anomaly alert is displayed in console UI,Detected v4 anomaly should generate an alert/notification visible in the console dashboard,Functional,Positive,Not Executed,
-04/07/2026,TC163,DHCP Anomaly v4,Linux,Verify DHCPv4 anomaly details include source client information,Anomaly detail page should show the offending client IP and MAC and hostname information,Functional,Positive,Not Executed,
-04/07/2026,TC164,DHCP Anomaly v4,Linux,Verify DHCPv4 anomaly severity level is categorized correctly,Anomaly should be classified with appropriate severity (low/medium/high/critical) based on type,Functional,Positive,Not Executed,
-04/07/2026,TC165,DHCP Anomaly v4,Linux,Verify no false positive DHCPv4 anomaly during normal lease operations,Normal lease create/update/delete operations should not trigger false anomaly alerts,Functional,Negative,Not Executed,
-04/07/2026,TC166,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for DUID spoofing — same DUID requesting multiple addresses rapidly,System should detect and flag DUID spoofing anomaly when a single DUID requests many v6 leases,Functional,Positive,Not Executed,
-04/07/2026,TC167,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for IPv6 address conflict — duplicate IPv6 assignment,System should detect and flag IPv6 conflict anomaly when same address is assigned to multiple clients,Functional,Positive,Not Executed,
-04/07/2026,TC168,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for rogue DHCPv6 server on the network,System should identify and alert about unauthorized DHCPv6 server responses on the network,Functional,Positive,Not Executed,
-04/07/2026,TC169,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for DHCPv6 starvation attack — excessive SOLICIT requests,System should detect abnormal volume of DHCPv6 SOLICIT packets indicating a starvation attack,Functional,Positive,Not Executed,
-04/07/2026,TC170,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for prefix exhaustion — prefix utilization at 100%,System should flag anomaly when a v6 prefix reaches full utilization with no available addresses,Functional,Positive,Not Executed,
-04/07/2026,TC171,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for rapid lease churn — frequent create and delete cycles for v6,System should detect unusual v6 lease churn rate where leases are rapidly created and deleted,Functional,Positive,Not Executed,
-04/07/2026,TC172,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for unauthorized client — unknown DUID requesting lease,System should flag unknown/unauthorized DUIDs requesting DHCPv6 leases,Functional,Positive,Not Executed,
-04/07/2026,TC173,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for abnormal lease duration — extremely short or long v6 expiry,System should flag v6 leases with abnormally short or long durations compared to prefix policy,Functional,Positive,Not Executed,
-04/07/2026,TC174,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for relay agent anomaly — invalid relay information for v6,System should detect and flag anomalies in DHCPv6 relay agent information,Functional,Positive,Not Executed,
-04/07/2026,TC175,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for prefix mismatch — client getting address from wrong prefix,System should flag when a client receives a v6 address from an unexpected prefix,Functional,Positive,Not Executed,
-04/07/2026,TC176,DHCP Anomaly v6,Linux,Verify DHCPv6 anomaly alert is displayed in console UI,Detected v6 anomaly should generate an alert/notification visible in the console dashboard,Functional,Positive,Not Executed,
-04/07/2026,TC177,DHCP Anomaly v6,Linux,Verify DHCPv6 anomaly details include source client information,V6 anomaly detail page should show the offending client IPv6 and DUID and hostname,Functional,Positive,Not Executed,
-04/07/2026,TC178,DHCP Anomaly v6,Linux,Verify DHCPv6 anomaly severity level is categorized correctly,V6 anomaly should be classified with appropriate severity based on type,Functional,Positive,Not Executed,
-04/07/2026,TC179,DHCP Anomaly v6,Linux,Verify no false positive DHCPv6 anomaly during normal v6 lease operations,Normal v6 lease operations should not trigger false anomaly alerts,Functional,Negative,Not Executed,
-04/07/2026,TC180,DHCP Anomaly General,Linux,Verify anomaly detection works when both v4 and v6 anomalies occur simultaneously,System should detect and flag both v4 and v6 anomalies independently when occurring at the same time,Functional,Positive,Not Executed,
-04/07/2026,TC181,DHCP Anomaly General,Linux,Verify anomaly history and audit trail for all detected anomalies,All detected anomalies should be logged with timestamp and type and severity and resolution status,Functional,Positive,Not Executed,
-04/07/2026,TC182,DHCP Anomaly General,Linux,Verify anomaly notification and email alert configuration,Anomaly detection should trigger configured notification channels (email/dashboard/SNMP),Functional,Positive,Not Executed,
-04/07/2026,TC183,DHCP Anomaly General,Linux,Verify anomaly auto-resolution for transient issues,Transient anomalies should auto-resolve and update status when the condition clears,Functional,Positive,Not Executed,
-04/07/2026,TC184,DHCP Anomaly General,Linux,Verify anomaly dashboard shows summary of all v4 and v6 anomalies,Dashboard should display an aggregated view of all active anomalies with counts by type and severity,Functional,Positive,Not Executed,
-,,,,"Need to validate all lease types along with their corresponding lease status counts (abandoned, 
-active, available, designated, excluded, inactive, and reserved).",,,,,
+Date,TC No,Module,Platform,Test Case Description,Expected Result,Type,Test Nature,Status,Tested By,Result
+04/13/2026,TC001,Create Lease v4,Linux,Create a new DHCPv4 lease with valid IP address and scope ID and MAC address,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC002,Create Lease v4,Linux,Create DHCPv4 lease with valid hostname and lease expiry time,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC004,Create Lease v4,Linux,Create DHCPv4 lease with invalid IP address format (e.g. 999.999.999.999),✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC005,Create Lease v4,Linux,Create DHCPv4 lease with IP address outside the scope range,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC006,Create Lease v4,Linux,Create DHCPv4 lease without mandatory fields (IP or scope ID or MAC),✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC007,Create Lease v4,Linux,Create DHCPv4 lease with invalid MAC address format,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC008,Create Lease v4,Linux,Create multiple DHCPv4 leases in batch within the same scope,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC009,Create Lease v4,Linux,Create DHCPv4 lease with past expiry date,✅ PASS,Functional,Boundary,Pass,Automation,✅ PASS
+04/13/2026,TC010,Create Lease v4,Linux,Create DHCPv4 lease and verify it appears in console UI immediately,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC011,Create Lease v6,Linux,Create a new DHCPv6 lease with valid IPv6 address and DUID and IAID,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC012,Create Lease v6,Linux,Create DHCPv6 lease with valid hostname and lease expiry time,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC013,Create Lease v6,Linux,Create DHCPv6 lease with duplicate IPv6 address in the same prefix,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC014,Create Lease v6,Linux,Create DHCPv6 lease with invalid IPv6 address format,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC015,Create Lease v6,Linux,Create DHCPv6 lease with IPv6 address outside the prefix range,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC016,Create Lease v6,Linux,Create DHCPv6 lease without mandatory fields (IPv6 or DUID or IAID),✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC017,Create Lease v6,Linux,Create DHCPv6 lease with invalid DUID format,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC018,Create Lease v6,Linux,Create multiple DHCPv6 leases in batch within the same prefix,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC019,Create Lease v6,Linux,Create DHCPv6 lease with various DUID types (DUID-LLT and DUID-EN and DUID-LL),✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC020,Create Lease v6,Linux,Create DHCPv6 lease and verify it appears in console UI immediately,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC021,Update Lease v4,Linux,Update an existing DHCPv4 lease hostname,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC022,Update Lease v4,Linux,Update an existing DHCPv4 lease expiry time to a future date,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC023,Update Lease v4,Linux,Update DHCPv4 lease IP address to a new valid IP within the scope,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC024,Update Lease v4,Linux,Update DHCPv4 lease IP address to an IP outside scope range,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC025,Update Lease v4,Linux,Update DHCPv4 lease with an IP already assigned to another lease,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC026,Update Lease v4,Linux,Update DHCPv4 lease scope ID,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC027,Update Lease v4,Linux,Update DHCPv4 lease with empty mandatory fields,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC028,Update Lease v4,Linux,Update DHCPv4 lease and verify changes reflect in console UI,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC029,Update Lease v4,Linux,Update multiple DHCPv4 lease fields simultaneously (hostname and expiry and description),✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC030,Update Lease v4,Linux,Update DHCPv4 lease expiry to a past date,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC031,Update Lease v6,Linux,Update an existing DHCPv6 lease hostname,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC032,Update Lease v6,Linux,Update an existing DHCPv6 lease expiry time to a future date,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC033,Update Lease v6,Linux,Update DHCPv6 lease IPv6 address to a new valid address within the prefix,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC034,Update Lease v6,Linux,Update DHCPv6 lease IPv6 address to an address outside prefix range,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC035,Update Lease v6,Linux,Update DHCPv6 lease DUID to a new valid DUID,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC036,Update Lease v6,Linux,Update DHCPv6 lease IAID value,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC037,Update Lease v6,Linux,Update DHCPv6 lease with empty mandatory fields,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC038,Update Lease v6,Linux,Update DHCPv6 lease and verify changes reflect in console UI,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC039,Update Lease v6,Linux,Update multiple DHCPv6 lease fields simultaneously,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC040,Update Lease v6,Linux,Update DHCPv6 lease with invalid IPv6 format,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC041,Delete Lease v4,Linux,Delete a single DHCPv4 lease from the scope,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC042,Delete Lease v4,Linux,Delete multiple DHCPv4 leases in batch from the same scope,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC043,Delete Lease v4,Linux,Delete all DHCPv4 leases from a scope,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC044,Delete Lease v4,Linux,Delete DHCPv4 lease and verify IP is released back to the scope pool,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC045,Delete Lease v4,Linux,Verify confirmation prompt appears before deleting DHCPv4 lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC046,Delete Lease v4,Linux,Cancel DHCPv4 lease deletion from confirmation prompt,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC047,Delete Lease v4,Linux,Delete DHCPv4 lease and verify it is removed from console UI immediately,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC048,Delete Lease v4,Linux,Attempt to delete a non-existent DHCPv4 lease,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC049,Delete Lease v6,Linux,Delete a single DHCPv6 lease from the prefix,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC050,Delete Lease v6,Linux,Delete multiple DHCPv6 leases in batch from the same prefix,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC051,Delete Lease v6,Linux,Delete all DHCPv6 leases from a prefix,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC052,Delete Lease v6,Linux,Delete DHCPv6 lease and verify IPv6 address is released back to the prefix pool,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC053,Delete Lease v6,Linux,Verify confirmation prompt appears before deleting DHCPv6 lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC054,Delete Lease v6,Linux,Cancel DHCPv6 lease deletion from confirmation prompt,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC055,Delete Lease v6,Linux,Delete DHCPv6 lease and verify it is removed from console UI immediately,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC056,Delete Lease v6,Linux,Attempt to delete a non-existent DHCPv6 lease,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC057,Lease History v4,Linux,Update DHCPv4 lease and verify update entry in lease history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC058,Lease History v4,Linux,Create DHCPv4 lease and verify creation entry in lease history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC059,Lease History v4,Linux,Delete DHCPv4 lease and verify deletion entry in lease history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC060,Lease History v4,Linux,Verify lease history shows correct timestamp for each v4 lease operation,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC061,Lease History v4,Linux,Verify lease history shows the user or source who performed the v4 lease operation,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC062,Lease History v4,Linux,Update DHCPv4 lease multiple times and verify all changes are recorded in history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC063,Lease History v4,Linux,Filter lease history by date range for v4 leases,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC064,Lease History v4,Linux,Filter lease history by operation type (create/update/delete) for v4,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC065,Lease History v4,Linux,Verify lease history pagination works correctly for large number of v4 entries,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC066,Lease History v6,Linux,Update DHCPv6 lease and verify update entry in lease history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC067,Lease History v6,Linux,Create DHCPv6 lease and verify creation entry in lease history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC068,Lease History v6,Linux,Delete DHCPv6 lease and verify deletion entry in lease history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC069,Lease History v6,Linux,Verify lease history shows correct timestamp for each v6 lease operation,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC070,Lease History v6,Linux,Verify lease history shows the user or source who performed the v6 lease operation,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC071,Lease History v6,Linux,Update DHCPv6 lease multiple times and verify all changes are recorded in history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC072,Lease History v6,Linux,Filter lease history by date range for v6 leases,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC073,Lease History v6,Linux,Filter lease history by operation type (create/update/delete) for v6,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC074,MAC Address,Linux,Verify MAC address is displayed correctly for DHCPv4 lease in lease details,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC075,MAC Address,Linux,Update MAC address of an existing DHCPv4 lease to a new valid MAC,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC076,MAC Address,Linux,Update MAC address with invalid format (wrong separators or length),✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC077,MAC Address,Linux,Update MAC address with duplicate MAC already used by another lease in the same scope,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC078,MAC Address,Linux,Verify MAC address change is recorded in lease history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC079,MAC Address,Linux,Update MAC address with empty value,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC080,MAC Address,Linux,Verify MAC address with different vendor prefixes is accepted,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC081,MAC Address,Linux,Verify MAC address is displayed correctly for DHCPv6 lease (DUID contains MAC),✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC082,Start End Time,Linux,Verify lease start time is displayed correctly for DHCPv4 lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC083,Start End Time,Linux,Verify lease end time (expiry) is displayed correctly for DHCPv4 lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC084,Start End Time,Linux,Update DHCPv4 lease start time to a valid date,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC085,Start End Time,Linux,Update DHCPv4 lease end time (expiry) to a valid future date,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC086,Start End Time,Linux,Update DHCPv4 lease end time to a date before start time,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC087,Start End Time,Linux,Verify lease start time is displayed correctly for DHCPv6 lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC088,Start End Time,Linux,Verify lease end time (expiry) is displayed correctly for DHCPv6 lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC089,Start End Time,Linux,Update DHCPv6 lease start time to a valid date,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC090,Start End Time,Linux,Update DHCPv6 lease end time (expiry) to a valid future date,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC091,Start End Time,Linux,Update DHCPv6 lease end time to a date before start time,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC092,Start End Time,Linux,Verify start and end time formats are consistent across v4 and v6 leases,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC093,Start End Time,Linux,Update start and end time and verify changes recorded in lease history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC094,Hardware Update,Linux,Verify hardware type is displayed correctly for DHCPv4 lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC095,Hardware Update,Linux,Update hardware type for an existing DHCPv4 lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC096,Hardware Update,Linux,Update hardware information with invalid hardware type,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC097,Hardware Update,Linux,Verify hardware address matches MAC address for DHCPv4 lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC098,Hardware Update,Linux,Update hardware address and verify MAC address is also updated consistently,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC099,Hardware Update,Linux,Verify hardware update is recorded in lease history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC100,Hardware Update,Linux,Verify hardware type for DHCPv6 lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC101,Hardware Update,Linux,Update hardware information for DHCPv6 lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC102,Hardware Update,Linux,Verify hardware update for v6 lease is recorded in lease history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+,TC103,DDNS Relation v4,Linux,Verify DDNS forward lookup (A record) is created when DHCPv4 lease is created,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC104,DDNS Relation v4,Linux,Verify DDNS reverse lookup (PTR record) is created when DHCPv4 lease is created,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC105,DDNS Relation v4,Linux,Update DHCPv4 lease hostname and verify DDNS A record is updated,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC106,DDNS Relation v4,Linux,Update DHCPv4 lease IP address and verify DDNS records (A and PTR) are updated,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC107,DDNS Relation v4,Linux,Delete DHCPv4 lease and verify DDNS records (A and PTR) are cleaned up,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC108,DDNS Relation v4,Linux,Verify DDNS relation is displayed in the DHCPv4 lease details page,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC109,DDNS Relation v4,Linux,Verify DDNS update on DHCPv4 lease renewal,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC110,DDNS Relation v4,Linux,Create DHCPv4 lease with DDNS disabled and verify no DNS records are created,🔵 DDNS - Manual,Functional,Negative,,,🔵 DDNS - Manual
+,TC111,DDNS Relation v4,Linux,Verify DDNS conflict handling when A record already exists for different lease,🔵 DDNS - Manual,Functional,Negative,,,🔵 DDNS - Manual
+,TC112,DDNS Relation v6,Linux,Verify DDNS forward lookup (AAAA record) is created when DHCPv6 lease is created,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC113,DDNS Relation v6,Linux,Verify DDNS reverse lookup (PTR record) is created when DHCPv6 lease is created,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC114,DDNS Relation v6,Linux,Update DHCPv6 lease hostname and verify DDNS AAAA record is updated,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC115,DDNS Relation v6,Linux,Update DHCPv6 lease IPv6 address and verify DDNS records (AAAA and PTR) are updated,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC116,DDNS Relation v6,Linux,Delete DHCPv6 lease and verify DDNS records (AAAA and PTR) are cleaned up,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC117,DDNS Relation v6,Linux,Verify DDNS relation is displayed in the DHCPv6 lease details page,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC118,DDNS Relation v6,Linux,Verify DDNS update on DHCPv6 lease renewal,🔵 DDNS - Manual,Functional,Positive,,,🔵 DDNS - Manual
+,TC119,DDNS Relation v6,Linux,Create DHCPv6 lease with DDNS disabled and verify no DNS records are created,🔵 DDNS - Manual,Functional,Negative,,,🔵 DDNS - Manual
+,TC120,DDNS Relation v6,Linux,Verify DDNS conflict handling when AAAA record already exists for different v6 lease,🔵 DDNS - Manual,Functional,Negative,,,🔵 DDNS - Manual
+04/13/2026,TC121,Lease History DNS,Linux,Verify DNS query records are displayed in the lease history page for v4 lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC122,Lease History DNS,Linux,Verify DNS query records are displayed in the lease history page for v6 lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC123,Lease History DNS,Linux,Verify DNS query timestamp matches the lease operation time,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC124,Lease History DNS,Linux,Verify DNS query type (A/AAAA/PTR) is displayed correctly in lease history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC125,Lease History DNS,Linux,Verify DNS query result (success/failure) is shown in lease history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC126,Lease History DNS,Linux,Verify DNS query source server is displayed in lease history,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC127,Lease History DNS,Linux,Filter lease history to show only DNS query entries,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+,TC128,Lease History DNS,Linux,Verify DNS queries are logged for failed DDNS updates in lease history,🔵 DDNS - Manual,Functional,Negative,,,🔵 DDNS - Manual
+04/13/2026,TC129,Lease Data Console v4,Linux,Verify DHCPv4 lease data is displayed correctly in the console,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC130,Lease Data Console v4,Linux,Verify DHCPv4 lease count matches between console and DHCP server,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC131,Lease Data Console v4,Linux,Verify DHCPv4 lease data sync between console and agent server,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC132,Lease Data Console v4,Linux,Create DHCPv4 lease on agent server and verify it appears in console,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC133,Lease Data Console v4,Linux,Delete DHCPv4 lease on agent server and verify it is removed from console,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC134,Lease Data Console v4,Linux,Verify DHCPv4 lease search and filter works correctly in console,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC135,Lease Data Console v4,Linux,Verify DHCPv4 lease sorting works correctly in console (by IP/MAC/expiry),✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC136,Lease Data Console v4,Linux,Verify DHCPv4 lease pagination works correctly in console for large datasets,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC137,Lease Data Console v6,Linux,Verify DHCPv6 lease data is displayed correctly in the console,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC138,Lease Data Console v6,Linux,Verify DHCPv6 lease count matches between console and DHCP server,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC139,Lease Data Console v6,Linux,Verify DHCPv6 lease data sync between console and agent server,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC140,Lease Data Console v6,Linux,Create DHCPv6 lease on agent server and verify it appears in console,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC141,Lease Data Console v6,Linux,Delete DHCPv6 lease on agent server and verify it is removed from console,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC142,Lease Data Console v6,Linux,Verify DHCPv6 lease search and filter works correctly in console,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC143,Lease Data Console v6,Linux,Verify DHCPv6 lease sorting works correctly in console,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC144,Lease Data Console v6,Linux,Verify DHCPv6 lease pagination works correctly in console for large datasets,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC145,Lease Data Agent v4,Linux,Verify DHCPv4 lease data is accessible on the agent server via CLI or API,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC146,Lease Data Agent v4,Linux,Verify DHCPv4 lease fields on agent match console display,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC147,Lease Data Agent v6,Linux,Verify DHCPv6 lease data is accessible on the agent server via CLI or API,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC148,Lease Data Agent v6,Linux,Verify DHCPv6 lease fields on agent match console display,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC149,Lease Data Sync,Linux,Verify lease data sync latency between agent and console is within acceptable time,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC150,Lease Data Sync,Linux,Verify lease data integrity after agent server restart,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC151,Lease Data Sync,Linux,Verify lease data integrity after console server restart,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC152,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for MAC address spoofing — same MAC requesting multiple IPs rapidly,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC153,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for IP address conflict — duplicate IP assignment,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC154,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for rogue DHCP server on the network,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC155,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for DHCP starvation attack — excessive DISCOVER requests,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC156,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for lease exhaustion — scope utilization at 100%,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC157,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for rapid lease churn — frequent create and delete cycles,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC158,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for unauthorized client — unknown MAC requesting lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC159,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for abnormal lease duration — extremely short or long expiry,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC160,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for DHCP relay agent anomaly — invalid relay information,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC161,DHCP Anomaly v4,Linux,Detect DHCPv4 anomaly for scope mismatch — client getting address from wrong scope,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC162,DHCP Anomaly v4,Linux,Verify DHCPv4 anomaly alert is displayed in console UI,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC163,DHCP Anomaly v4,Linux,Verify DHCPv4 anomaly details include source client information,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC164,DHCP Anomaly v4,Linux,Verify DHCPv4 anomaly severity level is categorized correctly,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC165,DHCP Anomaly v4,Linux,Verify no false positive DHCPv4 anomaly during normal lease operations,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC166,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for DUID spoofing — same DUID requesting multiple addresses rapidly,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC167,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for IPv6 address conflict — duplicate IPv6 assignment,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC168,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for rogue DHCPv6 server on the network,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC169,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for DHCPv6 starvation attack — excessive SOLICIT requests,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC170,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for prefix exhaustion — prefix utilization at 100%,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC171,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for rapid lease churn — frequent create and delete cycles for v6,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC172,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for unauthorized client — unknown DUID requesting lease,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC173,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for abnormal lease duration — extremely short or long v6 expiry,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC174,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for relay agent anomaly — invalid relay information for v6,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC175,DHCP Anomaly v6,Linux,Detect DHCPv6 anomaly for prefix mismatch — client getting address from wrong prefix,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC176,DHCP Anomaly v6,Linux,Verify DHCPv6 anomaly alert is displayed in console UI,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC177,DHCP Anomaly v6,Linux,Verify DHCPv6 anomaly details include source client information,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC178,DHCP Anomaly v6,Linux,Verify DHCPv6 anomaly severity level is categorized correctly,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC179,DHCP Anomaly v6,Linux,Verify no false positive DHCPv6 anomaly during normal v6 lease operations,✅ PASS,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC180,DHCP Anomaly General,Linux,Verify anomaly detection works when both v4 and v6 anomalies occur simultaneously,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC181,DHCP Anomaly General,Linux,Verify anomaly history and audit trail for all detected anomalies,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC182,DHCP Anomaly General,Linux,Verify anomaly notification and email alert configuration,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC183,DHCP Anomaly General,Linux,Verify anomaly auto-resolution for transient issues,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC184,DHCP Anomaly General,Linux,Verify anomaly dashboard shows summary of all v4 and v6 anomalies,✅ PASS,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC185,DUID Lease v6,Linux,Create DHCPv6 lease with DUID-LLT (Type 1) and verify active state,Lease created with Type 1 DUID and correct binding state,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC186,DUID Lease v6,Linux,Verify DUID type 1 (LLT) is correctly stored in lease file,DUID type identified as Type 1 (LLT),Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC187,DUID Lease v6,Linux,Extract MAC address from DUID-LLT (Type 1) lease,MAC extracted matches original MAC used in DUID,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC188,DUID Lease v6,Linux,Create second DUID-LLT lease with different MAC address,Second LLT lease created with unique DUID,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC189,DUID Lease v6,Linux,Create DHCPv6 lease with DUID-LL (Type 3) and verify active state,Lease created with Type 3 DUID and correct binding state,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC190,DUID Lease v6,Linux,Verify DUID type 3 (LL) is correctly stored in lease file,DUID type identified as Type 3 (LL),Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC191,DUID Lease v6,Linux,Extract MAC address from DUID-LL (Type 3) lease,MAC extracted matches original MAC used in DUID,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC192,DUID Lease v6,Linux,Create second DUID-LL lease with different MAC address,Second LL lease created with unique DUID,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC193,DUID Lease v6,Linux,Read all DUID-based leases and verify count for Type 1 + Type 3,All DUID leases exist in lease file,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC194,DUID Lease v6,Linux,Verify DUID-LLT is 14 bytes and DUID-LL is 10 bytes,DUID sizes match specification,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC195,DUID Lease v6,Linux,Update expiry time on DUID-LLT (Type 1) lease,Expiry updated successfully on LLT lease,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC196,DUID Lease v6,Linux,Update preferred-life and max-life on DUID-LL (Type 3) lease,Lifetimes updated successfully on LL lease,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC197,DUID Lease v6,Linux,Update MAC on DUID-LLT lease by delete and recreate with new DUID,New DUID-LLT lease created with updated MAC,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC198,DUID Lease v6,Linux,Update MAC on DUID-LL lease by delete and recreate with new DUID,New DUID-LL lease created with updated MAC,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC199,DUID Lease v6,Linux,Change DUID type from LLT (Type 1) to LL (Type 3) for same IP,Lease updated from Type 1 to Type 3 successfully,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC200,DUID Lease v6,Linux,Delete a DHCPv6 lease with DUID-LLT (Type 1),LLT lease deleted and no longer exists,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC201,DUID Lease v6,Linux,Delete a DHCPv6 lease with DUID-LL (Type 3),LL lease deleted and no longer exists,Functional,Positive,Pass,Automation,✅ PASS
+04/13/2026,TC202,DUID Lease v6,Linux,Delete non-existent DUID lease returns False,delete_v6_lease returns False for missing lease,Functional,Negative,Pass,Automation,✅ PASS
+04/13/2026,TC203,DUID Lease v6,Linux,Invalid DUID type parameter raises ValueError,ValueError raised for unsupported DUID type,Functional,Negative,Pass,Automation,✅ PASS
+tion,✅ PASS
+04/13/2026,TC204,DUID Lease v6,Linux,Malformed MAC address in DUID builder raises error,ValueError or IndexError raised for invalid MAC,Functional,Negative,Pass,Automation,✅ PASS
+,,,,"Need to validate all lease types along with their corresponding lease status counts (abandoned, ",,,,,,
+,,,linux,Need to check dhcpdv6 type1 and type 3 duid based should check dhcpdv6 leases,,,,,,

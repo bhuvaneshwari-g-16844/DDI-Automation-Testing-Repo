@@ -1,0 +1,223 @@
+# The format of this file is documented in the dhcpd.leases(5) manual page.
+# This lease file was written by isc-dhcp-4.4.3-P1
+
+# authoring-byte-order entry is generated, DO NOT DELETE
+authoring-byte-order little-endian;
+
+server-duid "\000\001\000\0011kXkRT\000$Z\317";
+
+# [AUTOTEST] TC041 | 2026/04/10 06:57:58
+lease 3.3.227.41 {
+  starts 1 2026/04/10 06:57:58;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 06:57:58;
+  binding state active;
+  client-hostname "tc041-validated";
+  hardware ethernet 00:00:FE:00:29:01;
+}
+
+# [AUTOTEST] TC042 | 2026/04/10 06:57:59
+lease 3.3.227.42 {
+  starts 1 2026/04/10 06:57:59;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 06:57:59;
+  binding state active;
+  client-hostname "tc042-validated";
+  hardware ethernet 00:00:FE:00:2A:01;
+}
+
+# [AUTOTEST] TC043 | 2026/04/10 06:58:00
+lease 3.3.227.43 {
+  starts 1 2026/04/10 06:58:00;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 06:58:00;
+  binding state active;
+  client-hostname "tc043-validated";
+  hardware ethernet 00:00:FE:00:2B:01;
+}
+
+# [AUTOTEST] TC044 | 2026/04/10 06:58:00
+lease 3.3.227.44 {
+  starts 1 2026/04/10 06:58:00;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 06:58:00;
+  binding state active;
+  client-hostname "tc044-validated";
+  hardware ethernet 00:00:FE:00:2C:01;
+}
+
+# [AUTOTEST] TC045 | 2026/04/10 06:58:01
+lease 3.3.227.45 {
+  starts 1 2026/04/10 06:58:01;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 06:58:01;
+  binding state active;
+  client-hostname "tc045-validated";
+  hardware ethernet 00:00:FE:00:2D:01;
+}
+
+# [AUTOTEST] TC046 | 2026/04/10 06:58:01
+lease 3.3.228.229 {
+  starts 1 2026/04/10 06:58:01;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 06:58:01;
+  binding state active;
+  hardware ethernet 00:00:46:00:00:01;
+}
+
+# [AUTOTEST] TC046 | 2026/04/10 06:58:01
+lease 3.3.227.46 {
+  starts 1 2026/04/10 06:58:01;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 06:58:01;
+  binding state active;
+  client-hostname "tc046-validated";
+  hardware ethernet 00:00:FE:00:2E:01;
+}
+
+# [AUTOTEST] TC047 | 2026/04/10 06:58:01
+lease 3.3.227.47 {
+  starts 1 2026/04/10 06:58:01;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 06:58:01;
+  binding state active;
+  client-hostname "tc047-validated";
+  hardware ethernet 00:00:FE:00:2F:01;
+}
+
+# [AUTOTEST] TC048 | 2026/04/10 06:58:01
+lease 3.3.227.48 {
+  starts 1 2026/04/10 06:58:01;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 06:58:01;
+  binding state active;
+  client-hostname "tc048-validated";
+  hardware ethernet 00:00:FE:00:30:01;
+}
+
+lease 3.3.228.151 {
+  starts 1 2026/04/08 00:00:00;
+  ends 1 2027/04/08 00:00:00;
+  tstp 1 2027/04/08 00:00:00;
+  cltt 1 2026/04/08 00:00:00;
+  binding state active;
+  client-hostname "persistent-v4-1";
+  hardware ethernet 00:00:23:aa:bb:01;
+}
+
+lease 3.3.228.152 {
+  starts 1 2026/04/08 00:00:00;
+  ends 1 2027/04/08 00:00:00;
+  tstp 1 2027/04/08 00:00:00;
+  cltt 1 2026/04/08 00:00:00;
+  binding state active;
+  client-hostname "persistent-v4-2";
+  hardware ethernet 00:00:23:aa:bb:02;
+}
+
+# [AUTOTEST] TC041 | 2026/04/10 07:04:19
+lease 3.3.227.41 {
+  starts 1 2026/04/10 07:04:19;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 07:04:19;
+  binding state active;
+  client-hostname "tc041-validated";
+  hardware ethernet 00:00:FE:00:29:01;
+}
+
+# [AUTOTEST] TC042 | 2026/04/10 07:04:19
+lease 3.3.227.42 {
+  starts 1 2026/04/10 07:04:19;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 07:04:19;
+  binding state active;
+  client-hostname "tc042-validated";
+  hardware ethernet 00:00:FE:00:2A:01;
+}
+
+# [AUTOTEST] TC043 | 2026/04/10 07:04:20
+lease 3.3.227.43 {
+  starts 1 2026/04/10 07:04:20;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 07:04:20;
+  binding state active;
+  client-hostname "tc043-validated";
+  hardware ethernet 00:00:FE:00:2B:01;
+}
+
+# [AUTOTEST] TC044 | 2026/04/10 07:04:21
+lease 3.3.228.227 {
+  starts 1 2026/04/10 07:04:21;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 07:04:21;
+  binding state active;
+  hardware ethernet 00:00:44:00:00:02;
+}
+
+# [AUTOTEST] TC044 | 2026/04/10 07:04:21
+lease 3.3.227.44 {
+  starts 1 2026/04/10 07:04:21;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 07:04:21;
+  binding state active;
+  client-hostname "tc044-validated";
+  hardware ethernet 00:00:FE:00:2C:01;
+}
+
+# [AUTOTEST] TC045 | 2026/04/10 07:04:21
+lease 3.3.227.45 {
+  starts 1 2026/04/10 07:04:21;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 07:04:21;
+  binding state active;
+  client-hostname "tc045-validated";
+  hardware ethernet 00:00:FE:00:2D:01;
+}
+
+# [AUTOTEST] TC046 | 2026/04/10 07:04:22
+lease 3.3.227.46 {
+  starts 1 2026/04/10 07:04:22;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 07:04:22;
+  binding state active;
+  client-hostname "tc046-validated";
+  hardware ethernet 00:00:FE:00:2E:01;
+}
+
+# [AUTOTEST] TC047 | 2026/04/10 07:04:22
+lease 3.3.227.47 {
+  starts 1 2026/04/10 07:04:22;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 07:04:22;
+  binding state active;
+  client-hostname "tc047-validated";
+  hardware ethernet 00:00:FE:00:2F:01;
+}
+
+# [AUTOTEST] TC048 | 2026/04/10 07:04:22
+lease 3.3.227.48 {
+  starts 1 2026/04/10 07:04:22;
+  ends 1 2027/04/07 00:00:00;
+  tstp 1 2027/04/07 00:00:00;
+  cltt 1 2026/04/10 07:04:22;
+  binding state active;
+  client-hostname "tc048-validated";
+  hardware ethernet 00:00:FE:00:30:01;
+}

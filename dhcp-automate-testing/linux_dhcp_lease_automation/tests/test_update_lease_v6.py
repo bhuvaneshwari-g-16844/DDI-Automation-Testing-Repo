@@ -53,7 +53,7 @@ class TestUpdateLeaseV6:
     def test_tc033_update_v6_address(self, lease_mgr, v6_data):
         """TC033: Update v6 lease address to new valid address in prefix."""
         old_ip = v6_data["test_lease"]["ip"]
-        new_ip = "1000::aaaa:bbbb:cccc:dddd"
+        new_ip = "2000::aaaa:bbbb:cccc:dddd"
         duid = v6_data["test_lease"]["duid"]
 
         lease_mgr.delete_v6_lease(old_ip)
@@ -90,7 +90,6 @@ class TestUpdateLeaseV6:
         addr = ipaddress.IPv6Address(out_ip)
         assert addr not in prefix, "IP should be outside prefix"
 
-        lease_mgr.delete_v6_lease(out_ip)
 
     # TC035: Update DHCPv6 lease DUID
     def test_tc035_update_v6_duid(self, lease_mgr, v6_data):

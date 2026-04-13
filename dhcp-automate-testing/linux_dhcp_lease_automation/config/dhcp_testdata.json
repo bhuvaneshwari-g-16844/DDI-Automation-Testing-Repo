@@ -21,11 +21,11 @@
     "status_v6_cmd": "systemctl status dhcpd6"
   },
   "v4_test_data": {
-    "scope_id": "2.2.228.0/24",
-    "scope_range_start": "2.2.228.100",
-    "scope_range_end": "2.2.228.200",
+    "scope_id": "3.3.228.0/24",
+    "scope_range_start": "3.3.228.100",
+    "scope_range_end": "3.3.228.200",
     "test_lease": {
-      "ip": "2.2.228.150",
+      "ip": "3.3.228.150",
       "mac": "00:00:23:df:5e:f1",
       "hostname": "test-client-v4",
       "starts": "2026/04/07 10:00:00",
@@ -33,7 +33,7 @@
       "binding_state": "active"
     },
     "update_lease": {
-      "ip": "2.2.228.150",
+      "ip": "3.3.228.150",
       "mac": "00:00:23:df:5e:f1",
       "hostname": "updated-client-v4",
       "starts": "2026/04/07 10:00:00",
@@ -41,11 +41,11 @@
       "binding_state": "active"
     },
     "batch_leases": [
-      {"ip": "2.2.228.101", "mac": "00:11:22:33:44:01"},
-      {"ip": "2.2.228.102", "mac": "00:11:22:33:44:02"},
-      {"ip": "2.2.228.103", "mac": "00:11:22:33:44:03"},
-      {"ip": "2.2.228.104", "mac": "00:11:22:33:44:04"},
-      {"ip": "2.2.228.105", "mac": "00:11:22:33:44:05"}
+      {"ip": "3.3.228.101", "mac": "00:11:22:33:44:01"},
+      {"ip": "3.3.228.102", "mac": "00:11:22:33:44:02"},
+      {"ip": "3.3.228.103", "mac": "00:11:22:33:44:03"},
+      {"ip": "3.3.228.104", "mac": "00:11:22:33:44:04"},
+      {"ip": "3.3.228.105", "mac": "00:11:22:33:44:05"}
     ],
     "invalid_ips": [
       "999.999.999.999",
@@ -64,9 +64,9 @@
     ]
   },
   "v6_test_data": {
-    "prefix": "1000::/64",
+    "prefix": "2000::/64",
     "test_lease": {
-      "ip": "1000::9465:cf2d:ef86:df42",
+      "ip": "2000::9465:cf2d:ef86:df42",
       "duid": "\\001\\000\\000\\000\\000\\003\\000\\0018\\370\\366j\\313@",
       "iaid": "\\001\\000\\000\\000",
       "hostname": "test-client-v6",
@@ -76,7 +76,7 @@
       "binding_state": "active"
     },
     "update_lease": {
-      "ip": "1000::9465:cf2d:ef86:df42",
+      "ip": "2000::9465:cf2d:ef86:df42",
       "duid": "\\001\\000\\000\\000\\000\\003\\000\\0018\\370\\366j\\313@",
       "iaid": "\\001\\000\\000\\000",
       "hostname": "updated-client-v6",
@@ -86,15 +86,15 @@
       "binding_state": "active"
     },
     "batch_leases": [
-      {"ip": "1000::1001", "duid": "\\001\\000\\000\\001"},
-      {"ip": "1000::1002", "duid": "\\001\\000\\000\\002"},
-      {"ip": "1000::1003", "duid": "\\001\\000\\000\\003"},
-      {"ip": "1000::1004", "duid": "\\001\\000\\000\\004"},
-      {"ip": "1000::1005", "duid": "\\001\\000\\000\\005"}
+      {"ip": "2000::1001", "duid": "\\001\\000\\000\\001"},
+      {"ip": "2000::1002", "duid": "\\001\\000\\000\\002"},
+      {"ip": "2000::1003", "duid": "\\001\\000\\000\\003"},
+      {"ip": "2000::1004", "duid": "\\001\\000\\000\\004"},
+      {"ip": "2000::1005", "duid": "\\001\\000\\000\\005"}
     ],
     "invalid_ipv6": [
       "gggg::1",
-      "1000::::::1",
+      "2000::::::1",
       "not-an-ipv6",
       "",
       "12345::1"
@@ -104,6 +104,120 @@
       "",
       "not-a-duid",
       "ZZ:ZZ:ZZ"
+    ]
+  },
+  "mac_test_data": {
+    "valid_vendor_macs": [
+      "00:1A:2B:3C:4D:5E",
+      "AC:DE:48:00:11:22",
+      "F0:DE:F1:23:45:67",
+      "00:50:56:AA:BB:CC",
+      "00:0C:29:11:22:33"
+    ],
+    "update_mac": "AA:BB:CC:DD:EE:01",
+    "duplicate_mac": "00:00:23:df:5e:f1",
+    "invalid_macs": [
+      "ZZ:ZZ:ZZ:ZZ:ZZ:ZZ",
+      "00:11:22",
+      "not-a-mac",
+      "",
+      "00:11:22:33:44:55:66:77"
+    ]
+  },
+  "time_test_data": {
+    "valid_future_start": "2026/06/01 08:00:00",
+    "valid_future_end": "2027/06/01 08:00:00",
+    "past_start": "2020/01/01 00:00:00",
+    "past_end": "2020/06/01 00:00:00",
+    "end_before_start_start": "2027/06/01 00:00:00",
+    "end_before_start_end": "2026/01/01 00:00:00"
+  },
+  "hardware_test_data": {
+    "default_type": "ethernet",
+    "valid_types": ["ethernet", "token-ring", "fddi"],
+    "invalid_type": "quantum-link",
+    "test_mac": "00:00:94:00:00:01"
+  },
+  "ddns_test_data": {
+    "dns_server": "127.0.0.1",
+    "forward_zone": "example.com",
+    "reverse_zone_v4": "228.3.3.in-addr.arpa",
+    "reverse_zone_v6": "0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1.ip6.arpa",
+    "test_hostname_v4": "ddns-test-v4.example.com",
+    "test_hostname_v6": "ddns-test-v6.example.com",
+    "test_ip_v4": "3.3.228.160",
+    "test_ip_v6": "2000::ddns:1",
+    "test_mac": "00:00:DD:00:00:01",
+    "test_duid": "\\001\\000\\000\\000\\000\\003\\000\\001DD\\000\\001"
+  },
+  "anomaly_test_data": {
+    "starvation_count": 20,
+    "rapid_churn_count": 10,
+    "spoof_mac": "DE:AD:BE:EF:00:01",
+    "rogue_check_cmd": "tcpdump -c 5 -i any port 67 or port 68 2>/dev/null || true",
+    "rogue_check_v6_cmd": "tcpdump -c 5 -i any port 546 or port 547 2>/dev/null || true"
+  },
+  "duid_test_data": {
+    "prefix": "2607:f8d8::/48",
+    "fixed_prefix": "2607:f8d8:0:1::/64",
+    "llt_leases": [
+      {
+        "ip": "2607:f8d8:0:1::10",
+        "mac": "38:f8:f6:6a:cb:40",
+        "duid_type": "LLT",
+        "preferred_life": 3600,
+        "max_life": 7200,
+        "ends": "2027/03/11 13:06:16",
+        "binding_state": "active"
+      },
+      {
+        "ip": "2607:f8d8:0:1::11",
+        "mac": "9c:93:4e:db:89:38",
+        "duid_type": "LLT",
+        "preferred_life": 3600,
+        "max_life": 7200,
+        "ends": "2027/03/11 13:06:16",
+        "binding_state": "active"
+      },
+      {
+        "ip": "2607:f8d8:0:1::14",
+        "mac": "ac:de:48:00:11:22",
+        "duid_type": "LLT",
+        "preferred_life": 3600,
+        "max_life": 7200,
+        "ends": "2028/06/15 00:00:00",
+        "binding_state": "active"
+      }
+    ],
+    "ll_leases": [
+      {
+        "ip": "2607:f8d8:0:1::12",
+        "mac": "00:1a:2b:3c:4d:5e",
+        "duid_type": "LL",
+        "preferred_life": 3600,
+        "max_life": 7200,
+        "ends": "2027/03/12 13:06:16",
+        "binding_state": "active"
+      },
+      {
+        "ip": "2607:f8d8:0:1::13",
+        "mac": "44:55:66:77:88:99",
+        "duid_type": "LL",
+        "preferred_life": 7200,
+        "max_life": 14400,
+        "ends": "2028/04/10 10:00:00",
+        "binding_state": "active"
+      }
+    ],
+    "update_mac": "AA:BB:CC:DD:EE:FF",
+    "update_ends": "2029/06/30 23:59:59",
+    "update_preferred_life": 1800,
+    "update_max_life": 3600,
+    "invalid_macs": [
+      "ZZ:ZZ:ZZ:ZZ:ZZ:ZZ",
+      "00:11:22",
+      "not-a-mac",
+      ""
     ]
   }
 }

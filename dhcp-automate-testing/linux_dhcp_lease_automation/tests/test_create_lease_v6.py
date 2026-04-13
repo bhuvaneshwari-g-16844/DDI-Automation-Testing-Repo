@@ -46,7 +46,7 @@ class TestCreateLeaseV6:
     @pytest.mark.order(2)
     def test_tc012_create_v6_with_hostname(self, lease_mgr, v6_data):
         """TC012: Create DHCPv6 lease with hostname and expiry time."""
-        ip = "1000::a001"
+        ip = "2000::a001"
         duid = "\\001\\000\\000\\000\\000\\003\\000\\002"
 
         if lease_mgr.v6_lease_exists(ip):
@@ -88,7 +88,7 @@ class TestCreateLeaseV6:
     @pytest.mark.order(4)
     @pytest.mark.parametrize("invalid_ip", [
         "gggg::1",
-        "1000::::::1",
+        "2000::::::1",
         "not-an-ipv6",
         "12345::1",
     ])
@@ -121,7 +121,6 @@ class TestCreateLeaseV6:
         addr = ipaddress.IPv6Address(out_ip)
         assert addr not in prefix, "IP should be outside prefix"
 
-        lease_mgr.delete_v6_lease(out_ip)
 
     # TC016: Create DHCPv6 lease without mandatory fields
     @pytest.mark.order(6)
@@ -131,7 +130,7 @@ class TestCreateLeaseV6:
             DHCPLeaseManager.build_v6_lease(ip=None, duid="\\001\\000")
 
         with pytest.raises((TypeError, ValueError)):
-            DHCPLeaseManager.build_v6_lease(ip="1000::1", duid=None)
+            DHCPLeaseManager.build_v6_lease(ip="2000::1", duid=None)
 
     # TC017: Create DHCPv6 lease with invalid DUID format
     @pytest.mark.order(7)
@@ -180,9 +179,9 @@ class TestCreateLeaseV6:
     def test_tc019_create_v6_duid_types(self, lease_mgr, duid_name, duid_val):
         """TC019: Create lease with various DUID types."""
         ip_map = {
-            "DUID-LLT": "1000::d001",
-            "DUID-EN":  "1000::d002",
-            "DUID-LL":  "1000::d003",
+            "DUID-LLT": "2000::d001",
+            "DUID-EN":  "2000::d002",
+            "DUID-LL":  "2000::d003",
         }
         ip = ip_map[duid_name]
 
@@ -194,13 +193,12 @@ class TestCreateLeaseV6:
         assert lease_mgr.v6_lease_exists(ip), \
             "v6 lease with {} not created".format(duid_name)
 
-        lease_mgr.delete_v6_lease(ip)
 
     # TC020: Create DHCPv6 lease and verify readback
     @pytest.mark.order(10)
     def test_tc020_create_v6_verify_readback(self, lease_mgr, v6_data):
         """TC020: Create v6 lease and verify it appears in lease file."""
-        ip = "1000::f001"
+        ip = "2000::f001"
         duid = "\\001\\000\\000\\020"
 
         if lease_mgr.v6_lease_exists(ip):

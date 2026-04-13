@@ -57,7 +57,7 @@ class TestUpdateLeaseV4:
     def test_tc023_update_v4_ip(self, lease_mgr, v4_data):
         """TC023: Update lease IP by deleting old and creating new."""
         old_ip = v4_data["test_lease"]["ip"]
-        new_ip = "2.2.228.170"
+        new_ip = "3.3.228.170"
         mac = v4_data["test_lease"]["mac"]
 
         # Delete old
@@ -93,13 +93,12 @@ class TestUpdateLeaseV4:
         assert lease_mgr.v4_lease_exists(out_ip), \
             "Out-of-scope IP lease should exist in file"
 
-        lease_mgr.delete_v4_lease(out_ip)
 
     # TC025: Update DHCPv4 lease IP to one already assigned
     def test_tc025_update_v4_ip_conflict(self, lease_mgr, v4_data):
         """TC025: Update to IP already used – both entries exist."""
         td = v4_data["test_lease"]
-        conflict_ip = "2.2.228.101"
+        conflict_ip = "3.3.228.101"
 
         # Ensure conflict IP has a lease
         if not lease_mgr.v4_lease_exists(conflict_ip):
@@ -127,7 +126,6 @@ class TestUpdateLeaseV4:
         lease_mgr.create_v4_lease(ip=new_scope_ip, mac=mac)
         assert lease_mgr.v4_lease_exists(new_scope_ip), "New scope lease not created"
 
-        lease_mgr.delete_v4_lease(new_scope_ip)
 
     # TC027: Update DHCPv4 lease with empty mandatory fields
     def test_tc027_update_v4_empty_fields(self, lease_mgr, v4_data):

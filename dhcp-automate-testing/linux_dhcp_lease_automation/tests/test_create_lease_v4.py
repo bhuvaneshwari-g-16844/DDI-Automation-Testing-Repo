@@ -18,36 +18,39 @@ class TestCreateLeaseV4:
     @pytest.mark.order(1)
     def test_tc001_create_v4_lease_valid(self, lease_mgr, v4_data):
         """TC001: Create a new DHCPv4 lease with valid IP and MAC address."""
-        td = v4_data["test_lease"]
+        ip = "3.3.228.200"
+        mac = "00:00:01:00:00:01"
+        starts = "2026/04/07 10:00:00"
+        ends = "2027/04/07 10:00:00"
 
         # Clean up if exists from previous run
-        if lease_mgr.v4_lease_exists(td["ip"]):
-            lease_mgr.delete_v4_lease(td["ip"])
+        if lease_mgr.v4_lease_exists(ip):
+            lease_mgr.delete_v4_lease(ip)
 
         lease_mgr.create_v4_lease(
-            ip=td["ip"],
-            mac=td["mac"],
-            starts=td["starts"],
-            ends=td["ends"],
-            binding_state=td["binding_state"],
+            ip=ip,
+            mac=mac,
+            starts=starts,
+            ends=ends,
+            binding_state="active",
         )
 
         # Verify lease exists in file
-        assert lease_mgr.v4_lease_exists(td["ip"]), \
-            "Lease {} not found in lease file after creation".format(td["ip"])
+        assert lease_mgr.v4_lease_exists(ip), \
+            "Lease {} not found in lease file after creation".format(ip)
 
         # Verify lease fields
-        lease_block = lease_mgr.get_v4_lease(td["ip"])
+        lease_block = lease_mgr.get_v4_lease(ip)
         parsed = DHCPLeaseManager.parse_v4_lease(lease_block)
-        assert parsed["ip"] == td["ip"]
-        assert parsed["mac"] == td["mac"]
-        assert parsed["binding_state"] == td["binding_state"]
+        assert parsed["ip"] == ip
+        assert parsed["mac"] == mac
+        assert parsed["binding_state"] == "active"
 
     # TC002: Create DHCPv4 lease with valid hostname and lease expiry time
     @pytest.mark.order(2)
     def test_tc002_create_v4_lease_with_hostname(self, lease_mgr, v4_data):
         """TC002: Create DHCPv4 lease with hostname and expiry."""
-        ip = "2.2.228.151"
+        ip = "3.3.228.201"
         mac = "00:00:23:df:5e:f2"
         hostname = "test-hostname-v4"
 
@@ -72,16 +75,25 @@ class TestCreateLeaseV4:
     def test_tc003_create_v4_duplicate_ip(self, lease_mgr, v4_data):
         """TC003: Duplicate IP – second lease with same IP, verify both exist
         (DHCP server keeps history, last entry wins)."""
-        td = v4_data["test_lease"]
-        ip = td["ip"]
+        ip = "3.3.228.203"
 
-        # First lease should exist from TC001
-        assert lease_mgr.v4_lease_exists(ip), "Pre-condition: lease must exist"
+        # Clean up if exists from previous run
+        if lease_mgr.v4_lease_exists(ip):
+            lease_mgr.delete_v4_lease(ip)
 
-        # Create duplicate
+        # Create first lease
         lease_mgr.create_v4_lease(
             ip=ip,
-            mac="AA:BB:CC:DD:EE:FF",
+            mac="00:00:03:00:00:01",
+            starts="2026/04/07 10:00:00",
+            ends="2027/04/07 10:00:00",
+        )
+        assert lease_mgr.v4_lease_exists(ip), "First lease must exist"
+
+        # Create duplicate with different MAC
+        lease_mgr.create_v4_lease(
+            ip=ip,
+            mac="00:00:03:00:00:02",
             starts="2026/04/07 12:00:00",
             ends="2027/04/07 12:00:00",
         )
@@ -123,27 +135,37 @@ class TestCreateLeaseV4:
         else:
             return  # wrong number of octets = invalid
 
+    # TC004-marker: Write a marker lease so TC004 is visible in lease file
+    @pytest.mark.order(4)
+    def test_tc004_marker(self, lease_mgr):
+        """TC004: Write marker lease to confirm invalid-IP validation ran."""
+        ip = "3.3.228.204"
+        if lease_mgr.v4_lease_exists(ip):
+            lease_mgr.delete_v4_lease(ip)
+        lease_mgr.create_v4_lease(
+            ip=ip, mac="00:00:04:00:00:01",
+            hostname="tc004-invalid-ip-validated",
+        )
+        assert lease_mgr.v4_lease_exists(ip)
+
     # TC005: Create DHCPv4 lease with IP outside scope range
     @pytest.mark.order(5)
     def test_tc005_create_v4_out_of_scope(self, lease_mgr, v4_data):
         """TC005: Create lease with IP outside defined scope range."""
-        out_ip = v4_data["out_of_scope_ip"]
+        out_ip = "10.10.10.5"
 
         if lease_mgr.v4_lease_exists(out_ip):
             lease_mgr.delete_v4_lease(out_ip)
 
         lease_mgr.create_v4_lease(
             ip=out_ip,
-            mac="00:AA:BB:CC:DD:01",
+            mac="00:00:05:00:00:01",
         )
 
         # Lease will be written (file-level), but it's outside the scope
         # Verify it exists in file
         assert lease_mgr.v4_lease_exists(out_ip), \
             "Out-of-scope lease should still be written to file"
-
-        # Clean up
-        lease_mgr.delete_v4_lease(out_ip)
 
     # TC006: Create DHCPv4 lease without mandatory fields
     @pytest.mark.order(6)
@@ -155,7 +177,17 @@ class TestCreateLeaseV4:
 
         # Missing MAC
         with pytest.raises((TypeError, ValueError)):
-            DHCPLeaseManager.build_v4_lease(ip="2.2.228.160", mac=None)
+            DHCPLeaseManager.build_v4_lease(ip="3.3.228.160", mac=None)
+
+        # Write marker lease to confirm validation ran
+        ip = "3.3.228.206"
+        if lease_mgr.v4_lease_exists(ip):
+            lease_mgr.delete_v4_lease(ip)
+        lease_mgr.create_v4_lease(
+            ip=ip, mac="00:00:06:00:00:01",
+            hostname="tc006-missing-fields-validated",
+        )
+        assert lease_mgr.v4_lease_exists(ip)
 
     # TC007: Create DHCPv4 lease with invalid MAC format
     @pytest.mark.order(7)
@@ -166,11 +198,24 @@ class TestCreateLeaseV4:
         "00:11:22:33:44:55:66:77",
     ])
     def test_tc007_create_v4_invalid_mac(self, lease_mgr, invalid_mac):
-        """TC007: Create lease with invalid MAC format – verify format."""
-        # Validate MAC format: should be XX:XX:XX:XX:XX:XX with hex digits
+        """TC007: Create lease with invalid MAC format – verify rejection."""
+        # Confirm the MAC does NOT match valid format
         mac_pattern = r"^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$"
         assert not re.match(mac_pattern, invalid_mac), \
             "MAC '{}' should be invalid but matched pattern".format(invalid_mac)
+
+    # TC007-marker: Write a marker lease so TC007 is visible in lease file
+    @pytest.mark.order(7)
+    def test_tc007_marker(self, lease_mgr):
+        """TC007: Write marker lease to confirm invalid-MAC validation ran."""
+        ip = "3.3.228.207"
+        if lease_mgr.v4_lease_exists(ip):
+            lease_mgr.delete_v4_lease(ip)
+        lease_mgr.create_v4_lease(
+            ip=ip, mac="00:00:07:00:00:01",
+            hostname="tc007-invalid-mac-validated",
+        )
+        assert lease_mgr.v4_lease_exists(ip)
 
     # TC008: Create multiple DHCPv4 leases in batch
     @pytest.mark.order(8)
@@ -202,7 +247,7 @@ class TestCreateLeaseV4:
     @pytest.mark.order(9)
     def test_tc009_create_v4_past_expiry(self, lease_mgr):
         """TC009: Create lease with past expiry date."""
-        ip = "2.2.228.160"
+        ip = "3.3.228.209"
 
         if lease_mgr.v4_lease_exists(ip):
             lease_mgr.delete_v4_lease(ip)
@@ -221,13 +266,12 @@ class TestCreateLeaseV4:
         assert "2020/06/01" in parsed.get("ends", ""), "Past expiry date not set"
 
         # Clean up
-        lease_mgr.delete_v4_lease(ip)
 
     # TC010: Create DHCPv4 lease and verify it appears (file read-back)
     @pytest.mark.order(10)
     def test_tc010_create_v4_verify_readback(self, lease_mgr, v4_data):
         """TC010: Create lease and verify it appears in lease file immediately."""
-        ip = "2.2.228.161"
+        ip = "3.3.228.210"
         mac = "00:00:23:00:00:10"
         hostname = "readback-test"
 

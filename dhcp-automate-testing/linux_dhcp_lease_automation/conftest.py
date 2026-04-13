@@ -269,12 +269,28 @@ def lease_mgr(dhcp_testdata):
     # Store reference for the auto-marker hook
     global _session_lease_mgr
     _session_lease_mgr = mgr
+    # Store connection info for the terminal summary hook (runs after
+    # fixture teardown, so _session_lease_mgr will already be None)
+    global _session_mgr_config
+    _session_mgr_config = {
+        "host": server["host"],
+        "username": server["username"],
+        "password": server.get("password"),
+        "key_file": server.get("key_file"),
+        "port": server.get("port", 22),
+        "v4_lease_file": lease_files["v4"],
+        "v6_lease_file": lease_files["v6"],
+        "restart_cmd": svc["restart_cmd"],
+        "restart_v6_cmd": svc["restart_v6_cmd"],
+    }
     yield mgr
     mgr.close()
     _session_lease_mgr = None
 
 # Global reference to lease_mgr used by the auto-marker hook
 _session_lease_mgr = None
+# Connection config for terminal summary hook (survives fixture teardown)
+_session_mgr_config = None
 
 
 # ────────────────────────────────────────────────────────────────────── #
@@ -440,3 +456,246 @@ def tagged_mgr(lease_mgr, tc_tag):
     with the current test case number (e.g. ``# [AUTOTEST] TC042``)
     inside the lease config file."""
     return _TaggedLeaseManager(lease_mgr, tc_tag)
+
+
+# ────────────────────────────────────────────────────────────────────── #
+#  Delete-IP reference table – all IPs used by delete test cases
+# ────────────────────────────────────────────────────────────────────── #
+_DELETE_IPS_V4 = [
+    ("TC041", "3.3.228.220", "00:00:41:00:00:01", "Delete single lease", False),
+    ("TC042", "3.3.228.221", "00:00:42:00:00:01", "Delete batch (1/3)", False),
+    ("TC042", "3.3.228.222", "00:00:42:00:00:02", "Delete batch (2/3)", False),
+    ("TC042", "3.3.228.223", "00:00:42:00:00:03", "Delete batch (3/3)", False),
+    ("TC043", "3.3.228.224", "00:00:43:00:00:01", "Delete all scope (1/3)", False),
+    ("TC043", "3.3.228.225", "00:00:43:00:00:02", "Delete all scope (2/3)", False),
+    ("TC043", "3.3.228.226", "00:00:43:00:00:03", "Delete all scope (3/3)", False),
+    ("TC044", "3.3.228.227", "00:00:44:00:00:01", "Deleted+reused new MAC", True),
+    ("TC045", "3.3.228.228", "00:00:45:00:00:01", "Delete+count decreased", False),
+    ("TC046", "3.3.228.229", "00:00:46:00:00:01", "Cancel (NOT deleted)", True),
+    ("TC047", "3.3.228.196", "00:00:47:00:00:01", "Delete+verify removed", False),
+    ("TC048", "99.99.99.99", "N/A", "Non-existent", None),
+]
+
+_DELETE_IPS_V6 = [
+    ("TC049", "2000::e001", "Delete single v6 lease", False),
+    ("TC050", "2000::e010", "Delete batch (1/3)", False),
+    ("TC050", "2000::e011", "Delete batch (2/3)", False),
+    ("TC050", "2000::e012", "Delete batch (3/3)", False),
+    ("TC051", "2000::e020", "Delete all prefix (1/3)", False),
+    ("TC051", "2000::e021", "Delete all prefix (2/3)", False),
+    ("TC051", "2000::e022", "Delete all prefix (3/3)", False),
+    ("TC052", "2000::e030", "Deleted+reused new DUID", True),
+    ("TC053", "2000::e040", "Delete+count decreased", False),
+    ("TC054", "2000::e050", "Cancel (NOT deleted)", True),
+    ("TC055", "2000::e060", "Delete+verify removed", False),
+    ("TC056", "ffff::dead:beef", "Non-existent", None),
+]
+
+_DELETE_IPS_DUID = [
+    ("TC200", "2607:f8d8:0:1::14", "DUID-LLT (Type 1)", False),
+    ("TC201", "2607:f8d8:0:1::13", "DUID-LL  (Type 3)", False),
+    ("TC202", "2607:f8d8:0:1::ffff", "Non-existent", None),
+]
+
+
+# ────────────────────────────────────────────────────────────────────── #
+#  pytest_terminal_summary – print delete IP verification + write to
+#  both lease config files after the entire test session.
+# ────────────────────────────────────────────────────────────────────── #
+def pytest_terminal_summary(terminalreporter, exitstatus, config):
+    """After all tests, show which delete-test IPs still exist on the
+    DHCP server and write a reference block into both lease files."""
+    from helpers.dhcp_lease_manager import DHCPLeaseManager as _Mgr
+
+    cfg = _session_mgr_config
+    if cfg is None:
+        return
+
+    try:
+        mgr = _Mgr(
+            host=cfg["host"], username=cfg["username"],
+            password=cfg.get("password"), key_file=cfg.get("key_file"),
+            port=cfg.get("port", 22),
+            v4_lease_file=cfg["v4_lease_file"],
+            v6_lease_file=cfg["v6_lease_file"],
+            restart_cmd=cfg.get("restart_cmd", ""),
+            restart_v6_cmd=cfg.get("restart_v6_cmd", ""),
+        )
+        mgr.connect()
+    except Exception as exc:
+        terminalreporter.section("DELETE IP VERIFICATION REPORT")
+        terminalreporter.write_line(
+            "  [WARN] Could not connect to DHCP server: {}".format(exc))
+        return
+
+    ts = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    sep = "=" * 90
+    dash = "-" * 90
+
+    terminalreporter.section("DELETE IP VERIFICATION REPORT")
+    terminalreporter.write_line(sep)
+
+    # ── V4 ────────────────────────────────────────────────────────── #
+    terminalreporter.write_line(
+        "  DHCPv4 DELETE IPs  (TC041-TC048)  |  Scope: 3.3.228.0/24")
+    terminalreporter.write_line(dash)
+    terminalreporter.write_line(
+        "{:<7} {:<17} {:<20} {:<28} {:<8} {:<8}".format(
+            "TC", "IP", "MAC", "Operation", "Exists?", "Status"))
+    terminalreporter.write_line(dash)
+
+    v4_ref_lines = []
+    for tc, ip, mac, desc, should_exist in _DELETE_IPS_V4:
+        if should_exist is None:
+            exists = False
+            status_str = "N/A"
+            v4_ref_lines.append(
+                "# {}  {}  {}  {}  -> N/A".format(tc, ip, mac, desc))
+        else:
+            try:
+                exists = mgr.v4_lease_exists(ip)
+            except Exception:
+                exists = None
+            if exists is None:
+                status_str = "ERR"
+            elif should_exist and exists:
+                status_str = "\033[92mOK\033[0m"
+            elif not should_exist and not exists:
+                status_str = "\033[92mOK\033[0m"
+            else:
+                status_str = "\033[91mFAIL\033[0m"
+            expect_tag = "SHOULD EXIST" if should_exist else "SHOULD NOT EXIST"
+            exist_tag = "YES" if exists else "NO"
+            v4_ref_lines.append(
+                "# {}  {}  {}  {}  -> {} [{}]".format(
+                    tc, ip, mac, desc, expect_tag, exist_tag))
+        exist_disp = "YES" if exists else "NO"
+        terminalreporter.write_line(
+            "{:<7} {:<17} {:<20} {:<28} {:<8} {}".format(
+                tc, ip, mac, desc, exist_disp, status_str))
+
+    terminalreporter.write_line("")
+
+    # ── V6 ────────────────────────────────────────────────────────── #
+    terminalreporter.write_line(
+        "  DHCPv6 DELETE IPs  (TC049-TC056)  |  Prefix: 2000::/64")
+    terminalreporter.write_line(dash)
+    terminalreporter.write_line(
+        "{:<7} {:<22} {:<28} {:<8} {:<8}".format(
+            "TC", "IPv6", "Operation", "Exists?", "Status"))
+    terminalreporter.write_line(dash)
+
+    v6_ref_lines = []
+    for tc, ip, desc, should_exist in _DELETE_IPS_V6:
+        if should_exist is None:
+            exists = False
+            status_str = "N/A"
+            v6_ref_lines.append(
+                "# {}  {}  {}  -> N/A".format(tc, ip, desc))
+        else:
+            try:
+                exists = mgr.v6_lease_exists(ip)
+            except Exception:
+                exists = None
+            if exists is None:
+                status_str = "ERR"
+            elif should_exist and exists:
+                status_str = "\033[92mOK\033[0m"
+            elif not should_exist and not exists:
+                status_str = "\033[92mOK\033[0m"
+            else:
+                status_str = "\033[91mFAIL\033[0m"
+            expect_tag = "SHOULD EXIST" if should_exist else "SHOULD NOT EXIST"
+            exist_tag = "YES" if exists else "NO"
+            v6_ref_lines.append(
+                "# {}  {}  {}  -> {} [{}]".format(
+                    tc, ip, desc, expect_tag, exist_tag))
+        exist_disp = "YES" if exists else "NO"
+        terminalreporter.write_line(
+            "{:<7} {:<22} {:<28} {:<8} {}".format(
+                tc, ip, desc, exist_disp, status_str))
+
+    terminalreporter.write_line("")
+
+    # ── DUID ──────────────────────────────────────────────────────── #
+    terminalreporter.write_line(
+        "  DUID DELETE IPs (TC200-TC202)  |  Prefix: 2607:f8d8:0:1::/64")
+    terminalreporter.write_line(dash)
+    terminalreporter.write_line(
+        "{:<7} {:<26} {:<22} {:<8} {:<8}".format(
+            "TC", "IPv6", "DUID Type", "Exists?", "Status"))
+    terminalreporter.write_line(dash)
+
+    duid_ref_lines = []
+    for tc, ip, desc, should_exist in _DELETE_IPS_DUID:
+        if should_exist is None:
+            exists = False
+            status_str = "N/A"
+            duid_ref_lines.append(
+                "# {}  {}  {}  -> N/A".format(tc, ip, desc))
+        else:
+            try:
+                exists = mgr.v6_lease_exists(ip)
+            except Exception:
+                exists = None
+            if exists is None:
+                status_str = "ERR"
+            elif should_exist and exists:
+                status_str = "\033[92mOK\033[0m"
+            elif not should_exist and not exists:
+                status_str = "\033[92mOK\033[0m"
+            else:
+                status_str = "\033[91mFAIL\033[0m"
+            expect_tag = "SHOULD EXIST" if should_exist else "SHOULD NOT EXIST"
+            exist_tag = "YES" if exists else "NO"
+            duid_ref_lines.append(
+                "# {}  {}  {}  -> {} [{}]".format(
+                    tc, ip, desc, expect_tag, exist_tag))
+        exist_disp = "YES" if exists else "NO"
+        terminalreporter.write_line(
+            "{:<7} {:<26} {:<22} {:<8} {}".format(
+                tc, ip, desc, exist_disp, status_str))
+
+    terminalreporter.write_line(sep)
+    terminalreporter.write_line(
+        "  OK = delete verified  |  FAIL = lease state mismatch  |  "
+        "Timestamp: {}".format(ts))
+    terminalreporter.write_line(sep)
+
+    # ── Write reference blocks into lease config files ────────────── #
+    try:
+        v4_block = "\n".join([
+            "",
+            "# " + "=" * 68,
+            "# DELETE TEST IP REFERENCE  —  {}".format(ts),
+            "# OK=verified  |  FAIL=mismatch  |  Auto-generated by pytest",
+            "# " + "=" * 68,
+        ] + v4_ref_lines + [
+            "# " + "=" * 68,
+            "",
+        ])
+        mgr._append_file(mgr.v4_lease_file, v4_block)
+
+        v6_block = "\n".join([
+            "",
+            "# " + "=" * 68,
+            "# DELETE TEST IP REFERENCE  —  {}".format(ts),
+            "# OK=verified  |  FAIL=mismatch  |  Auto-generated by pytest",
+            "# " + "=" * 68,
+        ] + v6_ref_lines + [
+            "# " + "-" * 68,
+            "# DUID DELETE TESTS  (Prefix: 2607:f8d8:0:1::/64)",
+            "# " + "-" * 68,
+        ] + duid_ref_lines + [
+            "# " + "=" * 68,
+            "",
+        ])
+        mgr._append_file(mgr.v6_lease_file, v6_block)
+
+        terminalreporter.write_line(
+            "  [Written] Delete IP reference appended to v4 + v6 lease files")
+    except Exception as exc:
+        terminalreporter.write_line(
+            "  [WARN] Could not write reference to lease files: {}".format(exc))
+
+    mgr.close()

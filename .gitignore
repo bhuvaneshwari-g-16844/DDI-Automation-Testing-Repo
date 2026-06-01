@@ -8,3 +8,5 @@ videos/
 dist/
 build/
 .env
+.playwright-mcp/
+*.png

@@ -1,0 +1,191 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e1998]:
+    - list [ref=e2000] [cursor=pointer]:
+      - img "DDI Central" [ref=e2002]
+      - listitem [ref=e2003]:
+        - link "Dashboard" [ref=e2004]:
+          - /url: "#/dashboard"
+          - generic [ref=e2007]: Dashboard
+      - listitem [ref=e2008]:
+        - link "DNS" [ref=e2009]:
+          - /url: "#/dns"
+          - generic [ref=e2012]: DNS
+      - listitem [ref=e2013]:
+        - link "DHCP" [ref=e2014]:
+          - /url: "#/dhcp"
+          - generic [ref=e2017]: DHCP
+      - listitem [ref=e2018]:
+        - link "IPAM" [ref=e2019]:
+          - /url: "#/ipam"
+          - generic [ref=e2022]: IPAM
+      - listitem [ref=e2023]:
+        - link "Threat Intel" [ref=e2024]:
+          - /url: "#/threat_intl"
+          - generic "Threat Intel" [ref=e2027]
+      - listitem [ref=e2028]:
+        - link "Anomaly Detection" [ref=e2029]:
+          - /url: "#/anomaly_detection"
+          - generic "Anomaly Detection" [ref=e2032]
+      - listitem [ref=e2033]:
+        - link " Alerts" [ref=e2034]:
+          - /url: "#/alerts"
+          - generic [ref=e2036]: 
+          - generic [ref=e2037]: Alerts
+      - listitem [ref=e2038]:
+        - link "Integrations" [ref=e2039]:
+          - /url: "#/integrations"
+          - generic [ref=e2042]: Integrations
+      - listitem [ref=e2043]:
+        - link "Settings" [ref=e2044]:
+          - /url: "#/settings"
+          - generic [ref=e2047]: Settings
+      - listitem [ref=e2563]:
+        - generic [ref=e2564]:
+          - generic [ref=e2566]: 
+          - generic [ref=e2567]: Hide Sidebar
+    - generic [ref=e2052]:
+      - generic [ref=e2054]:
+        - text: Trial ends in
+        - strong [ref=e2055]: "25"
+        - text: days
+      - generic "windows-agent-248" [ref=e2059] [cursor=pointer]
+      - img [ref=e2062] [cursor=pointer]
+      - generic [ref=e2068]:
+        - generic [ref=e2070] [cursor=pointer]: 
+        - generic [ref=e2071]:
+          - generic [ref=e2074]:
+            - generic [ref=e2076]: ddiadmin@manageengine.com
+            - generic [ref=e2077]:
+              - text: "Edition:"
+              - generic [ref=e2078]: Enterprise
+            - generic [ref=e2079]: "Role: Admin"
+            - generic [ref=e2080]: "Build number: 6.2.0"
+            - generic [ref=e2082]:
+              - text: Logout
+              - generic [ref=e2084]: 
+          - generic [ref=e2086]:
+            - heading "Client Credentials" [level=6] [ref=e2087]
+            - generic [ref=e2088]:
+              - generic [ref=e2089] [cursor=pointer]:
+                - generic [ref=e2090]: 
+                - text: View
+              - generic [ref=e2091] [cursor=pointer]:
+                - generic [ref=e2092]: 
+                - text: Reset
+              - generic [ref=e2093] [cursor=pointer]:
+                - generic [ref=e2094]: 
+                - text: Reset Password
+          - generic [ref=e2096]:
+            - heading "License" [level=6] [ref=e2097]
+            - generic [ref=e2098]:
+              - generic [ref=e2099] [cursor=pointer]:
+                - generic [ref=e2100]: 
+                - text: Upload
+              - generic [ref=e2101] [cursor=pointer]:
+                - generic [ref=e2102]: 
+                - text: View
+          - generic [ref=e2104]:
+            - heading "Need help?" [level=6] [ref=e2105]
+            - generic [ref=e2106]:
+              - generic [ref=e2107] [cursor=pointer]:
+                - generic [ref=e2108]: 
+                - text: Chat with us
+              - generic [ref=e2109] [cursor=pointer]:
+                - generic [ref=e2110]: 
+                - text: Submit Ticket
+              - generic [ref=e2111] [cursor=pointer]:
+                - generic [ref=e2112]: 
+                - text: User guide
+    - text:              *
+    - list [ref=e2526]:
+      - listitem [ref=e2527]:
+        - link "Domains" [ref=e2529] [cursor=pointer]:
+          - /url: "#/dns/domains"
+          - generic [ref=e2532]: Domains
+      - listitem [ref=e2533]:
+        - link "Audit" [ref=e2535] [cursor=pointer]:
+          - /url: "#/dns/audit"
+          - generic [ref=e2538]: Audit
+      - listitem [ref=e2539]:
+        - link " Analytics" [ref=e2541] [cursor=pointer]:
+          - /url: "#/dns/analytics"
+          - generic [ref=e2543]: 
+          - generic [ref=e2544]: Analytics
+      - listitem [ref=e2545]:
+        - link " Config" [ref=e2547] [cursor=pointer]:
+          - /url: "#/dns/configuration"
+          - generic [ref=e2549]: 
+          - generic [ref=e2550]: Config
+      - listitem [ref=e2551]:
+        - link "Scavenging" [ref=e2553] [cursor=pointer]:
+          - /url: "#/dns/scavenging"
+          - generic [ref=e2556]: Scavenging
+      - listitem [ref=e2557]:
+        - link " Schedule" [ref=e2559] [cursor=pointer]:
+          - /url: "#/dns/schedule"
+          - generic [ref=e2561]: 
+          - generic [ref=e2562]: Schedule
+    - generic [ref=e2113]:
+      - generic [ref=e5527]:
+        - heading "proofzone1.com. > Create CName" [level=2] [ref=e5528]:
+          - link "proofzone1.com." [ref=e5530] [cursor=pointer]:
+            - /url: "#/dns/domains/showdomain/55"
+          - text: ">"
+          - generic [ref=e5531] [cursor=pointer]: Create CName
+        - generic [ref=e5532] [cursor=pointer]: Page Tips?
+      - generic [ref=e5533]:
+        - generic [ref=e5534]:
+          - generic [ref=e5535] [cursor=pointer]: 
+          - heading "Page Tips?" [level=2] [ref=e5536]
+          - generic [ref=e5538] [cursor=pointer]: 
+        - list [ref=e5540]:
+          - listitem [ref=e5541]:
+            - heading "CNAME (Canonical Name) Record" [level=4] [ref=e5542]
+            - paragraph [ref=e5543]: •Redirects one domain name to another domain name, allowing multiple DNS records to map to the same server without specifying IP addresses.
+          - listitem [ref=e5544]:
+            - strong [ref=e5545]: User Guide Links
+            - paragraph [ref=e5546]:
+              - link "Configuring CNAME Record" [ref=e5547] [cursor=pointer]:
+                - /url: https://www.manageengine.com/dns-dhcp-ipam/help/linux-dns-records.html#cname-record
+      - generic [ref=e5548]:
+        - generic [ref=e5551]:
+          - generic [ref=e5552]:
+            - generic [ref=e5553]: Name*
+            - textbox [ref=e5554]: cn2.proofzone1.com.
+          - generic [ref=e5555]:
+            - generic [ref=e5556]: ttl*
+            - textbox [ref=e5557]: "86400"
+          - list [ref=e5559]:
+            - generic [ref=e5561] [cursor=pointer]:
+              - text: Add Host
+              - generic [ref=e5562]: 
+            - text: 
+          - generic [ref=e5563]:
+            - link "Cancel" [ref=e5564] [cursor=pointer]:
+              - /url: "#/dns/domains/showdomain/55"
+              - button "Cancel" [ref=e5565]
+            - button "Save" [ref=e5567] [cursor=pointer]:
+              - generic [ref=e5568]: Save
+            - button "Save and Continue" [ref=e5570] [cursor=pointer]:
+              - generic [ref=e5571]: Save and Continue
+        - generic [ref=e5573]:
+          - heading "Add Host " [level=2] [ref=e5575]:
+            - text: Add Host
+            - generic [ref=e5577] [cursor=pointer]: 
+          - generic [ref=e5579]:
+            - generic [ref=e5580]:
+              - generic [ref=e5581]: host*
+              - textbox [ref=e5582]
+            - generic [ref=e5583]:
+              - generic [ref=e5584]: Enable*
+              - generic [ref=e5586]:
+                - generic [ref=e5588] [cursor=pointer]: "Yes"
+                - generic [ref=e5591]:
+                  - textbox [ref=e5593]
+                  - list [ref=e5594]
+          - generic [ref=e5595]:
+            - button "Save" [ref=e5597] [cursor=pointer]:
+              - generic [ref=e5598]: Save
+            - button "Save and Continue" [ref=e5600] [cursor=pointer]:
+              - generic [ref=e5601]: Save and Continue
+  - img [ref=e530]

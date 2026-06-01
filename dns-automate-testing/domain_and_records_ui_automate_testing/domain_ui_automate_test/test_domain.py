@@ -692,3 +692,216 @@ class TestEdgeCase:
         body = page.inner_text("body").lower()
         assert zone_name.lower().rstrip(".") in body, \
             f"Domain '{zone_name}' not found (case-insensitive check)."
+
+
+# ═══════════════════════════════════════════════════════════════
+#  FORWARDER DOMAIN TESTS  (TC-51 to TC-54)
+# ═══════════════════════════════════════════════════════════════
+
+class TestForwarderDomain:
+    """S.No 51–54: Forwarder zone CRUD tests."""
+
+    # ── TC-51  Create Forwarder domain ──
+    def test_tc51_create_forwarder_domain(self, page, testdata):
+        """Create a Forward zone with forwarder IPs and verify:
+          - Domain created without errors
+          - Lands on detail or list page
+          - Zone type is Forward
+          - Forwarder IPs are visible
+        """
+        domain = DomainPage(page)
+        data = testdata["forwarder_domain"]
+
+        domain.create_forwarder_domain(data)
+
+        is_err = domain.is_error_visible()
+        on_detail = domain.is_on_domain_detail_page()
+        on_list = "dns/domains" in domain.get_current_url()
+
+        assert on_detail or on_list, \
+            f"Expected detail/list page after Forwarder create, got: {domain.get_current_url()}"
+        assert not is_err, \
+            f"Forwarder domain creation failed: {domain.get_error_message()}"
+
+        # Navigate to detail to verify zone type
+        if not on_detail:
+            domain.go_to_domain_list()
+            domain.click_domain_link(data["zone_name"])
+
+        assert domain.is_forwarder_domain(), \
+            "Domain detail does not show 'Forward' zone type."
+
+        # Verify forwarder IPs are visible
+        ips = domain.get_forwarder_ips_from_detail()
+        for fwd_ip in data.get("forwarders", []):
+            assert fwd_ip in ips, \
+                f"Forwarder IP '{fwd_ip}' not visible. Found: {ips}"
+
+    # ── TC-52  Update Forwarder domain ──
+    def test_tc52_update_forwarder_domain(self, page, testdata):
+        """Update an existing Forward zone:
+          - Change forwarder IPs from 8.8.8.8/8.8.4.4 to 1.1.1.1/9.9.9.9
+          - Change forward type from 'only' to 'first'
+          - Verify update saves without errors
+          - Verify new IPs are visible on detail page
+        """
+        domain = DomainPage(page)
+        zone_name = testdata["forwarder_domain"]["zone_name"]
+        update_data = testdata["update_forwarder_domain"]
+
+        # Ensure the forwarder domain exists
+        domain.go_to_domain_list()
+        if not domain.is_domain_visible(zone_name):
+            domain.create_forwarder_domain(testdata["forwarder_domain"])
+
+        result = domain.update_forwarder_domain(zone_name, update_data)
+        assert result, f"Could not open Forwarder domain '{zone_name}' for editing."
+
+        assert not domain.is_error_visible(), \
+            f"Forwarder update failed: {domain.get_error_message()}"
+
+        # Verify updated IPs on detail
+        if domain.is_on_domain_detail_page():
+            ips = domain.get_forwarder_ips_from_detail()
+            for fwd_ip in update_data.get("forwarders", []):
+                assert fwd_ip in ips, \
+                    f"Updated forwarder IP '{fwd_ip}' not visible. Found: {ips}"
+
+    # ── TC-53  Verify Forwarder domain visible in list ──
+    def test_tc53_verify_forwarder_in_list(self, page, testdata):
+        """After create/update, verify the Forwarder domain
+        appears in the domain list with correct zone type indicator.
+        """
+        domain = DomainPage(page)
+        zone_name = testdata["forwarder_domain"]["zone_name"]
+
+        domain.go_to_domain_list()
+        assert domain.is_domain_visible(zone_name), \
+            f"Forwarder domain '{zone_name}' not visible in domain list."
+
+        # Click into detail and verify type
+        clicked = domain.click_domain_link(zone_name)
+        assert clicked, f"Could not open Forwarder domain '{zone_name}'."
+        assert domain.is_forwarder_domain(), \
+            "Zone type is not Forward on detail page."
+
+    # ── TC-54  Delete Forwarder domain ──
+    def test_tc54_delete_forwarder_domain(self, page, testdata):
+        """Delete the Forwarder domain and verify it is removed
+        from the domain list.
+        """
+        domain = DomainPage(page)
+        zone_name = testdata["forwarder_domain"]["zone_name"]
+
+        # Ensure it exists before deleting
+        domain.go_to_domain_list()
+        if not domain.is_domain_visible(zone_name):
+            domain.create_forwarder_domain(testdata["forwarder_domain"])
+
+        domain.delete_domain(zone_name)
+        domain.go_to_domain_list()
+
+        assert not domain.is_domain_visible(zone_name), \
+            f"Forwarder domain '{zone_name}' still visible after deletion."
+
+
+# ═══════════════════════════════════════════════════════════════
+#  RPZ (RESPONSE POLICY ZONE) TESTS  (TC-55 to TC-58)
+# ═══════════════════════════════════════════════════════════════
+
+class TestRPZDomain:
+    """S.No 55–58: Response Policy Zone CRUD tests."""
+
+    # ── TC-55  Create RPZ domain ──
+    def test_tc55_create_rpz_domain(self, page, testdata):
+        """Create a Response Policy Zone and verify:
+          - Domain created without errors
+          - Lands on detail or list page
+          - Zone type shows RPZ
+          - RPZ settings/configuration visible
+        """
+        domain = DomainPage(page)
+        data = testdata["rpz_domain"]
+
+        domain.create_rpz_domain(data)
+
+        is_err = domain.is_error_visible()
+        on_detail = domain.is_on_domain_detail_page()
+        on_list = "dns/domains" in domain.get_current_url()
+
+        assert on_detail or on_list, \
+            f"Expected detail/list page after RPZ create, got: {domain.get_current_url()}"
+        assert not is_err, \
+            f"RPZ domain creation failed: {domain.get_error_message()}"
+
+        # Navigate to detail to verify zone type
+        if not on_detail:
+            domain.go_to_domain_list()
+            domain.click_domain_link(data["zone_name"])
+
+        assert domain.is_rpz_domain(), \
+            "Domain detail does not show 'RPZ' / Response Policy Zone type."
+
+    # ── TC-56  Update RPZ domain ──
+    def test_tc56_update_rpz_domain(self, page, testdata):
+        """Update an existing RPZ zone:
+          - Change TTL, contact, SOA timers
+          - Verify update saves without errors
+          - Verify changes reflect on detail page
+        """
+        domain = DomainPage(page)
+        zone_name = testdata["rpz_domain"]["zone_name"]
+        update_data = testdata["update_rpz_domain"]
+
+        # Ensure the RPZ domain exists
+        domain.go_to_domain_list()
+        if not domain.is_domain_visible(zone_name):
+            domain.create_rpz_domain(testdata["rpz_domain"])
+
+        result = domain.update_rpz_domain(zone_name, update_data)
+        assert result, f"Could not open RPZ domain '{zone_name}' for editing."
+
+        assert not domain.is_error_visible(), \
+            f"RPZ update failed: {domain.get_error_message()}"
+
+        # Verify still an RPZ zone after update
+        if domain.is_on_domain_detail_page():
+            assert domain.is_rpz_domain(), \
+                "Zone type changed from RPZ after update."
+
+    # ── TC-57  Verify RPZ domain visible in list ──
+    def test_tc57_verify_rpz_in_list(self, page, testdata):
+        """After create/update, verify the RPZ domain
+        appears in the domain list with correct zone type indicator.
+        """
+        domain = DomainPage(page)
+        zone_name = testdata["rpz_domain"]["zone_name"]
+
+        domain.go_to_domain_list()
+        assert domain.is_domain_visible(zone_name), \
+            f"RPZ domain '{zone_name}' not visible in domain list."
+
+        # Click into detail and verify type
+        clicked = domain.click_domain_link(zone_name)
+        assert clicked, f"Could not open RPZ domain '{zone_name}'."
+        assert domain.is_rpz_domain(), \
+            "Zone type is not RPZ on detail page."
+
+    # ── TC-58  Delete RPZ domain ──
+    def test_tc58_delete_rpz_domain(self, page, testdata):
+        """Delete the RPZ domain and verify it is removed
+        from the domain list.
+        """
+        domain = DomainPage(page)
+        zone_name = testdata["rpz_domain"]["zone_name"]
+
+        # Ensure it exists before deleting
+        domain.go_to_domain_list()
+        if not domain.is_domain_visible(zone_name):
+            domain.create_rpz_domain(testdata["rpz_domain"])
+
+        domain.delete_domain(zone_name)
+        domain.go_to_domain_list()
+
+        assert not domain.is_domain_visible(zone_name), \
+            f"RPZ domain '{zone_name}' still visible after deletion."

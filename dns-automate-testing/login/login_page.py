@@ -1,13 +1,19 @@
+import os
+
+
 class LoginPage:
 
-    def __init__(self, page):
+    DEFAULT_BASE_URL = os.environ.get("DNS_BASE_URL", "https://10.73.17.95:9443").rstrip("/")
+
+    def __init__(self, page, base_url=None):
         self.page = page
+        self.base_url = (base_url or self.DEFAULT_BASE_URL).rstrip("/")
 
     def login(self, username, password):
 
         # Open login page
         self.page.goto(
-            "https://10.73.17.95:9443/#/login",
+            f"{self.base_url}/#/login",
             timeout=60000,
             wait_until="domcontentloaded"
         )

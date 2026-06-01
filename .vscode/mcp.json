@@ -1,0 +1,27 @@
+{
+  "$schema": "https://aka.ms/vscode-mcp-schema",
+
+  "//": [
+    "============================================================",
+    "  Single MCP server: official Microsoft Playwright browser.",
+    "  - Locked to the DDI host so it cannot navigate elsewhere.",
+    "  - No secrets here — credentials are typed in the chat or",
+    "    read from the page-objects once we drive the UI.",
+    "============================================================"
+  ],
+
+  "servers": {
+    "playwright": {
+      "command": "/home/bhuva-16844/.nvm/versions/node/v20.20.2/bin/npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser", "chrome",
+        "--ignore-https-errors",
+        "--viewport-size", "1440,900",
+        "--allowed-origins", "https://10.63.14.98:9443",
+        "--blocked-origins", "file://*"
+      ]
+    }
+  }
+}

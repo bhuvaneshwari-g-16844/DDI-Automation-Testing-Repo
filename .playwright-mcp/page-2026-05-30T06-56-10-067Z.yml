@@ -1,0 +1,273 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e135]:
+    - list [ref=e137] [cursor=pointer]:
+      - img "DDI Central" [ref=e139]
+      - listitem [ref=e140]:
+        - link "Dashboard" [ref=e141]:
+          - /url: "#/dashboard"
+          - generic [ref=e144]: Dashboard
+      - listitem [ref=e145]:
+        - link "DNS" [ref=e146]:
+          - /url: "#/dns"
+          - generic [ref=e149]: DNS
+      - listitem [ref=e150]:
+        - link "DHCP" [ref=e151]:
+          - /url: "#/dhcp"
+          - generic [ref=e154]: DHCP
+      - listitem [ref=e155]:
+        - link "IPAM" [ref=e156]:
+          - /url: "#/ipam"
+          - generic [ref=e159]: IPAM
+      - listitem [ref=e160]:
+        - link "Threat Intel" [ref=e161]:
+          - /url: "#/threat_intl"
+          - generic "Threat Intel" [ref=e164]
+      - listitem [ref=e165]:
+        - link "Anomaly Detection" [ref=e166]:
+          - /url: "#/anomaly_detection"
+          - generic "Anomaly Detection" [ref=e169]
+      - listitem [ref=e170]:
+        - link " Alerts" [ref=e171]:
+          - /url: "#/alerts"
+          - generic [ref=e173]: 
+          - generic [ref=e174]: Alerts
+      - listitem [ref=e175]:
+        - link "Integrations" [ref=e176]:
+          - /url: "#/integrations"
+          - generic [ref=e179]: Integrations
+      - listitem [ref=e180]:
+        - link "Settings" [ref=e181]:
+          - /url: "#/settings"
+          - generic [ref=e184]: Settings
+      - listitem [ref=e743]:
+        - generic [ref=e744]:
+          - generic [ref=e746]: 
+          - generic [ref=e747]: Hide Sidebar
+    - generic [ref=e189]:
+      - generic [ref=e191]:
+        - text: Trial ends in
+        - strong [ref=e192]: "27"
+        - text: days
+      - generic "windows-agent-248" [ref=e1237] [cursor=pointer]
+      - img [ref=e199] [cursor=pointer]
+      - generic [ref=e205]:
+        - generic [ref=e207] [cursor=pointer]: 
+        - generic [ref=e208]:
+          - generic [ref=e211]:
+            - generic [ref=e213]: ddiadmin@manageengine.com
+            - generic [ref=e214]:
+              - text: "Edition:"
+              - generic [ref=e215]: Enterprise
+            - generic [ref=e216]: "Role: Admin"
+            - generic [ref=e217]: "Build number: 6.2.0"
+            - generic [ref=e219]:
+              - text: Logout
+              - generic [ref=e221]: 
+          - generic [ref=e223]:
+            - heading "Client Credentials" [level=6] [ref=e224]
+            - generic [ref=e225]:
+              - generic [ref=e226] [cursor=pointer]:
+                - generic [ref=e227]: 
+                - text: View
+              - generic [ref=e228] [cursor=pointer]:
+                - generic [ref=e229]: 
+                - text: Reset
+              - generic [ref=e230] [cursor=pointer]:
+                - generic [ref=e231]: 
+                - text: Reset Password
+          - generic [ref=e233]:
+            - heading "License" [level=6] [ref=e234]
+            - generic [ref=e235]:
+              - generic [ref=e236] [cursor=pointer]:
+                - generic [ref=e237]: 
+                - text: Upload
+              - generic [ref=e238] [cursor=pointer]:
+                - generic [ref=e239]: 
+                - text: View
+          - generic [ref=e241]:
+            - heading "Need help?" [level=6] [ref=e242]
+            - generic [ref=e243]:
+              - generic [ref=e244] [cursor=pointer]:
+                - generic [ref=e245]: 
+                - text: Chat with us
+              - generic [ref=e246] [cursor=pointer]:
+                - generic [ref=e247]: 
+                - text: Submit Ticket
+              - generic [ref=e248] [cursor=pointer]:
+                - generic [ref=e249]: 
+                - text: User guide
+    - text:              *
+    - list [ref=e1660]:
+      - listitem [ref=e1661]:
+        - link "Domains" [ref=e1663] [cursor=pointer]:
+          - /url: "#/dns/domains"
+          - generic [ref=e1666]: Domains
+      - listitem [ref=e1667]:
+        - link "Audit" [ref=e1669] [cursor=pointer]:
+          - /url: "#/dns/audit"
+          - generic [ref=e1672]: Audit
+      - listitem [ref=e1673]:
+        - link " Analytics" [ref=e1675] [cursor=pointer]:
+          - /url: "#/dns/analytics"
+          - generic [ref=e1677]: 
+          - generic [ref=e1678]: Analytics
+      - listitem [ref=e1679]:
+        - link " Config" [ref=e1681] [cursor=pointer]:
+          - /url: "#/dns/configuration"
+          - generic [ref=e1683]: 
+          - generic [ref=e1684]: Config
+      - listitem [ref=e1685]:
+        - link "Scavenging" [ref=e1687] [cursor=pointer]:
+          - /url: "#/dns/scavenging"
+          - generic [ref=e1690]: Scavenging
+      - listitem [ref=e1691]:
+        - link " Schedule" [ref=e1693] [cursor=pointer]:
+          - /url: "#/dns/schedule"
+          - generic [ref=e1695]: 
+          - generic [ref=e1696]: Schedule
+    - generic [ref=e250]:
+      - generic [ref=e1846]:
+        - heading "Domains > mcpcsv.com." [level=2] [ref=e1847]:
+          - link "Domains" [ref=e1849] [cursor=pointer]:
+            - /url: "#/dns/domains"
+          - text: ">"
+          - generic "mcpcsv.com." [ref=e1850] [cursor=pointer]:
+            - generic [ref=e1851]: mcpcsv.com.
+        - generic [ref=e1852] [cursor=pointer]:
+          - link "Previous versions" [ref=e1853]:
+            - /url: "#/dns/domains/versions/51"
+          - generic [ref=e1854]: 
+      - generic [ref=e1855]:
+        - generic [ref=e1856]:
+          - list
+        - generic [ref=e1857]:
+          - link "DNSSEC " [ref=e1858] [cursor=pointer]:
+            - /url: "#/dns/domains/dnssec/51"
+            - generic [ref=e1859]:
+              - text: DNSSEC
+              - generic [ref=e1860]: 
+          - button "Import " [ref=e1862] [cursor=pointer]:
+            - text: Import
+            - generic [ref=e1863]: 
+          - button "Export " [ref=e1865] [cursor=pointer]:
+            - text: Export
+            - generic [ref=e1866]: 
+        - generic [ref=e1868] [cursor=pointer]:
+          - paragraph [ref=e1869]:
+            - generic [ref=e1871]: 
+            - text: A (IPV4) 1
+          - list [ref=e1872]:
+            - listitem [ref=e1873]:
+              - generic [ref=e1874]:
+                - generic [ref=e1876]:
+                  - button "Scan for Duplicates " [ref=e1877]:
+                    - text: Scan for Duplicates
+                    - generic [ref=e1878]: 
+                  - generic [ref=e1879]:
+                    - combobox [ref=e1880]
+                    - combobox "Contains" [ref=e1883]:
+                      - textbox "Contains" [ref=e1884]
+                    - searchbox "Search..." [ref=e1885]
+                - table [ref=e1887]:
+                  - rowgroup [ref=e1888]:
+                    - row "Domain Name Domain Ttl IP Created Modified  " [ref=e1889]:
+                      - cell [ref=e1890]:
+                        - checkbox [ref=e1892]
+                      - cell "Domain Name" [ref=e1893]
+                      - cell "Domain Ttl" [ref=e1894]
+                      - cell "IP" [ref=e1895]
+                      - cell "Created" [ref=e1896]
+                      - cell "Modified" [ref=e1897]
+                      - cell " " [ref=e1898]:
+                        - link "" [ref=e1900]:
+                          - /url: "#/dns/a_add/51"
+                          - generic "Add" [ref=e1901]: 
+                        - generic [ref=e1903]: 
+                  - rowgroup [ref=e1904]:
+                    - row "ns1.mcpcsv.com. 1 86400 10.72.33.248 5/31/2026, 12:55:34 AM 5/31/2026, 12:55:34 AM  " [ref=e1905]:
+                      - cell [ref=e1906]:
+                        - checkbox [ref=e1908]
+                      - cell "ns1.mcpcsv.com. 1" [ref=e1909]
+                      - cell "86400" [ref=e1910]
+                      - cell "10.72.33.248" [ref=e1911]
+                      - cell "5/31/2026, 12:55:34 AM" [ref=e1912]
+                      - cell "5/31/2026, 12:55:34 AM" [ref=e1913]
+                      - cell " " [ref=e1914]:
+                        - generic "Edit" [ref=e1915]: 
+                        - generic [ref=e1916]: 
+                - generic [ref=e1917]:
+                  - generic [ref=e1918]:
+                    - list [ref=e1920]:
+                      - listitem [ref=e1921]:
+                        - link "Previous":
+                          - /url: "#"
+                      - listitem [ref=e1922]:
+                        - link "1" [ref=e1923]:
+                          - /url: "#"
+                      - listitem [ref=e1924]:
+                        - link "Next":
+                          - /url: "#"
+                    - generic [ref=e1926]:
+                      - text: Per Page
+                      - combobox "Per Page" [ref=e1927]:
+                        - option "5" [selected]
+                        - option "10"
+                        - option "25"
+                        - option "50"
+                        - option "75"
+                        - option "100"
+                        - option "250"
+                        - option "500"
+                  - status [ref=e1929]: Showing 1 to 1 of 1 record(s)
+        - generic [ref=e1931] [cursor=pointer]:
+          - paragraph [ref=e1932]:
+            - generic [ref=e1934]: 
+            - text: AAAA (IPV6)
+          - list:  
+        - generic [ref=e1936] [cursor=pointer]:
+          - paragraph [ref=e1937]:
+            - generic [ref=e1939]: 
+            - text: CAA
+          - list:  
+        - generic [ref=e1941] [cursor=pointer]:
+          - paragraph [ref=e1942]:
+            - generic [ref=e1944]: 
+            - text: CNAME
+          - list:  
+        - generic [ref=e1946] [cursor=pointer]:
+          - paragraph [ref=e1947]:
+            - generic [ref=e1949]: 
+            - text: DS
+          - list:  
+        - generic [ref=e1951] [cursor=pointer]:
+          - paragraph [ref=e1952]:
+            - generic [ref=e1954]: 
+            - text: HINFO
+          - list:  
+        - generic [ref=e1956] [cursor=pointer]:
+          - paragraph [ref=e1957]:
+            - generic [ref=e1959]: 
+            - text: MX
+          - list:  
+        - generic [ref=e1961] [cursor=pointer]:
+          - paragraph [ref=e1962]:
+            - generic [ref=e1964]: 
+            - text: NS 1
+          - list:  
+        - generic [ref=e1966] [cursor=pointer]:
+          - paragraph [ref=e1967]:
+            - generic [ref=e1969]: 
+            - text: PTR
+          - list:  
+        - generic [ref=e1971] [cursor=pointer]:
+          - paragraph [ref=e1972]:
+            - generic [ref=e1974]: 
+            - text: SRV
+          - list:  
+        - generic [ref=e1976] [cursor=pointer]:
+          - paragraph [ref=e1977]:
+            - generic [ref=e1979]: 
+            - text: TXT
+          - list:  
+      - text:   
+  - img [ref=e644]

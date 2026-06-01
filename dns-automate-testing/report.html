@@ -3,11 +3,332 @@
   <head>
     <meta charset="utf-8"/>
     <title id="head-title">report.html</title>
-      <link href="assets/style.css" rel="stylesheet" type="text/css"/>
+      <style type="text/css">body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  /* do not increase min-width as some may use split screens */
+  min-width: 800px;
+  color: #999;
+}
+
+h1 {
+  font-size: 24px;
+  color: black;
+}
+
+h2 {
+  font-size: 16px;
+  color: black;
+}
+
+p {
+  color: black;
+}
+
+a {
+  color: #999;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+#environment td {
+  padding: 5px;
+  border: 1px solid #e6e6e6;
+  vertical-align: top;
+}
+#environment tr:nth-child(odd) {
+  background-color: #f6f6f6;
+}
+#environment ul {
+  margin: 0;
+  padding: 0 20px;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed,
+.passed .col-result {
+  color: green;
+}
+
+span.skipped,
+span.xfailed,
+span.rerun,
+.skipped .col-result,
+.xfailed .col-result,
+.rerun .col-result {
+  color: orange;
+}
+
+span.error,
+span.failed,
+span.xpassed,
+.error .col-result,
+.failed .col-result,
+.xpassed .col-result {
+  color: red;
+}
+
+.col-links__extra {
+  margin-right: 3px;
+}
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+#results-table {
+  border: 1px solid #e6e6e6;
+  color: #999;
+  font-size: 12px;
+  width: 100%;
+}
+#results-table th,
+#results-table td {
+  padding: 5px;
+  border: 1px solid #e6e6e6;
+  text-align: left;
+}
+#results-table th {
+  font-weight: bold;
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+.logwrapper {
+  max-height: 230px;
+  overflow-y: scroll;
+  background-color: #e6e6e6;
+}
+.logwrapper.expanded {
+  max-height: none;
+}
+.logwrapper.expanded .logexpander:after {
+  content: "collapse [-]";
+}
+.logwrapper .logexpander {
+  z-index: 1;
+  position: sticky;
+  top: 10px;
+  width: max-content;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 5px 7px;
+  margin: 10px 0 10px calc(100% - 80px);
+  cursor: pointer;
+  background-color: #e6e6e6;
+}
+.logwrapper .logexpander:after {
+  content: "expand [+]";
+}
+.logwrapper .logexpander:hover {
+  color: #000;
+  border-color: #000;
+}
+.logwrapper .log {
+  min-height: 40px;
+  position: relative;
+  top: -50px;
+  height: calc(100% + 50px);
+  border: 1px solid #e6e6e6;
+  color: black;
+  display: block;
+  font-family: "Courier New", Courier, monospace;
+  padding: 5px;
+  padding-right: 80px;
+  white-space: pre-wrap;
+}
+
+div.media {
+  border: 1px solid #e6e6e6;
+  float: right;
+  height: 240px;
+  margin: 0 5px;
+  overflow: hidden;
+  width: 320px;
+}
+
+.media-container {
+  display: grid;
+  grid-template-columns: 25px auto 25px;
+  align-items: center;
+  flex: 1 1;
+  overflow: hidden;
+  height: 200px;
+}
+
+.media-container--fullscreen {
+  grid-template-columns: 0px auto 0px;
+}
+
+.media-container__nav--right,
+.media-container__nav--left {
+  text-align: center;
+  cursor: pointer;
+}
+
+.media-container__viewport {
+  cursor: pointer;
+  text-align: center;
+  height: inherit;
+}
+.media-container__viewport img,
+.media-container__viewport video {
+  object-fit: cover;
+  width: 100%;
+  max-height: 100%;
+}
+
+.media__name,
+.media__counter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex: 0 0 25px;
+  align-items: center;
+}
+
+.collapsible td:not(.col-links) {
+  cursor: pointer;
+}
+.collapsible td:not(.col-links):hover::after {
+  color: #bbb;
+  font-style: italic;
+  cursor: pointer;
+}
+
+.col-result {
+  width: 130px;
+}
+.col-result:hover::after {
+  content: " (hide details)";
+}
+
+.col-result.collapsed:hover::after {
+  content: " (show details)";
+}
+
+#environment-header h2:hover::after {
+  content: " (hide details)";
+  color: #bbb;
+  font-style: italic;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#environment-header.collapsed h2:hover::after {
+  content: " (show details)";
+  color: #bbb;
+  font-style: italic;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+  cursor: pointer;
+}
+.sortable.desc:after {
+  content: " ";
+  position: relative;
+  left: 5px;
+  bottom: -12.5px;
+  border: 10px solid #4caf50;
+  border-bottom: 0;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.sortable.asc:after {
+  content: " ";
+  position: relative;
+  left: 5px;
+  bottom: 12.5px;
+  border: 10px solid #4caf50;
+  border-top: 0;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+
+.hidden, .summary__reload__button.hidden {
+  display: none;
+}
+
+.summary__data {
+  flex: 0 0 550px;
+}
+.summary__reload {
+  flex: 1 1;
+  display: flex;
+  justify-content: center;
+}
+.summary__reload__button {
+  flex: 0 0 300px;
+  display: flex;
+  color: white;
+  font-weight: bold;
+  background-color: #4caf50;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.summary__reload__button:hover {
+  background-color: #46a049;
+}
+.summary__spacer {
+  flex: 0 0 550px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filters,
+.collapse {
+  display: flex;
+  align-items: center;
+}
+.filters button,
+.collapse button {
+  color: #999;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.filters button:hover,
+.collapse button:hover {
+  color: #ccc;
+}
+
+.filter__label {
+  margin-right: 10px;
+}
+
+      </style>
+    
   </head>
   <body>
     <h1 id="title">report.html</h1>
-    <p>Report generated on 28-Feb-2026 at 17:38:19 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a>
+    <p>Report generated on 27-May-2026 at 18:42:27 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a>
         v4.1.1</p>
     <div id="environment-header">
       <h2>Environment</h2>
@@ -61,7 +382,7 @@
         <h2>Summary</h2>
         <div class="additional-summary prefix">
         </div>
-        <p class="run-count">1 test took 00:00:35.</p>
+        <p class="run-count">4 tests took 00:01:12.</p>
         <p class="filter">(Un)check the boxes to filter the results.</p>
         <div class="summary__reload">
           <div class="summary__reload__button hidden" onclick="location.reload()">
@@ -73,8 +394,8 @@
           <div class="filters">
             <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="failed" />
             <span class="failed">1 Failed,</span>
-            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="passed" disabled/>
-            <span class="passed">0 Passed,</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="passed" />
+            <span class="passed">3 Passed,</span>
             <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="skipped" disabled/>
             <span class="skipped">0 Skipped,</span>
             <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="xfailed" disabled/>
@@ -108,7 +429,7 @@
     </table>
   </body>
   <footer>
-    <div id="data-container" data-jsonblob="{&#34;environment&#34;: {&#34;Python&#34;: &#34;3.8.16&#34;, &#34;Platform&#34;: &#34;Linux-6.17.0-14-generic-x86_64-with-glibc2.2.5&#34;, &#34;Packages&#34;: {&#34;pytest&#34;: &#34;8.3.5&#34;, &#34;pluggy&#34;: &#34;1.5.0&#34;}, &#34;Plugins&#34;: {&#34;xdist&#34;: &#34;3.6.1&#34;, &#34;metadata&#34;: &#34;3.1.1&#34;, &#34;html&#34;: &#34;4.1.1&#34;}}, &#34;tests&#34;: {&#34;tests/test_domain.py::test_create_domain&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Failed&#34;, &#34;testId&#34;: &#34;tests/test_domain.py::test_create_domain&#34;, &#34;duration&#34;: &#34;00:00:35&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Failed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/test_domain.py::test_create_domain&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:35&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;page = &amp;lt;Page url=&amp;#x27;https://10.73.17.95:9443/#/login&amp;#x27;&amp;gt;\ntestdata = {&amp;#x27;domain&amp;#x27;: &amp;#x27;auto-test.com&amp;#x27;, &amp;#x27;email&amp;#x27;: &amp;#x27;admin@test.com&amp;#x27;, &amp;#x27;password&amp;#x27;: &amp;#x27;Admin@123&amp;#x27;, &amp;#x27;url&amp;#x27;: &amp;#x27;https://10.73.17.95:9443/#/login&amp;#x27;, ...}\n\n    def test_create_domain(page, testdata):\n    \n        login = LoginPage(page)\n        domain = DomainPage(page)\n    \n&amp;gt;       login.login(testdata)\n\ntests/test_domain.py:10: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \npages/login_page.py:24: in login\n    self.page.locator(\n../venv/lib/python3.8/site-packages/playwright/sync_api/_generated.py:17736: in wait_for\n    self._sync(self._impl_obj.wait_for(timeout=timeout, state=state))\n../venv/lib/python3.8/site-packages/playwright/_impl/_locator.py:670: in wait_for\n    await self._frame.wait_for_selector(\n../venv/lib/python3.8/site-packages/playwright/_impl/_frame.py:323: in wait_for_selector\n    await self._channel.send(&amp;quot;waitForSelector&amp;quot;, locals_to_params(locals()))\n../venv/lib/python3.8/site-packages/playwright/_impl/_connection.py:59: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = &amp;lt;playwright._impl._connection.Connection object at 0x702be5f5db20&amp;gt;, cb = &amp;lt;function Channel.send.&amp;lt;locals&amp;gt;.&amp;lt;lambda&amp;gt; at 0x702be6678c10&amp;gt;, is_internal = False\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False\n    ) -&amp;gt; Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(task, &amp;quot;__pw_stack__&amp;quot;, inspect.stack())\n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n&amp;gt;           raise rewrite_error(error, f&amp;quot;{parsed_st[&amp;#x27;apiName&amp;#x27;]}: {error}&amp;quot;) from None\nE           playwright._impl._errors.TimeoutError: Locator.wait_for: Timeout 30000ms exceeded.\nE           Call log:\nE           waiting for locator(&amp;quot;input[type=\\&amp;quot;password\\&amp;quot;]&amp;quot;) to be visible\n\n../venv/lib/python3.8/site-packages/playwright/_impl/_connection.py:520: TimeoutError\n&#34;}]}, &#34;renderCollapsed&#34;: [&#34;passed&#34;], &#34;initialSort&#34;: &#34;result&#34;, &#34;title&#34;: &#34;report.html&#34;}"></div>
+    <div id="data-container" data-jsonblob="{&#34;environment&#34;: {&#34;Python&#34;: &#34;3.8.16&#34;, &#34;Platform&#34;: &#34;Linux-6.17.0-29-generic-x86_64-with-glibc2.2.5&#34;, &#34;Packages&#34;: {&#34;pytest&#34;: &#34;8.2.2&#34;, &#34;pluggy&#34;: &#34;1.5.0&#34;}, &#34;Plugins&#34;: {&#34;xdist&#34;: &#34;3.6.1&#34;, &#34;rerunfailures&#34;: &#34;14.0&#34;, &#34;metadata&#34;: &#34;3.1.1&#34;, &#34;base-url&#34;: &#34;2.1.0&#34;, &#34;playwright&#34;: &#34;0.5.1&#34;, &#34;html&#34;: &#34;4.1.1&#34;}, &#34;Base URL&#34;: &#34;&#34;}, &#34;tests&#34;: {&#34;domain_and_records_ui_automate_testing/test_server_configuration_edit.py::test_tc01_edit_page_loads&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;domain_and_records_ui_automate_testing/test_server_configuration_edit.py::test_tc01_edit_page_loads&#34;, &#34;duration&#34;: &#34;00:00:29&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;domain_and_records_ui_automate_testing/test_server_configuration_edit.py::test_tc01_edit_page_loads&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:29&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;No log output captured.&#34;}], &#34;domain_and_records_ui_automate_testing/test_server_configuration_edit.py::test_tc02_edit_form_is_visible&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;domain_and_records_ui_automate_testing/test_server_configuration_edit.py::test_tc02_edit_form_is_visible&#34;, &#34;duration&#34;: &#34;00:00:03&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;domain_and_records_ui_automate_testing/test_server_configuration_edit.py::test_tc02_edit_form_is_visible&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:03&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;No log output captured.&#34;}], &#34;domain_and_records_ui_automate_testing/test_server_configuration_edit.py::test_tc03_cancel_returns_to_list&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;domain_and_records_ui_automate_testing/test_server_configuration_edit.py::test_tc03_cancel_returns_to_list&#34;, &#34;duration&#34;: &#34;00:00:05&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;domain_and_records_ui_automate_testing/test_server_configuration_edit.py::test_tc03_cancel_returns_to_list&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:05&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;No log output captured.&#34;}], &#34;domain_and_records_ui_automate_testing/test_server_configuration_edit.py::test_tc04_save_without_changes_is_clean&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Failed&#34;, &#34;testId&#34;: &#34;domain_and_records_ui_automate_testing/test_server_configuration_edit.py::test_tc04_save_without_changes_is_clean&#34;, &#34;duration&#34;: &#34;00:00:35&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Failed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;domain_and_records_ui_automate_testing/test_server_configuration_edit.py::test_tc04_save_without_changes_is_clean&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:35&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;domain_and_records_ui_automate_testing/test_server_configuration_edit.py:88: in test_tc04_save_without_changes_is_clean\n    save.first.scroll_into_view_if_needed()\n../venv/lib/python3.8/site-packages/playwright/sync_api/_generated.py:16903: in scroll_into_view_if_needed\n    self._sync(self._impl_obj.scroll_into_view_if_needed(timeout=timeout))\n../venv/lib/python3.8/site-packages/playwright/_impl/_locator.py:541: in scroll_into_view_if_needed\n    return await self._with_element(\n../venv/lib/python3.8/site-packages/playwright/_impl/_locator.py:112: in _with_element\n    return await task(\n../venv/lib/python3.8/site-packages/playwright/_impl/_element_handle.py:107: in scroll_into_view_if_needed\n    await self._channel.send(&amp;quot;scrollIntoViewIfNeeded&amp;quot;, locals_to_params(locals()))\n../venv/lib/python3.8/site-packages/playwright/_impl/_connection.py:59: in send\n    return await self._connection.wrap_api_call(\n../venv/lib/python3.8/site-packages/playwright/_impl/_connection.py:514: in wrap_api_call\n    raise rewrite_error(error, f&amp;quot;{parsed_st[&amp;#x27;apiName&amp;#x27;]}: {error}&amp;quot;) from None\nE   playwright._impl._errors.TimeoutError: Locator.scroll_into_view_if_needed: Timeout 29994ms exceeded.\nE   Call log:\nE   attempting scroll into view action\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #1\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #2\nE     -   waiting 20ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #3\nE     -   waiting 100ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #4\nE     -   waiting 100ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #5\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #6\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #7\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #8\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #9\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #10\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #11\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #12\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #13\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #14\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #15\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #16\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #17\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #18\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #19\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #20\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #21\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #22\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #23\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #24\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #25\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #26\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #27\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #28\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #29\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #30\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #31\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #32\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #33\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #34\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #35\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #36\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #37\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #38\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #39\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #40\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #41\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #42\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #43\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #44\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #45\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #46\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #47\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #48\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #49\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #50\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #51\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #52\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #53\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #54\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #55\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #56\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #57\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #58\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #59\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #60\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #61\nE     -   waiting 500ms\nE     -   waiting for element to be stable\nE     -   element is not visible\nE     - retrying scroll into view action, attempt #62\nE     -   waiting 500ms\n&#34;}]}, &#34;renderCollapsed&#34;: [&#34;passed&#34;], &#34;initialSort&#34;: &#34;result&#34;, &#34;title&#34;: &#34;report.html&#34;}"></div>
     <script>
       (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const { getCollapsedCategory, setCollapsedIds } = require('./storage.js')

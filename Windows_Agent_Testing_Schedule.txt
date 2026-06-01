@@ -1,0 +1,146 @@
+================================================================================
+        WINDOWS AGENT TESTING - PHASE-WISE & DAY-WISE TIMETABLE
+        Tester    : Manual + API Testing
+        Duration  : 19-May-2026  to  30-June-2026
+        Total TCs : 554   (Manual UI: 432   +   API: 122)
+        Leave     : 04-June-2026 (Thu), 05-June-2026 (Fri)
+================================================================================
+
+--------------------------------------------------------------------------------
+ PHASE 1 - SERVER & ZONE FOUNDATION                      (19-May to 22-May)
+--------------------------------------------------------------------------------
+ Date         Day   Module(s)                                         Count
+ -----------  ----  ------------------------------------------------  -----
+ 2026-05-19   Tue   Windows Agent Server Configuration (Part 1)         20
+                    TC-001  ->  TC-020
+ 2026-05-20   Wed   Windows Agent Server Configuration (Part 2)         24
+                    TC-020a ->  TC-020x
+ 2026-05-21   Thu   Windows DNS Zone Management                         24
+                    TC-021  ->  TC-044
+ 2026-05-22   Fri   Scope Level Testing                                 24
+                    TC-045  ->  TC-068
+                                                          Phase Total : 92
+
+--------------------------------------------------------------------------------
+ PHASE 2 - DNS FEATURES                                  (25-May to 29-May)
+--------------------------------------------------------------------------------
+ Date         Day   Module(s)                                         Count
+ -----------  ----  ------------------------------------------------  -----
+ 2026-05-25   Mon   Client Subnet (12) + DNS Recursion Setting (6)      18
+ 2026-05-26   Tue   DNS Forwarders (9) + DNS RRL Setting (13)           22
+ 2026-05-27   Wed   RRL Exception List (10) + DNS QRP (15)              25
+ 2026-05-28   Thu   DNS Firewall (6) + DDNS (20)                        26
+ 2026-05-29   Fri   DNS Discover                                        15
+                                                          Phase Total : 106
+
+--------------------------------------------------------------------------------
+ PHASE 3 - DHCP CORE                                     (01-Jun to 03-Jun)
+--------------------------------------------------------------------------------
+ Date         Day   Module(s)                                         Count
+ -----------  ----  ------------------------------------------------  -----
+ 2026-06-01   Mon   DHCP Subnet (10) + Static Subnet/Supernet/VLAN (9)  19
+ 2026-06-02   Tue   Shared Network (5) + Host (5) + Filter (5)
+                    + Class (4)                                         19
+ 2026-06-03   Wed   DHCP Policy (14) + DHCP Options (7)                 21
+                                                          Phase Total : 59
+
+================================================================================
+ *** LEAVE  ***   04-Jun-2026 (Thu)   and   05-Jun-2026 (Fri)
+                  No test execution on these days.
+================================================================================
+
+--------------------------------------------------------------------------------
+ PHASE 4 - DHCP FAILOVER & IPAM                          (08-Jun to 12-Jun)
+--------------------------------------------------------------------------------
+ Date         Day   Module(s)                                         Count
+ -----------  ----  ------------------------------------------------  -----
+ 2026-06-08   Mon   DHCP Multicast (11) +
+                    Windows Agent Specific - Additional (10)            21
+ 2026-06-09   Tue   DHCP Failover Configuration  - Part 1               20
+ 2026-06-10   Wed   DHCP Failover Configuration  - Part 2               20
+ 2026-06-11   Thu   IPAM Lease (13) + IPAM VLAN (5)                     18
+ 2026-06-12   Fri   IPAM ManageIP (7) + Analytics (11)                  18
+                                                          Phase Total : 97
+
+--------------------------------------------------------------------------------
+ PHASE 5 - SCHEDULING / SECURITY / PERFORMANCE / NON-FUNCTIONAL
+                                                         (15-Jun to 18-Jun)
+--------------------------------------------------------------------------------
+ Date         Day   Module(s)                                         Count
+ -----------  ----  ------------------------------------------------  -----
+ 2026-06-15   Mon   Scheduling (14) + DNS Settings & Configuration (7)  21
+ 2026-06-16   Tue   User Management (6) + Failover & HA (6)
+                    + Security - Part 1 (7)                             19
+ 2026-06-17   Wed   Security - Part 2 (10) + Performance - Part 1 (8)   18
+ 2026-06-18   Thu   Performance - Part 2 (4) + Non-Functional (16)      20
+                                                          Phase Total : 78
+
+================================================================================
+ PHASE 6 - API AUTOMATION TESTING (DNS / DHCP / IPAM)    (19-Jun to 29-Jun)
+================================================================================
+ Date         Day   API Module(s)                                     Count
+ -----------  ----  ------------------------------------------------  -----
+ 2026-06-19   Fri   A record API (5) + AAAA record API (5)
+                    + CAA record API (5) + CNAME record API (5)         20
+                    TC-409 -> TC-428
+ 2026-06-22   Mon   MX record API (5) + NS record API (5)
+                    + SRV record API (5) + PTR record API (5)           20
+                    TC-429 -> TC-448
+ 2026-06-23   Tue   TXT record API (5) + DS record API (5)
+                    + HINFO record API (5) + DNS Audit API (4)          19
+                    TC-449 -> TC-467
+ 2026-06-24   Wed   Import BIND API (4) + Export BIND API (4)
+                    + DHCP Subnet API (5) + Shared Network API (5)      18
+                    TC-468 -> TC-485
+ 2026-06-25   Thu   HOST API (5) + SUPERNET API (5)
+                    + VLAN Management API (5) + Static Subnet API (5)   20
+                    TC-486 -> TC-505
+ 2026-06-26   Fri   Static Lease API (5) + DHCP Audit API (4)
+                    + IPAM Subnet IP Inventory API (4)
+                    + IPAM Subnet Leastlist API (4)                     17
+                    TC-506 -> TC-522
+ 2026-06-29   Mon   IPAM Subnet Usage API (4)
+                    + IPAM VLAN Usage API (4)                            8
+                    TC-523 -> TC-530
+                                                          Phase Total : 122
+
+--------------------------------------------------------------------------------
+ PHASE 7 - REGRESSION / SIGN-OFF                         (29-Jun to 30-Jun)
+--------------------------------------------------------------------------------
+ Date         Day   Activity
+ -----------  ----  ----------------------------------------------------------
+ 2026-06-29   Mon   (Afternoon) Bug retest of failed UI + API cases
+ 2026-06-30   Tue   Final regression + Consolidated report + Sign-off
+
+================================================================================
+ OVERALL SUMMARY
+================================================================================
+   Phase 1  Server & Zone Foundation .................................  92
+   Phase 2  DNS Features ............................................. 106
+   Phase 3  DHCP Core ................................................  59
+   Phase 4  DHCP Failover & IPAM .....................................  97
+   Phase 5  Scheduling / Security / Performance / Non-Functional .....  78
+   Phase 6  API Automation (DNS / DHCP / IPAM) ....................... 122
+                                                            ---------------
+                                                  TOTAL  TEST CASES : 554
+
+   Execution Days : 27  (UI : 20   API : 7)
+   Leave Days     : 02  (04-Jun, 05-Jun)
+   Buffer / Sign  : 01  (30-Jun)
+   Project End    : 30-Jun-2026
+
+--------------------------------------------------------------------------------
+ API MODULES COVERED (26 total)
+--------------------------------------------------------------------------------
+   DNS Records (11) : A, AAAA, CAA, CNAME, MX, NS, SRV, PTR, TXT, DS, HINFO
+   DNS Misc    (3)  : DNS Audit, Import BIND, Export BIND
+   DHCP        (8)  : DHCP Subnet, Shared Network, HOST, SUPERNET,
+                      VLAN Management, Static Subnet, Static Lease, DHCP Audit
+   IPAM        (4)  : Subnet IP Inventory, Subnet Leaselist,
+                      Subnet Usage, VLAN Usage
+
+   Each API module = GET list + POST valid + PUT/update + DELETE
+                     + Negative (invalid / 401 / 404 / 409)
+   Backend verified with PowerShell (Get-DnsServer.../Get-DhcpServer...)
+   and dig where applicable - never trust the API response alone.
+================================================================================

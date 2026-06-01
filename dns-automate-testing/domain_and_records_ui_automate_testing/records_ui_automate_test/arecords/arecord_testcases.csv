@@ -1,0 +1,16 @@
+Date,TC No,Module,Platform,Test Case Description,Expected Result,Type,Test Nature,Status,TestBy
+17-04-2026,TC_001,A-Record,Windows & Linux,Create A record with valid prefix and IPs,Record should be created successfully,Functional,Positive,FAIL,bhuva-16844
+17-04-2026,TC_002,A-Record,Windows & Linux,Create A record with a single IP,Record should be accepted,Functional,Positive,FAIL,bhuva-16844
+17-04-2026,TC_003,A-Record,Windows & Linux,Create apex A record (@),Apex record should be created,Functional,Positive,FAIL,bhuva-16844
+17-04-2026,TC_004,A-Record,Windows & Linux,Update existing A record TTL/IPs,Changes should reflect correctly,Functional,Positive,PASS,bhuva-16844
+17-04-2026,TC_005,A-Record,Windows & Linux,Delete A record with confirmation,Record should be removed,Functional,Positive,PASS,bhuva-16844
+17-04-2026,TC_006,A-Record,Windows & Linux,Search A record by prefix,Matching record should be displayed,Functional,Positive,FAIL,bhuva-16844
+17-04-2026,TC_007,A-Record,Windows & Linux,Open A-records tab on zone detail,A-records list should load,Functional,Positive,PASS,bhuva-16844
+17-04-2026,TC_008,A-Record,Windows & Linux,Duplicate A record creation,System should restrict duplicates,Functional,Negative,FAIL,bhuva-16844
+17-04-2026,TC_009,A-Record,Windows & Linux,Create A record with empty prefix,Validation error,Functional,Negative,PASS,bhuva-16844
+17-04-2026,TC_010,A-Record,Windows & Linux,Create A record with empty IP list,Validation error,Functional,Negative,PASS,bhuva-16844
+17-04-2026,TC_011,A-Record,Windows & Linux,Create A record with invalid IP (999.999.999.999),Validation error,Functional,Negative,PASS,bhuva-16844
+17-04-2026,TC_012,A-Record,Windows & Linux,Create A record with invalid prefix characters,Validation error,Functional,Negative,PASS,bhuva-16844
+17-04-2026,TC_013,A-Record,Windows & Linux,Create A record with non-numeric TTL,Validation error,Functional,Negative,PASS,bhuva-16844
+17-04-2026,TC_014,A-Record,Windows & Linux,Save empty Add-Record form,Error message displayed,Functional,Negative,PASS,bhuva-16844
+17-04-2026,TC_015,A-Record,Windows & Linux,Page reload on A-records tab,Page should recover gracefully,Non-Functional,Reliability,PASS,bhuva-16844

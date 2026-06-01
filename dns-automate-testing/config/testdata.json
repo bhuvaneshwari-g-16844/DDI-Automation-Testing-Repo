@@ -1,5 +1,5 @@
 {
-  "url": "https://10.73.17.95:9443/#/login",
+  "url": "https://10.72.51.96:9443/#/login",
   "username": "admin",
   "password": "Admin@123",
 
@@ -12,7 +12,7 @@
     "expiry": "1209600",
     "minimum": "180",
     "zone_type": "1",
-    "master_servers": "10.73.17.95",
+    "master_servers": "10.72.51.96",
     "ad_zone": false,
     "ddns_zone": true,
     "sec_ns": "data.apple.com",
@@ -28,10 +28,10 @@
         "option_name": "check-sibling",
         "value": "yes",
         "block": "zone",
-        "cluster": "1"
+        "cluster": "linux_Appconsole"
       }
     ],
-    "cluster": "1"
+    "cluster": "linux_Appconsole"
   },
 
   "update_domain": {
@@ -52,7 +52,7 @@
     "expiry": "1209600",
     "minimum": "180",
     "zone_type": "1",
-    "master_servers": "10.73.17.95",
+    "master_servers": "10.72.51.96",
     "ddns_zone": false,
     "sec_ns": "ns1.fqdntest.com",
     "nameservers": {
@@ -72,7 +72,7 @@
     "expiry": "1209600",
     "minimum": "180",
     "zone_type": "1",
-    "master_servers": "10.73.17.95",
+    "master_servers": "10.72.51.96",
     "ddns_zone": false,
     "sec_ns": "ns1.test.apple.com",
     "nameservers": {
@@ -92,7 +92,7 @@
     "expiry": "1209600",
     "minimum": "180",
     "zone_type": "1",
-    "master_servers": "10.73.17.95",
+    "master_servers": "10.72.51.96",
     "ddns_zone": false,
     "sec_ns": "ns1.valid-domain123.com",
     "nameservers": {
@@ -112,7 +112,7 @@
     "expiry": "1209600",
     "minimum": "180",
     "zone_type": "1",
-    "master_servers": "10.73.17.95",
+    "master_servers": "10.72.51.96",
     "ddns_zone": false,
     "sec_ns": "ns1.my-test-domain.com",
     "nameservers": {
@@ -137,5 +137,104 @@
   },
   "negative_ending_hyphen": {
     "zone_name": "endwithhyphen-.com"
+  },
+
+  "forwarder_domain": {
+    "zone_name": "forwarder-test.com",
+    "zone_ttl": "86400",
+    "zone_contact": "admin.forwarder-test.com",
+    "refresh": "43200",
+    "retry": "3600",
+    "expiry": "1209600",
+    "minimum": "180",
+    "zone_type": "3",
+    "master_servers": "10.72.51.96",
+    "ddns_zone": false,
+    "forwarders": ["8.8.8.8", "8.8.4.4"],
+    "forward_type": "only"
+  },
+
+  "update_forwarder_domain": {
+    "forwarders": ["1.1.1.1", "9.9.9.9"],
+    "forward_type": "first"
+  },
+
+  "rpz_domain": {
+    "zone_name": "rpz-block-test.com",
+    "zone_ttl": "86400",
+    "zone_contact": "admin.rpz-block-test.com",
+    "refresh": "43200",
+    "retry": "3600",
+    "expiry": "1209600",
+    "minimum": "180",
+    "zone_type": "2",
+    "master_servers": "10.72.51.96",
+    "ddns_zone": false,
+    "sec_ns": "ns1.rpz-block-test.com",
+    "nameservers": {
+      "nameservers": "ns1.rpz-block-test.com",
+      "ns_with_ip": [
+        { "ns": "ns1.rpz-block-test.com", "ips": "10.72.51.96" }
+      ]
+    }
+  },
+
+  "update_rpz_domain": {
+    "zone_ttl": "172800",
+    "zone_contact": "updated.rpz-admin.com",
+    "refresh": "86400",
+    "retry": "7200",
+    "expiry": "2419200",
+    "minimum": "300"
+  },
+
+  "arecord_ui": {
+    "parent_zone": "apple.com",
+    "zone_pk": 30,
+    "create_record": {
+      "domain_prefix": "ui1",
+      "domain_ttl": "3600",
+      "ip_records": ["10.10.10.11", "10.10.10.12"]
+    },
+    "create_record_single": {
+      "domain_prefix": "ui2",
+      "domain_ttl": "3600",
+      "ip_records": ["10.10.10.21"]
+    },
+    "create_record_apex": {
+      "domain_prefix": "@",
+      "domain_ttl": "3600",
+      "ip_records": ["10.10.10.31"]
+    },
+    "update_record": {
+      "domain_prefix": "ui1",
+      "domain_ttl": "7200",
+      "ip_records": ["10.10.10.99", "10.10.10.100"]
+    },
+    "negative_invalid_ip": {
+      "domain_prefix": "baduip",
+      "domain_ttl": "3600",
+      "ip_records": ["999.999.999.999"]
+    },
+    "negative_empty_prefix": {
+      "domain_prefix": "",
+      "domain_ttl": "3600",
+      "ip_records": ["10.10.10.50"]
+    },
+    "negative_empty_ip": {
+      "domain_prefix": "noip",
+      "domain_ttl": "3600",
+      "ip_records": []
+    },
+    "negative_invalid_prefix": {
+      "domain_prefix": "bad!@#prefix",
+      "domain_ttl": "3600",
+      "ip_records": ["10.10.10.60"]
+    },
+    "negative_invalid_ttl": {
+      "domain_prefix": "badttl",
+      "domain_ttl": "abc",
+      "ip_records": ["10.10.10.70"]
+    }
   }
 }

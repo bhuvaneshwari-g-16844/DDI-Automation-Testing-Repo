@@ -1,0 +1,242 @@
+- generic [ref=e1]:
+  - generic [ref=e135]:
+    - list [ref=e137] [cursor=pointer]:
+      - img "DDI Central" [ref=e139]
+      - listitem [ref=e140]:
+        - link "Dashboard" [ref=e141]:
+          - /url: "#/dashboard"
+          - generic [ref=e144]: Dashboard
+      - listitem [ref=e145]:
+        - link "DNS" [ref=e146]:
+          - /url: "#/dns"
+          - generic [ref=e149]: DNS
+      - listitem [ref=e150]:
+        - link "DHCP" [ref=e151]:
+          - /url: "#/dhcp"
+          - generic [ref=e154]: DHCP
+      - listitem [ref=e155]:
+        - link "IPAM" [ref=e156]:
+          - /url: "#/ipam"
+          - generic [ref=e159]: IPAM
+      - listitem [ref=e160]:
+        - link "Threat Intel" [ref=e161]:
+          - /url: "#/threat_intl"
+          - generic "Threat Intel" [ref=e164]
+      - listitem [ref=e165]:
+        - link "Anomaly Detection" [ref=e166]:
+          - /url: "#/anomaly_detection"
+          - generic "Anomaly Detection" [ref=e169]
+      - listitem [ref=e170]:
+        - link " Alerts" [ref=e171]:
+          - /url: "#/alerts"
+          - generic [ref=e173]: 
+          - generic [ref=e174]: Alerts
+      - listitem [ref=e175]:
+        - link "Integrations" [ref=e176]:
+          - /url: "#/integrations"
+          - generic [ref=e179]: Integrations
+      - listitem [ref=e180]:
+        - link "Settings" [ref=e181]:
+          - /url: "#/settings"
+          - generic [ref=e184]: Settings
+      - listitem [ref=e767]:
+        - generic [ref=e768]:
+          - generic [ref=e770]: 
+          - generic [ref=e771]: Hide Sidebar
+    - generic [ref=e189]:
+      - generic [ref=e191]:
+        - text: Trial ends in
+        - strong [ref=e192]: "27"
+        - text: days
+      - generic "win-agent241" [ref=e196] [cursor=pointer]
+      - img [ref=e199] [cursor=pointer]
+      - generic [ref=e205]:
+        - generic [ref=e207] [cursor=pointer]: 
+        - generic [ref=e208]:
+          - generic [ref=e211]:
+            - generic [ref=e213]: ddiadmin@manageengine.com
+            - generic [ref=e214]:
+              - text: "Edition:"
+              - generic [ref=e215]: Enterprise
+            - generic [ref=e216]: "Role: Admin"
+            - generic [ref=e217]: "Build number: 6.2.0"
+            - generic [ref=e219]:
+              - text: Logout
+              - generic [ref=e221]: 
+          - generic [ref=e223]:
+            - heading "Client Credentials" [level=6] [ref=e224]
+            - generic [ref=e225]:
+              - generic [ref=e226] [cursor=pointer]:
+                - generic [ref=e227]: 
+                - text: View
+              - generic [ref=e228] [cursor=pointer]:
+                - generic [ref=e229]: 
+                - text: Reset
+              - generic [ref=e230] [cursor=pointer]:
+                - generic [ref=e231]: 
+                - text: Reset Password
+          - generic [ref=e233]:
+            - heading "License" [level=6] [ref=e234]
+            - generic [ref=e235]:
+              - generic [ref=e236] [cursor=pointer]:
+                - generic [ref=e237]: 
+                - text: Upload
+              - generic [ref=e238] [cursor=pointer]:
+                - generic [ref=e239]: 
+                - text: View
+          - generic [ref=e241]:
+            - heading "Need help?" [level=6] [ref=e242]
+            - generic [ref=e243]:
+              - generic [ref=e244] [cursor=pointer]:
+                - generic [ref=e245]: 
+                - text: Chat with us
+              - generic [ref=e246] [cursor=pointer]:
+                - generic [ref=e247]: 
+                - text: Submit Ticket
+              - generic [ref=e248] [cursor=pointer]:
+                - generic [ref=e249]: 
+                - text: User guide
+    - text:              *
+    - list [ref=e609]:
+      - listitem [ref=e610]:
+        - link "Domains" [ref=e612] [cursor=pointer]:
+          - /url: "#/dns/domains"
+          - generic [ref=e614]: Domains
+      - listitem [ref=e615]:
+        - link "Audit" [ref=e617] [cursor=pointer]:
+          - /url: "#/dns/audit"
+          - generic [ref=e619]: Audit
+      - listitem [ref=e620]:
+        - link " Analytics" [ref=e622] [cursor=pointer]:
+          - /url: "#/dns/analytics"
+          - generic [ref=e624]: 
+          - generic [ref=e625]: Analytics
+      - listitem [ref=e626]:
+        - link " Config" [ref=e628] [cursor=pointer]:
+          - /url: "#/dns/configuration"
+          - generic [ref=e630]: 
+          - generic [ref=e631]: Config
+      - listitem [ref=e632]:
+        - link "Scavenging" [ref=e634] [cursor=pointer]:
+          - /url: "#/dns/scavenging"
+          - generic [ref=e636]: Scavenging
+      - listitem [ref=e637]:
+        - link " Schedule" [ref=e639] [cursor=pointer]:
+          - /url: "#/dns/schedule"
+          - generic [ref=e641]: 
+          - generic [ref=e642]: Schedule
+    - generic [ref=e775]:
+      - generic [ref=e776]:
+        - heading "Domains > Create Domain" [level=2] [ref=e777]:
+          - link "Domains" [ref=e779] [cursor=pointer]:
+            - /url: "#/dns/domains"
+          - text: ">"
+          - generic [ref=e780] [cursor=pointer]: Create Domain
+        - generic [ref=e781] [cursor=pointer]: Page Tips?
+      - generic [ref=e782]:
+        - generic [ref=e783]:
+          - generic [ref=e784] [cursor=pointer]: 
+          - heading "Page Tips?" [level=2] [ref=e785]
+          - generic [ref=e787] [cursor=pointer]: 
+        - list [ref=e789]:
+          - listitem [ref=e790]:
+            - heading "What can you do here?" [level=4] [ref=e791]
+            - paragraph [ref=e792]: • Discover or setup new domains, including authoritative, forward, and reverse domains. Configure dynamic IP updates for a domain using Dynamic DNS or DDNS. Additionally, configure automatic failover with multiple primary and multiple secondary setups for a domain.
+          - listitem [ref=e793]:
+            - heading "Zone scope" [level=4] [ref=e794]
+            - paragraph [ref=e795]: • Zone scopes are unique instances of a domain that allows administrators to manage different versions of DNS records for the same domain name independently. It enables DNS policies to distribute traffic across multiple instances of a zone, providing enhanced flexibility and control over DNS resolution.
+            - paragraph [ref=e796]:
+              - link "Creating zone scopes" [ref=e797] [cursor=pointer]:
+                - /url: https://www.manageengine.com/dns-dhcp-ipam/help/creating-zone-scopes-for-microsoft-dns-in-ddi-central.html
+          - listitem [ref=e798]:
+            - heading "DDNS" [level=4] [ref=e799]
+            - paragraph [ref=e800]: • Enable or disable DDNS to manage a domain dynamically with DHCP-allocated variable IPs.
+            - paragraph [ref=e801]:
+              - link "Managing dynamic domains in DDI Central" [ref=e802] [cursor=pointer]:
+                - /url: https://www.manageengine.com/dns-dhcp-ipam/help/managing-dynamic-domains-for-microsoft-dns-in-ddi-central.html
+          - listitem [ref=e803]:
+            - heading "Active Directory" [level=4] [ref=e804]
+            - paragraph [ref=e805]: •Network admins can enable by toggling 'Active Directory' for every new domains they create, in DDI Central Windows Microsoft. This feature enables authorized devices to automatically update DNS records and enables automated replication across multiple domain controllers.
+            - paragraph [ref=e806]:
+              - link "Adding AD domains in DDI Central" [ref=e807] [cursor=pointer]:
+                - /url: https://www.manageengine.com/dns-dhcp-ipam/help/windows-adding-ad-domains.html
+      - generic [ref=e811]:
+        - generic [ref=e812]:
+          - generic [ref=e813]: Name *
+          - textbox "Enter Name" [ref=e814]: proofzone1.com
+        - generic [ref=e815]:
+          - generic [ref=e816]: Type *
+          - generic [ref=e818]:
+            - generic [ref=e820] [cursor=pointer]: Authoritative
+            - generic [ref=e823]:
+              - textbox [ref=e825]
+              - list [ref=e826]
+        - generic [ref=e827]:
+          - generic [ref=e828]: TTL*
+          - textbox "Enter TTL" [ref=e829]: "86400"
+        - generic [ref=e830]:
+          - generic [ref=e831]: Active Directory*
+          - checkbox [ref=e833] [cursor=pointer]
+        - generic [ref=e835]:
+          - generic [ref=e836]:
+            - text: NS Records
+            - generic "For multiple NS records, separate each entry with a comma." [ref=e837] [cursor=pointer]: 
+            - text: "*"
+          - textbox "Enter NS Records" [ref=e838]: ns1.proofzone1.com
+        - generic [ref=e891]:
+          - heading "NS Records IP(s)" [level=4] [ref=e892]
+          - generic [ref=e893]: The following NS Records are subdomains within the zone itself, please provide IPv4/v6 addresses.
+          - generic [ref=e898]:
+            - textbox [disabled] [ref=e899]: ns1.proofzone1.com.
+            - textbox "Enter IP(s)" [active] [ref=e900]
+        - generic [ref=e839]:
+          - generic [ref=e840]:
+            - text: Email
+            - generic "'@' in your mail will be replaced by '.'" [ref=e841] [cursor=pointer]: 
+            - text: "*"
+          - textbox "Enter Email" [ref=e842]: admin.proofzone1.com
+        - text: "*"
+        - generic [ref=e843]:
+          - generic [ref=e844]: Refresh*
+          - textbox "Enter Refresh" [ref=e845]: "43200"
+        - generic [ref=e846]:
+          - generic [ref=e847]: Retry*
+          - textbox "Enter Retry" [ref=e848]: "3600"
+        - generic [ref=e849]:
+          - generic [ref=e850]: Expiry*
+          - textbox "Enter Expiry" [ref=e851]: "1209600"
+        - generic [ref=e852]:
+          - generic [ref=e853]: Minimum*
+          - textbox "Enter Minimum" [ref=e854]: "180"
+        - generic [ref=e855]:
+          - generic [ref=e856]: Primary(s) *
+          - generic [ref=e858]:
+            - list [ref=e859]:
+              - listitem [ref=e860]:
+                - textbox [ref=e861] [cursor=pointer]: Select a server...
+            - generic [ref=e862]:
+              - list
+        - generic [ref=e863]:
+          - generic [ref=e864]: Secondary
+          - generic [ref=e866]:
+            - list [ref=e867]:
+              - listitem [ref=e868]:
+                - textbox [ref=e869] [cursor=pointer]: Select a server...
+            - generic [ref=e870]:
+              - list
+        - generic [ref=e871]:
+          - generic [ref=e872]: Scope List
+          - textbox "Enter Scope" [ref=e873]:
+            - /placeholder: "Enter Scope "
+          - generic "Add Scope" [ref=e874] [cursor=pointer]:
+            - generic [ref=e875]: 
+        - generic [ref=e876]:
+          - generic [ref=e877]: DDNS*
+          - generic [ref=e881] [cursor=pointer]: Disabled
+        - generic [ref=e883]:
+          - link "Cancel" [ref=e884] [cursor=pointer]:
+            - /url: "#/dns/domains"
+            - button "Cancel" [ref=e885]
+          - button "Save" [ref=e887] [cursor=pointer]:
+            - generic [ref=e888]: Save
+  - img [ref=e604]

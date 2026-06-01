@@ -1,0 +1,394 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e135]:
+    - list [ref=e137] [cursor=pointer]:
+      - img "DDI Central" [ref=e139]
+      - listitem [ref=e140]:
+        - link "Dashboard" [ref=e141]:
+          - /url: "#/dashboard"
+          - generic [ref=e144]: Dashboard
+      - listitem [ref=e145]:
+        - link "DNS" [ref=e146]:
+          - /url: "#/dns"
+          - generic [ref=e149]: DNS
+      - listitem [ref=e150]:
+        - link "DHCP" [ref=e151]:
+          - /url: "#/dhcp"
+          - generic [ref=e154]: DHCP
+      - listitem [ref=e155]:
+        - link "IPAM" [ref=e156]:
+          - /url: "#/ipam"
+          - generic [ref=e159]: IPAM
+      - listitem [ref=e160]:
+        - link "Threat Intel" [ref=e161]:
+          - /url: "#/threat_intl"
+          - generic "Threat Intel" [ref=e164]
+      - listitem [ref=e165]:
+        - link "Anomaly Detection" [ref=e166]:
+          - /url: "#/anomaly_detection"
+          - generic "Anomaly Detection" [ref=e169]
+      - listitem [ref=e170]:
+        - link " Alerts" [ref=e171]:
+          - /url: "#/alerts"
+          - generic [ref=e173]: 
+          - generic [ref=e174]: Alerts
+      - listitem [ref=e175]:
+        - link "Integrations" [ref=e176]:
+          - /url: "#/integrations"
+          - generic [ref=e179]: Integrations
+      - listitem [ref=e180]:
+        - link "Settings" [ref=e181]:
+          - /url: "#/settings"
+          - generic [ref=e184]: Settings
+      - text: 
+    - generic [ref=e189]:
+      - generic [ref=e191]:
+        - text: Trial ends in
+        - strong [ref=e192]: "27"
+        - text: days
+      - generic "win-agent241" [ref=e196] [cursor=pointer]
+      - img [ref=e199] [cursor=pointer]
+      - generic [ref=e205]:
+        - generic [ref=e207] [cursor=pointer]: 
+        - generic [ref=e208]:
+          - generic [ref=e211]:
+            - generic [ref=e213]: ddiadmin@manageengine.com
+            - generic [ref=e214]:
+              - text: "Edition:"
+              - generic [ref=e215]: Enterprise
+            - generic [ref=e216]: "Role: Admin"
+            - generic [ref=e217]: "Build number: 6.2.0"
+            - generic [ref=e219]:
+              - text: Logout
+              - generic [ref=e221]: 
+          - generic [ref=e223]:
+            - heading "Client Credentials" [level=6] [ref=e224]
+            - generic [ref=e225]:
+              - generic [ref=e226] [cursor=pointer]:
+                - generic [ref=e227]: 
+                - text: View
+              - generic [ref=e228] [cursor=pointer]:
+                - generic [ref=e229]: 
+                - text: Reset
+              - generic [ref=e230] [cursor=pointer]:
+                - generic [ref=e231]: 
+                - text: Reset Password
+          - generic [ref=e233]:
+            - heading "License" [level=6] [ref=e234]
+            - generic [ref=e235]:
+              - generic [ref=e236] [cursor=pointer]:
+                - generic [ref=e237]: 
+                - text: Upload
+              - generic [ref=e238] [cursor=pointer]:
+                - generic [ref=e239]: 
+                - text: View
+          - generic [ref=e241]:
+            - heading "Need help?" [level=6] [ref=e242]
+            - generic [ref=e243]:
+              - generic [ref=e244] [cursor=pointer]:
+                - generic [ref=e245]: 
+                - text: Chat with us
+              - generic [ref=e246] [cursor=pointer]:
+                - generic [ref=e247]: 
+                - text: Submit Ticket
+              - generic [ref=e248] [cursor=pointer]:
+                - generic [ref=e249]: 
+                - text: User guide
+    - text:              *
+    - list [ref=e649]:
+      - listitem [ref=e650]:
+        - link "Domains" [ref=e652] [cursor=pointer]:
+          - /url: "#/dns/domains"
+          - generic [ref=e654]: Domains
+      - listitem [ref=e655]:
+        - link "Audit" [ref=e657] [cursor=pointer]:
+          - /url: "#/dns/audit"
+          - generic [ref=e659]: Audit
+      - listitem [ref=e660]:
+        - link " Analytics" [ref=e662] [cursor=pointer]:
+          - /url: "#/dns/analytics"
+          - generic [ref=e664]: 
+          - generic [ref=e665]: Analytics
+      - listitem [ref=e666]:
+        - link " Config" [ref=e668] [cursor=pointer]:
+          - /url: "#/dns/configuration"
+          - generic [ref=e670]: 
+          - generic [ref=e671]: Config
+      - listitem [ref=e672]:
+        - link "Scavenging" [ref=e674] [cursor=pointer]:
+          - /url: "#/dns/scavenging"
+          - generic [ref=e676]: Scavenging
+      - listitem [ref=e677]:
+        - link " Schedule" [ref=e679] [cursor=pointer]:
+          - /url: "#/dns/schedule"
+          - generic [ref=e681]: 
+          - generic [ref=e682]: Schedule
+    - generic [ref=e250]:
+      - generic [ref=e251]:
+        - heading "dashboard |" [level=2] [ref=e252]:
+          - generic [ref=e253] [cursor=pointer]: dashboard
+          - text: "|"
+        - generic [ref=e254]:
+          - text: Auto Refresh
+          - checkbox [checked] [ref=e256] [cursor=pointer]: 
+      - generic [ref=e258]:
+        - generic [ref=e259]:
+          - generic [ref=e261] [cursor=pointer]:
+            - heading "Servers" [level=3] [ref=e262]
+            - generic [ref=e263]:
+              - generic [ref=e264]:
+                - generic [ref=e265]: "2"
+                - generic [ref=e266]: DNS
+              - generic [ref=e267]:
+                - generic [ref=e268]: "2"
+                - generic [ref=e269]: DHCP
+            - generic [ref=e271]: 
+          - generic [ref=e273] [cursor=pointer]:
+            - heading "DNS" [level=3] [ref=e274]
+            - generic [ref=e275]:
+              - generic [ref=e276]:
+                - generic "11" [ref=e277]
+                - generic [ref=e278]: Domains
+              - generic "Last hour queries" [ref=e279]:
+                - generic "0" [ref=e280]
+                - generic [ref=e281]: Queries
+          - generic [ref=e285] [cursor=pointer]:
+            - heading "DHCP" [level=3] [ref=e286]
+            - generic [ref=e287]:
+              - generic [ref=e288]:
+                - generic [ref=e289]: "4"
+                - generic [ref=e290]: Subnets
+              - generic [ref=e291]:
+                - generic [ref=e292]: 0%
+                - generic [ref=e293]: Usage
+          - generic [ref=e297] [cursor=pointer]:
+            - heading "Services" [level=3] [ref=e298]
+            - generic [ref=e299]:
+              - generic [ref=e301]:
+                - generic [ref=e303]:
+                  - generic [ref=e305]: 
+                  - generic [ref=e306]: "2"
+                - generic [ref=e307]: DNS
+              - generic [ref=e309]:
+                - generic [ref=e311]:
+                  - generic [ref=e313]: 
+                  - generic [ref=e314]: "2"
+                - generic [ref=e315]: dhcp4
+              - generic [ref=e317]:
+                - generic [ref=e319]:
+                  - generic [ref=e321]: 
+                  - generic [ref=e322]: "2"
+                - generic [ref=e323]: dhcp6
+            - generic [ref=e325]: 
+        - generic [ref=e326]:
+          - generic [ref=e328]:
+            - heading "Average Query Resolution (Last Hour)" [level=2] [ref=e329]
+            - table [ref=e331]:
+              - rowgroup [ref=e332]:
+                - row "Server Average Time" [ref=e333]:
+                  - columnheader "Server" [ref=e334]
+                  - columnheader "Average Time" [ref=e335]
+              - rowgroup [ref=e336]:
+                - row "win-agent12(10.71.17.241) 3.9 ms" [ref=e337]:
+                  - cell "win-agent12(10.71.17.241)" [ref=e338] [cursor=pointer]
+                  - cell "3.9 ms" [ref=e339] [cursor=pointer]
+                - row "win-agent13(10.71.17.127) 5.2 ms" [ref=e340]:
+                  - cell "win-agent13(10.71.17.127)" [ref=e341] [cursor=pointer]
+                  - cell "5.2 ms" [ref=e342] [cursor=pointer]
+          - generic [ref=e344]:
+            - heading "Average Query Resolution (Last Hour)" [level=2] [ref=e345]
+            - generic [ref=e349]:
+              - img [ref=e350]:
+                - generic [ref=e352]:
+                  - generic [ref=e354]:
+                    - generic [ref=e356]: Servers
+                    - generic [ref=e357]:
+                      - generic [ref=e360] [cursor=pointer]: win-agent12(10.71.17.241)
+                      - generic [ref=e362] [cursor=pointer]: win-agent13(10.71.17.127)
+                  - generic [ref=e364]:
+                    - generic [ref=e366]: Time
+                    - generic [ref=e367]:
+                      - generic [ref=e370] [cursor=pointer]: 0 ms
+                      - generic [ref=e372] [cursor=pointer]: 20 ms
+                      - generic [ref=e374] [cursor=pointer]: 40 ms
+                      - generic [ref=e376] [cursor=pointer]: 60 ms
+                      - generic [ref=e378] [cursor=pointer]: 80 ms
+                      - generic [ref=e380] [cursor=pointer]: 100 ms
+              - img
+        - generic [ref=e390]:
+          - generic [ref=e392]:
+            - heading "CPU Usage (Last Hour)" [level=2] [ref=e393]
+            - table [ref=e395]:
+              - rowgroup [ref=e396]:
+                - row "Server usage" [ref=e397]:
+                  - columnheader "Server" [ref=e398]
+                  - columnheader "usage" [ref=e399]
+              - rowgroup [ref=e400]:
+                - row "win-agent12(10.71.17.241) 4.55%" [ref=e401]:
+                  - cell "win-agent12(10.71.17.241)" [ref=e402] [cursor=pointer]
+                  - cell "4.55%" [ref=e403] [cursor=pointer]
+                - row "win-agent13(10.71.17.127) 9.8%" [ref=e404]:
+                  - cell "win-agent13(10.71.17.127)" [ref=e405] [cursor=pointer]
+                  - cell "9.8%" [ref=e406] [cursor=pointer]
+          - generic [ref=e408]:
+            - heading "CPU Usage (Last Hour)  " [level=2] [ref=e409]:
+              - text: CPU Usage (Last Hour)
+              - generic [ref=e410] [cursor=pointer]:
+                - generic [ref=e411]: 
+                - generic [ref=e412]: 
+            - generic [ref=e416]:
+              - img [ref=e417]:
+                - generic [ref=e419]:
+                  - generic [ref=e421]:
+                    - generic [ref=e423]: Servers
+                    - generic [ref=e424]:
+                      - generic [ref=e427] [cursor=pointer]: win-agent12(10.71.17.241)
+                      - generic [ref=e429] [cursor=pointer]: win-agent13(10.71.17.127)
+                  - generic [ref=e431]:
+                    - generic [ref=e433]: Usage
+                    - generic [ref=e434]:
+                      - generic [ref=e437] [cursor=pointer]: 0%
+                      - generic [ref=e439] [cursor=pointer]: 20%
+                      - generic [ref=e441] [cursor=pointer]: 40%
+                      - generic [ref=e443] [cursor=pointer]: 60%
+                      - generic [ref=e445] [cursor=pointer]: 80%
+                      - generic [ref=e447] [cursor=pointer]: 100%
+              - img:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: 9.8%
+              - list [ref=e459]:
+                - listitem [ref=e460] [cursor=pointer]: DNS
+                - listitem [ref=e462] [cursor=pointer]: DHCP
+                - listitem [ref=e464] [cursor=pointer]: Other
+        - generic [ref=e466]:
+          - generic [ref=e468]:
+            - heading "Memory Usage (Last Hour)" [level=2] [ref=e469]
+            - table [ref=e471]:
+              - rowgroup [ref=e472]:
+                - row "Server usage" [ref=e473]:
+                  - columnheader "Server" [ref=e474]
+                  - columnheader "usage" [ref=e475]
+              - rowgroup [ref=e476]:
+                - row "win-agent12(10.71.17.241) 58%" [ref=e477]:
+                  - cell "win-agent12(10.71.17.241)" [ref=e478] [cursor=pointer]
+                  - cell "58%" [ref=e479] [cursor=pointer]
+                - row "win-agent13(10.71.17.127) 78.79%" [ref=e480]:
+                  - cell "win-agent13(10.71.17.127)" [ref=e481] [cursor=pointer]
+                  - cell "78.79%" [ref=e482] [cursor=pointer]
+          - generic [ref=e484]:
+            - heading "Memory Usage (Last Hour)  " [level=2] [ref=e485]:
+              - text: Memory Usage (Last Hour)
+              - generic [ref=e486] [cursor=pointer]:
+                - generic [ref=e487]: 
+                - generic [ref=e488]: 
+            - generic [ref=e492]:
+              - img [ref=e493]:
+                - generic [ref=e495]:
+                  - generic [ref=e497]:
+                    - generic [ref=e499]: Servers
+                    - generic [ref=e500]:
+                      - generic [ref=e503] [cursor=pointer]: win-agent12(10.71.17.241)
+                      - generic [ref=e505] [cursor=pointer]: win-agent13(10.71.17.127)
+                  - generic [ref=e507]:
+                    - generic [ref=e509]: Usage
+                    - generic [ref=e510]:
+                      - generic [ref=e513] [cursor=pointer]: 0%
+                      - generic [ref=e515] [cursor=pointer]: 20%
+                      - generic [ref=e517] [cursor=pointer]: 40%
+                      - generic [ref=e519] [cursor=pointer]: 60%
+                      - generic [ref=e521] [cursor=pointer]: 80%
+                      - generic [ref=e523] [cursor=pointer]: 100%
+              - img:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: 54.38%
+                        - generic: 75.18%
+              - list [ref=e541]:
+                - listitem [ref=e542] [cursor=pointer]: DNS
+                - listitem [ref=e544] [cursor=pointer]: DHCP
+                - listitem [ref=e546] [cursor=pointer]: Other
+        - generic [ref=e548]:
+          - generic [ref=e550]:
+            - heading "Disk Usage (Last Hour)" [level=2] [ref=e551]
+            - table [ref=e553]:
+              - rowgroup [ref=e554]:
+                - row "Server usage" [ref=e555]:
+                  - columnheader "Server" [ref=e556]
+                  - columnheader "usage" [ref=e557]
+              - rowgroup [ref=e558]:
+                - row "win-agent12(10.71.17.241) 64.92%" [ref=e559]:
+                  - cell "win-agent12(10.71.17.241)" [ref=e560] [cursor=pointer]
+                  - cell "64.92%" [ref=e561] [cursor=pointer]
+                - row "win-agent13(10.71.17.127) 56.82%" [ref=e562]:
+                  - cell "win-agent13(10.71.17.127)" [ref=e563] [cursor=pointer]
+                  - cell "56.82%" [ref=e564] [cursor=pointer]
+          - generic [ref=e566]:
+            - heading "Disk Usage (Last Hour)" [level=2] [ref=e567]
+            - generic [ref=e568]:
+              - generic [ref=e570]:
+                - generic [ref=e572] [cursor=pointer]: win-agent12(10.71.17.241)
+                - generic [ref=e575]:
+                  - textbox [ref=e577]
+                  - list [ref=e578]
+              - heading "Disk Name:Drive C" [level=4] [ref=e579]
+            - generic [ref=e583]:
+              - img [ref=e584]
+              - img:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: 64.9%
+        - generic [ref=e595]:
+          - generic [ref=e597]:
+            - heading "Last 24 Hours Queries" [level=2] [ref=e598]
+            - generic [ref=e686]:
+              - img [ref=e687]:
+                - generic [ref=e689]:
+                  - generic [ref=e691]:
+                    - generic "Hours" [ref=e693]
+                    - generic [ref=e694]:
+                      - generic [ref=e697] [cursor=pointer]: 5/29at12:00
+                      - generic [ref=e699] [cursor=pointer]: 5/29at14:00
+                      - generic [ref=e701] [cursor=pointer]: 5/29at16:00
+                      - generic [ref=e703] [cursor=pointer]: 5/29at18:00
+                      - generic [ref=e705] [cursor=pointer]: 5/29at20:00
+                      - generic [ref=e707] [cursor=pointer]: 5/29at22:00
+                      - generic [ref=e709] [cursor=pointer]: 5/30at0:00
+                      - generic [ref=e711] [cursor=pointer]: 5/30at2:00
+                      - generic [ref=e713] [cursor=pointer]: 5/30at4:00
+                      - generic [ref=e715] [cursor=pointer]: 5/30at6:00
+                      - generic [ref=e717] [cursor=pointer]: 5/30at8:00
+                      - generic [ref=e719] [cursor=pointer]: 5/30at10:00
+                  - generic [ref=e721]:
+                    - generic [ref=e723]: Queries
+                    - generic [ref=e724]:
+                      - generic [ref=e727] [cursor=pointer]: "0"
+                      - generic [ref=e729] [cursor=pointer]: "0"
+                      - generic [ref=e731] [cursor=pointer]: "0"
+                      - generic [ref=e733] [cursor=pointer]: "0"
+                      - generic [ref=e735] [cursor=pointer]: "0"
+                      - generic [ref=e737] [cursor=pointer]: "0"
+              - img
+          - generic [ref=e607]:
+            - heading "Usage per Subnet (Top 5)" [level=2] [ref=e608]
+            - generic [ref=e612]:
+              - img [ref=e613]:
+                - generic [ref=e618]:
+                  - generic [ref=e621] [cursor=pointer]: 1000::/64
+                  - generic [ref=e623] [cursor=pointer]: 1.1.1.0/24
+                  - generic [ref=e625] [cursor=pointer]: 2.2.2.0/24
+                  - generic [ref=e627] [cursor=pointer]: 3.3.3.0/24
+              - img:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: 0.4%
+                        - generic: 0.4%
+                        - generic: 0.4%
+  - img [ref=e644]

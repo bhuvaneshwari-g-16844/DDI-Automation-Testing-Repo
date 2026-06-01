@@ -1,0 +1,373 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e1998]:
+    - list [ref=e2000] [cursor=pointer]:
+      - img "DDI Central" [ref=e2002]
+      - listitem [ref=e2003]:
+        - link "Dashboard" [ref=e2004]:
+          - /url: "#/dashboard"
+          - generic [ref=e2007]: Dashboard
+      - listitem [ref=e2008]:
+        - link "DNS" [ref=e2009]:
+          - /url: "#/dns"
+          - generic [ref=e2012]: DNS
+      - listitem [ref=e2013]:
+        - link "DHCP" [ref=e2014]:
+          - /url: "#/dhcp"
+          - generic [ref=e2017]: DHCP
+      - listitem [ref=e2018]:
+        - link "IPAM" [ref=e2019]:
+          - /url: "#/ipam"
+          - generic [ref=e2022]: IPAM
+      - listitem [ref=e2023]:
+        - link "Threat Intel" [ref=e2024]:
+          - /url: "#/threat_intl"
+          - generic "Threat Intel" [ref=e2027]
+      - listitem [ref=e2028]:
+        - link "Anomaly Detection" [ref=e2029]:
+          - /url: "#/anomaly_detection"
+          - generic "Anomaly Detection" [ref=e2032]
+      - listitem [ref=e2033]:
+        - link " Alerts" [ref=e2034]:
+          - /url: "#/alerts"
+          - generic [ref=e2036]: 
+          - generic [ref=e2037]: Alerts
+      - listitem [ref=e2038]:
+        - link "Integrations" [ref=e2039]:
+          - /url: "#/integrations"
+          - generic [ref=e2042]: Integrations
+      - listitem [ref=e2043]:
+        - link "Settings" [ref=e2044]:
+          - /url: "#/settings"
+          - generic [ref=e2047]: Settings
+      - listitem [ref=e2563]:
+        - generic [ref=e2564]:
+          - generic [ref=e2566]: 
+          - generic [ref=e2567]: Hide Sidebar
+    - generic [ref=e2052]:
+      - generic [ref=e2054]:
+        - text: Trial ends in
+        - strong [ref=e2055]: "25"
+        - text: days
+      - generic "windows-agent-248" [ref=e2059] [cursor=pointer]
+      - img [ref=e2062] [cursor=pointer]
+      - generic [ref=e2068]:
+        - generic [ref=e2070] [cursor=pointer]: 
+        - generic [ref=e2071]:
+          - generic [ref=e2074]:
+            - generic [ref=e2076]: ddiadmin@manageengine.com
+            - generic [ref=e2077]:
+              - text: "Edition:"
+              - generic [ref=e2078]: Enterprise
+            - generic [ref=e2079]: "Role: Admin"
+            - generic [ref=e2080]: "Build number: 6.2.0"
+            - generic [ref=e2082]:
+              - text: Logout
+              - generic [ref=e2084]: 
+          - generic [ref=e2086]:
+            - heading "Client Credentials" [level=6] [ref=e2087]
+            - generic [ref=e2088]:
+              - generic [ref=e2089] [cursor=pointer]:
+                - generic [ref=e2090]: 
+                - text: View
+              - generic [ref=e2091] [cursor=pointer]:
+                - generic [ref=e2092]: 
+                - text: Reset
+              - generic [ref=e2093] [cursor=pointer]:
+                - generic [ref=e2094]: 
+                - text: Reset Password
+          - generic [ref=e2096]:
+            - heading "License" [level=6] [ref=e2097]
+            - generic [ref=e2098]:
+              - generic [ref=e2099] [cursor=pointer]:
+                - generic [ref=e2100]: 
+                - text: Upload
+              - generic [ref=e2101] [cursor=pointer]:
+                - generic [ref=e2102]: 
+                - text: View
+          - generic [ref=e2104]:
+            - heading "Need help?" [level=6] [ref=e2105]
+            - generic [ref=e2106]:
+              - generic [ref=e2107] [cursor=pointer]:
+                - generic [ref=e2108]: 
+                - text: Chat with us
+              - generic [ref=e2109] [cursor=pointer]:
+                - generic [ref=e2110]: 
+                - text: Submit Ticket
+              - generic [ref=e2111] [cursor=pointer]:
+                - generic [ref=e2112]: 
+                - text: User guide
+    - text:              *
+    - list [ref=e2526]:
+      - listitem [ref=e2527]:
+        - link "Domains" [ref=e2529] [cursor=pointer]:
+          - /url: "#/dns/domains"
+          - generic [ref=e2532]: Domains
+      - listitem [ref=e2533]:
+        - link "Audit" [ref=e2535] [cursor=pointer]:
+          - /url: "#/dns/audit"
+          - generic [ref=e2538]: Audit
+      - listitem [ref=e2539]:
+        - link " Analytics" [ref=e2541] [cursor=pointer]:
+          - /url: "#/dns/analytics"
+          - generic [ref=e2543]: 
+          - generic [ref=e2544]: Analytics
+      - listitem [ref=e2545]:
+        - link " Config" [ref=e2547] [cursor=pointer]:
+          - /url: "#/dns/configuration"
+          - generic [ref=e2549]: 
+          - generic [ref=e2550]: Config
+      - listitem [ref=e2551]:
+        - link "Scavenging" [ref=e2553] [cursor=pointer]:
+          - /url: "#/dns/scavenging"
+          - generic [ref=e2556]: Scavenging
+      - listitem [ref=e2557]:
+        - link " Schedule" [ref=e2559] [cursor=pointer]:
+          - /url: "#/dns/schedule"
+          - generic [ref=e2561]: 
+          - generic [ref=e2562]: Schedule
+    - generic [ref=e2113]:
+      - generic [ref=e8610]:
+        - heading "Domains > proofzone1.com." [level=2] [ref=e8611]:
+          - link "Domains" [ref=e8613] [cursor=pointer]:
+            - /url: "#/dns/domains"
+          - text: ">"
+          - generic "proofzone1.com." [ref=e8614] [cursor=pointer]:
+            - generic [ref=e8615]: proofzone1.com.
+        - generic [ref=e8616] [cursor=pointer]:
+          - link "Previous versions" [ref=e8617]:
+            - /url: "#/dns/domains/versions/55"
+          - generic [ref=e8618]: 
+      - generic [ref=e8619]:
+        - generic [ref=e8620]:
+          - list
+        - generic [ref=e8621]:
+          - link "DNSSEC " [ref=e8622] [cursor=pointer]:
+            - /url: "#/dns/domains/dnssec/55"
+            - generic [ref=e8623]:
+              - text: DNSSEC
+              - generic [ref=e8624]: 
+          - button "Import " [ref=e8626] [cursor=pointer]:
+            - text: Import
+            - generic [ref=e8627]: 
+          - button "Export " [ref=e8629] [cursor=pointer]:
+            - text: Export
+            - generic [ref=e8630]: 
+        - generic [ref=e8632] [cursor=pointer]:
+          - paragraph [ref=e8633]:
+            - generic [ref=e8635]: 
+            - text: A (IPV4) 3
+          - list [ref=e8636]:
+            - listitem [ref=e8637]:
+              - generic [ref=e8638]:
+                - generic [ref=e8640]:
+                  - button "Scan for Duplicates " [ref=e8641]:
+                    - text: Scan for Duplicates
+                    - generic [ref=e8642]: 
+                  - generic [ref=e8643]:
+                    - combobox [ref=e8644]
+                    - combobox "Contains" [ref=e8647]:
+                      - textbox "Contains" [ref=e8648]
+                    - searchbox "Search..." [ref=e8649]
+                - table [ref=e8651]:
+                  - rowgroup [ref=e8652]:
+                    - row "Domain Name Domain Ttl IP Created Modified  " [ref=e8653]:
+                      - cell [ref=e8654]:
+                        - checkbox [ref=e8656]
+                      - cell "Domain Name" [ref=e8657]
+                      - cell "Domain Ttl" [ref=e8658]
+                      - cell "IP" [ref=e8659]
+                      - cell "Created" [ref=e8660]
+                      - cell "Modified" [ref=e8661]
+                      - cell " " [ref=e8662]:
+                        - link "" [ref=e8664]:
+                          - /url: "#/dns/a_add/55"
+                          - generic "Add" [ref=e8665]: 
+                        - generic [ref=e8667]: 
+                  - rowgroup [ref=e8668]:
+                    - row "arec1.proofzone1.com. 1 86400 10.10.10.21 6/1/2026, 10:52:47 PM 6/1/2026, 10:52:47 PM  " [ref=e8669]:
+                      - cell [ref=e8670]:
+                        - checkbox [ref=e8672]
+                      - cell "arec1.proofzone1.com. 1" [ref=e8673]
+                      - cell "86400" [ref=e8674]
+                      - cell "10.10.10.21" [ref=e8675]
+                      - cell "6/1/2026, 10:52:47 PM" [ref=e8676]
+                      - cell "6/1/2026, 10:52:47 PM" [ref=e8677]
+                      - cell " " [ref=e8678]:
+                        - generic "Edit" [ref=e8679]: 
+                        - generic [ref=e8680]: 
+                    - row "arec2.proofzone1.com. 1 7200 10.10.10.22 6/1/2026, 10:58:36 PM 6/1/2026, 11:02:30 PM  " [ref=e8681]:
+                      - cell [ref=e8682]:
+                        - checkbox [ref=e8684]
+                      - cell "arec2.proofzone1.com. 1" [ref=e8685]
+                      - cell "7200" [ref=e8686]
+                      - cell "10.10.10.22" [ref=e8687]
+                      - cell "6/1/2026, 10:58:36 PM" [ref=e8688]
+                      - cell "6/1/2026, 11:02:30 PM" [ref=e8689]
+                      - cell " " [ref=e8690]:
+                        - generic "Edit" [ref=e8691]: 
+                        - generic [ref=e8692]: 
+                    - row "ns1.proofzone1.com. 1 86400 10.72.33.248 5/31/2026, 3:51:18 AM 5/31/2026, 3:51:18 AM  " [ref=e8693]:
+                      - cell [ref=e8694]:
+                        - checkbox [ref=e8696]
+                      - cell "ns1.proofzone1.com. 1" [ref=e8697]
+                      - cell "86400" [ref=e8698]
+                      - cell "10.72.33.248" [ref=e8699]
+                      - cell "5/31/2026, 3:51:18 AM" [ref=e8700]
+                      - cell "5/31/2026, 3:51:18 AM" [ref=e8701]
+                      - cell " " [ref=e8702]:
+                        - generic "Edit" [ref=e8703]: 
+                        - generic [ref=e8704]: 
+                - generic [ref=e8705]:
+                  - generic [ref=e8706]:
+                    - list [ref=e8708]:
+                      - listitem [ref=e8709]:
+                        - link "Previous":
+                          - /url: "#"
+                      - listitem [ref=e8710]:
+                        - link "1" [ref=e8711]:
+                          - /url: "#"
+                      - listitem [ref=e8712]:
+                        - link "Next":
+                          - /url: "#"
+                    - generic [ref=e8714]:
+                      - text: Per Page
+                      - combobox "Per Page" [ref=e8715]:
+                        - option "5" [selected]
+                        - option "10"
+                        - option "25"
+                        - option "50"
+                        - option "75"
+                        - option "100"
+                        - option "250"
+                        - option "500"
+                  - status [ref=e8717]: Showing 1 to 3 of 3 record(s)
+        - generic [ref=e8719] [cursor=pointer]:
+          - paragraph [ref=e8720]:
+            - generic [ref=e8722]: 
+            - text: AAAA (IPV6) 2
+          - list:  
+        - generic [ref=e8724] [cursor=pointer]:
+          - paragraph [ref=e8725]:
+            - generic [ref=e8727]: 
+            - text: CAA
+          - list:  
+        - generic [ref=e8729] [cursor=pointer]:
+          - paragraph [ref=e8730]:
+            - generic [ref=e8732]: 
+            - text: CNAME 2
+          - list:  
+        - generic [ref=e8734] [cursor=pointer]:
+          - paragraph [ref=e8735]:
+            - generic [ref=e8737]: 
+            - text: DS
+          - list:  
+        - generic [ref=e8739] [cursor=pointer]:
+          - paragraph [ref=e8740]:
+            - generic [ref=e8742]: 
+            - text: HINFO
+          - list:  
+        - generic [ref=e8744] [cursor=pointer]:
+          - paragraph [ref=e8745]:
+            - generic [ref=e8747]: 
+            - text: MX 2
+          - list:  
+        - generic [ref=e8749] [cursor=pointer]:
+          - paragraph [ref=e8750]:
+            - generic [ref=e8752]: 
+            - text: NS 1
+          - list:  
+        - generic [ref=e8754] [cursor=pointer]:
+          - paragraph [ref=e8755]:
+            - generic [ref=e8757]: 
+            - text: PTR
+          - list:  
+        - generic [ref=e8759] [cursor=pointer]:
+          - paragraph [ref=e8760]:
+            - generic [ref=e8762]: 
+            - text: SRV
+          - list:  
+        - generic [ref=e8764] [cursor=pointer]:
+          - paragraph [ref=e8765]:
+            - generic [ref=e8767]: 
+            - text: TXT 3
+          - list [ref=e8768]:
+            - listitem [ref=e8769]:
+              - generic [ref=e8770]:
+                - searchbox [ref=e8774]
+                - table [ref=e8776]:
+                  - rowgroup [ref=e8777]:
+                    - row "Domain Name Domain Ttl Created Modified  " [ref=e8778]:
+                      - cell [ref=e8779]:
+                        - checkbox [ref=e8781]
+                      - cell "Domain Name" [ref=e8782]
+                      - cell "Domain Ttl" [ref=e8783]
+                      - cell "Created" [ref=e8784]
+                      - cell "Modified" [ref=e8785]
+                      - cell " " [ref=e8786]:
+                        - link "" [ref=e8788]:
+                          - /url: "#/dns/txt_add/55"
+                          - generic "Add" [ref=e8789]: 
+                        - generic [ref=e8791]: 
+                  - rowgroup [ref=e8792]:
+                    - row "txt1.proofzone1.com. 1 86400 6/1/2026, 11:14:03 PM 6/1/2026, 11:14:03 PM  " [ref=e8793]:
+                      - cell [ref=e8794]:
+                        - checkbox [ref=e8796]
+                      - cell "txt1.proofzone1.com. 1" [ref=e8797]:
+                        - generic "view records" [ref=e8798]: txt1.proofzone1.com.
+                        - text: "1"
+                      - cell "86400" [ref=e8799]
+                      - cell "6/1/2026, 11:14:03 PM" [ref=e8800]
+                      - cell "6/1/2026, 11:14:03 PM" [ref=e8801]
+                      - cell " " [ref=e8802]:
+                        - generic "Edit" [ref=e8803]: 
+                        - generic [ref=e8804]: 
+                    - row "txt2.proofzone1.com. 1 86400 6/1/2026, 11:14:39 PM 6/1/2026, 11:14:39 PM  " [ref=e8805]:
+                      - cell [ref=e8806]:
+                        - checkbox [ref=e8808]
+                      - cell "txt2.proofzone1.com. 1" [ref=e8809]:
+                        - generic "view records" [ref=e8810]: txt2.proofzone1.com.
+                        - text: "1"
+                      - cell "86400" [ref=e8811]
+                      - cell "6/1/2026, 11:14:39 PM" [ref=e8812]
+                      - cell "6/1/2026, 11:14:39 PM" [ref=e8813]
+                      - cell " " [ref=e8814]:
+                        - generic "Edit" [ref=e8815]: 
+                        - generic [ref=e8816]: 
+                    - row "txt3.proofzone1.com. 1 86400 6/1/2026, 11:15:14 PM 6/1/2026, 11:15:14 PM  " [ref=e8817]:
+                      - cell [ref=e8818]:
+                        - checkbox [ref=e8820]
+                      - cell "txt3.proofzone1.com. 1" [ref=e8821]:
+                        - generic "view records" [ref=e8822]: txt3.proofzone1.com.
+                        - text: "1"
+                      - cell "86400" [ref=e8823]
+                      - cell "6/1/2026, 11:15:14 PM" [ref=e8824]
+                      - cell "6/1/2026, 11:15:14 PM" [ref=e8825]
+                      - cell " " [ref=e8826]:
+                        - generic "Edit" [ref=e8827]: 
+                        - generic [ref=e8828]: 
+                - generic [ref=e8829]:
+                  - generic [ref=e8830]:
+                    - list [ref=e8832]:
+                      - listitem [ref=e8833]:
+                        - link "Previous":
+                          - /url: "#"
+                      - listitem [ref=e8834]:
+                        - link "1" [ref=e8835]:
+                          - /url: "#"
+                      - listitem [ref=e8836]:
+                        - link "Next":
+                          - /url: "#"
+                    - generic [ref=e8838]:
+                      - text: Per Page
+                      - combobox "Per Page" [ref=e8839]:
+                        - option "5" [selected]
+                        - option "10"
+                        - option "25"
+                        - option "50"
+                        - option "75"
+                        - option "100"
+                        - option "250"
+                        - option "500"
+                  - status [ref=e8841]: Showing 1 to 3 of 3 record(s)
+      - text:   
+  - img [ref=e530]

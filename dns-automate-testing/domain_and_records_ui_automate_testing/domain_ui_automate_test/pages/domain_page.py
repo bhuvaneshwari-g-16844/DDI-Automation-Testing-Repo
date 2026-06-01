@@ -1,3 +1,7 @@
+import json
+import os
+
+
 class DomainPage:
     """Page Object for DNS Domain CRUD operations.
 
@@ -8,12 +12,86 @@ class DomainPage:
           → click domain name <a> → Edit Domain (/#/dns/domains/edit/<id>)
     """
 
-    BASE_URL = "https://10.73.17.95:9443"
+    BASE_URL = "https://10.72.51.96:9443"
     DASHBOARD_URL = BASE_URL + "/#/dashboard"
     DOMAINS_URL = BASE_URL + "/#/dns/domains"
 
-    def __init__(self, page):
+    def __init__(self, page, testdata=None):
         self.page = page
+        self._testdata = testdata
+
+    # ─────────── SESSION / RE-LOGIN ───────────
+
+    def _get_credentials(self):
+        """Return credentials dict from testdata or config file."""
+        if self._testdata:
+            return self._testdata
+        # Fallback: read from config/testdata.json
+        config_path = os.path.join(
+            os.path.dirname(__file__), "..", "..", "..", "config", "testdata.json"
+        )
+        config_path = os.path.normpath(config_path)
+        if os.path.exists(config_path):
+            with open(config_path) as f:
+                return json.load(f)
+        return None
+
+    def _is_on_login_page(self):
+        """Detect if the browser has been redirected to the login page."""
+        url = self.page.url.lower()
+        if "login" in url:
+            return True
+        # Check for login form elements
+        username_input = self.page.locator('//input[@name="username"]')
+        login_btn = self.page.locator('button.btn-login')
+        return username_input.count() > 0 and login_btn.count() > 0
+
+    def _re_login(self):
+        """Re-authenticate when the session has expired."""
+        creds = self._get_credentials()
+        if not creds:
+            return
+        self.page.goto(f"{self.BASE_URL}/#/login", timeout=60000, wait_until="domcontentloaded")
+        self.page.wait_for_timeout(2000)
+
+        # Try selecting Local Authentication
+        self.page.evaluate("""() => {
+            const selects = document.querySelectorAll('select');
+            for (const sel of selects) {
+                for (const opt of sel.options) {
+                    if (opt.text.toLowerCase().includes('local')) {
+                        sel.value = opt.value;
+                        sel.dispatchEvent(new Event('change', { bubbles: true }));
+                        break;
+                    }
+                }
+            }
+        }""")
+        self.page.wait_for_timeout(500)
+
+        self.page.wait_for_selector('//input[@name="username"]').fill(creds["username"])
+        self.page.wait_for_selector('button.btn-login').click()
+        self.page.wait_for_timeout(1000)
+
+        self.page.wait_for_selector('//input[@name="password"]').fill(creds["password"])
+        self.page.wait_for_selector('button.btn-login').click()
+
+        self.page.wait_for_load_state("networkidle")
+        self.page.wait_for_timeout(3000)
+
+        # Handle setting_up redirect
+        if "setting_up" in self.page.url:
+            self.page.wait_for_timeout(5000)
+            if "setting_up" in self.page.url:
+                self.page.goto(f"{self.BASE_URL}/#/dashboard", wait_until="networkidle", timeout=30000)
+                self.page.wait_for_timeout(3000)
+
+        self.page.wait_for_timeout(2000)
+
+    def _ensure_logged_in(self):
+        """Check if session is active; re-login if expired."""
+        if self._is_on_login_page():
+            self._re_login()
 
     # ─────────── NAVIGATION ───────────
 
@@ -21,11 +99,17 @@ class DomainPage:
         """Navigate to dashboard page."""
         self.page.goto(self.DASHBOARD_URL, wait_until="networkidle", timeout=30000)
         self.page.wait_for_timeout(2000)
+        self._ensure_logged_in()
 
     def go_to_domain_list(self):
         """Navigate to the domain list page."""
         self.page.goto(self.DOMAINS_URL, wait_until="networkidle", timeout=30000)
         self.page.wait_for_timeout(3000)
+        self._ensure_logged_in()
+        # After re-login we may need to navigate again
+        if "login" in self.page.url.lower() or "setting_up" in self.page.url:
+            self.page.goto(self.DOMAINS_URL, wait_until="networkidle", timeout=30000)
+            self.page.wait_for_timeout(3000)
         # Verify we landed on domain list (check for '+ Add Domain' button)
         if self.page.locator(".btn-Addd").count() == 0:
             # Fallback: JS hash navigation
@@ -38,7 +122,7 @@ class DomainPage:
         """
         self.go_to_domain_list()
         add_btn = self.page.locator(".btn-Addd")
-        add_btn.wait_for(state="visible", timeout=10000)
+        add_btn.wait_for(state="visible", timeout=15000)
         add_btn.click()
         self.page.wait_for_timeout(3000)
 
@@ -599,3 +683,177 @@ class DomainPage:
             end = time.time()
             return (end - start) * 1000
         return 0
+
+    # ─────────── FORWARDER DOMAIN HELPERS ───────────
+
+    def create_forwarder_domain(self, data):
+        """Create a Forward zone:
+        1. Clean up existing zone
+        2. Go to Add Domain form
+        3. Fill zone name, select zone_type=3 (Forward)
+        4. Fill forwarder IPs
+        5. Save
+        """
+        if "zone_name" in data:
+            self.cleanup_existing_domain(data["zone_name"])
+
+        self.go_to_add_domain()
+
+        # Zone name
+        if "zone_name" in data:
+            self._safe_fill('input[name="zone_name"]', data["zone_name"])
+
+        # Zone type = 3 (Forward)
+        if data.get("zone_type"):
+            self._select_ember_chosen("type", str(data["zone_type"]))
+            self.page.wait_for_timeout(1000)
+
+        # Fill forwarder IPs — after selecting Forward type,
+        # the UI shows forwarder input fields
+        self._fill_forwarder_ips(data.get("forwarders", []))
+
+        # Forward type (only / first)
+        self._select_forward_type(data.get("forward_type"))
+
+        # Master server
+        if data.get("master_servers"):
+            self._select_ember_chosen("master", data["master_servers"])
+
+        self._scroll_and_click_save()
+        return self.get_zone_id_from_url()
+
+    def update_forwarder_domain(self, zone_name, update_data):
+        """Update a Forward zone:
+        1. Navigate to domain list
+        2. Click on the forwarder domain to open edit page
+        3. Update forwarder IPs and/or forward type
+        4. Save
+        """
+        self.go_to_domain_list()
+        if not self.click_domain_link(zone_name):
+            return False
+
+        self.page.wait_for_timeout(2000)
+
+        # Update forwarder IPs if provided
+        if "forwarders" in update_data:
+            # Clear existing forwarder entries — click remove icons if present
+            remove_icons = self.page.locator(
+                '.forwarder-remove, .remove-forwarder, '
+                '[class*="forwarder"] .fa-times, [class*="forwarder"] .fa-trash'
+            )
+            for i in range(remove_icons.count()):
+                if remove_icons.nth(0).is_visible():
+                    remove_icons.nth(0).click()
+                    self.page.wait_for_timeout(300)
+
+            self._fill_forwarder_ips(update_data["forwarders"])
+
+        # Update forward type if provided
+        if "forward_type" in update_data:
+            self._select_forward_type(update_data["forward_type"])
+
+        # Update standard fields if any
+        for field in ["zone_ttl", "zone_contact", "refresh", "retry", "expiry", "minimum"]:
+            if field in update_data:
+                self._safe_fill(f'input[name="{field}"]', update_data[field])
+
+        self._scroll_and_click_save()
+        return True
+
+    def _fill_forwarder_ips(self, forwarders):
+        """Fill forwarder IP input fields."""
+        for ip in forwarders:
+            fwd_input = self.page.locator(
+                'input[name="forwarder"], input[name="forwarders"], '
+                'input[placeholder*="forwarder" i], input[placeholder*="IP" i], '
+                'input[name="fwd_ip"]'
+            )
+            if fwd_input.count() > 0 and fwd_input.first.is_visible():
+                fwd_input.first.fill(str(ip))
+                fwd_input.first.press("Enter")
+                self.page.wait_for_timeout(500)
+
+    def _select_forward_type(self, forward_type):
+        """Select forward type (only / first) from dropdown."""
+        if not forward_type:
+            return
+        ft = forward_type.lower()
+        self.page.evaluate(f"""() => {{
+            const selects = document.querySelectorAll('select');
+            for (const sel of selects) {{
+                for (const opt of sel.options) {{
+                    if (opt.text.toLowerCase().includes('{ft}') ||
+                        opt.value.toLowerCase().includes('{ft}')) {{
+                        sel.value = opt.value;
+                        sel.dispatchEvent(new Event('change', {{ bubbles: true }}));
+                        if (typeof jQuery !== 'undefined') {{
+                            jQuery(sel).trigger('chosen:updated').trigger('change');
+                        }}
+                        return;
+                    }}
+                }}
+            }}
+        }}""")
+        self.page.wait_for_timeout(500)
+
+    def is_forwarder_domain(self):
+        """Check if the current domain detail page shows Forward zone type."""
+        body = self.page.inner_text("body").lower()
+        return "forward" in body
+
+    def get_forwarder_ips_from_detail(self):
+        """Extract forwarder IPs shown on the domain detail/edit page."""
+        body = self.page.inner_text("body")
+        import re
+        return re.findall(r'\b(?:\d{1,3}\.){3}\d{1,3}\b', body)
+
+    def get_zone_type_from_detail(self):
+        """Get the zone type text from the domain detail/edit page."""
+        body = self.page.inner_text("body").lower()
+        if "forward" in body:
+            return "forward"
+        elif "rpz" in body or "response policy" in body:
+            return "rpz"
+        elif "authoritative" in body:
+            return "authoritative"
+        return "unknown"
+
+    # ─────────── RPZ DOMAIN HELPERS ───────────
+
+    def create_rpz_domain(self, data):
+        """Create a Response Policy Zone (RPZ):
+        1. Clean up existing zone
+        2. Go to Add Domain form
+        3. Fill zone name, select zone_type=2 (RPZ)
+        4. Fill NS records and other fields
+        5. Save
+        """
+        if "zone_name" in data:
+            self.cleanup_existing_domain(data["zone_name"])
+
+        self.go_to_add_domain()
+        self.fill_domain_form(data)
+        self._scroll_and_click_save()
+        return self.get_zone_id_from_url()
+
+    def update_rpz_domain(self, zone_name, update_data):
+        """Update a Response Policy Zone:
+        1. Navigate to domain list
+        2. Click on the RPZ domain to open edit page
+        3. Update SOA fields (TTL, contact, refresh, etc.)
+        4. Save
+        """
+        self.go_to_domain_list()
+        if not self.click_domain_link(zone_name):
+            return False
+
+        self.page.wait_for_timeout(2000)
+        self.fill_domain_form(update_data)
+        self._scroll_and_click_save()
+        return True
+
+    def is_rpz_domain(self):
+        """Check if the current domain detail page shows RPZ zone type."""
+        body = self.page.inner_text("body").lower()
+        return "rpz" in body or "response policy" in body

@@ -1,7 +1,0 @@
-- generic [ref=e130]:
-  - generic [ref=e131]:
-    - generic [ref=e132]:
-      - generic [ref=e133]: 
-      - text: Success
-    - text: Logged in succesfully.
-  - generic [ref=e134] [cursor=pointer]: ×
